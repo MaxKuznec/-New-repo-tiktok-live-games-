@@ -35,7 +35,6 @@
       user-select: none;
     }
 
-    /* Плавный анимированный фон с живыми неоновыми переливами */
     body {
       background: #0b0c14;
       background-image: 
@@ -123,7 +122,6 @@
       flex-wrap: wrap;
     }
 
-    /* Счетчик онлайна */
     .online-pill {
       display: inline-flex;
       align-items: center;
@@ -169,6 +167,24 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
+    }
+
+    /* Специальная кнопка админа в шапке */
+    .admin-pill-btn {
+      display: none;
+      background: rgba(254, 44, 85, 0.18);
+      border: 1px solid rgba(254, 44, 85, 0.45);
+      color: var(--tt-pink);
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      align-items: center;
+      gap: 5px;
+    }
+    .admin-pill-btn.visible {
+      display: inline-flex;
     }
 
     .tt-auth-btn {
@@ -649,15 +665,18 @@
   <header class="top-header">
     <div class="header-inner">
       <div class="header-row-top">
-        <!-- Живой счетчик онлайна -->
         <div class="online-pill" title="Активных игроков онлайн">
           <span class="status-dot"></span>
-          <span>Онлайн: <strong id="onlineCount">1</strong></span>
+          <span>Онлайн: <strong id="onlineCount">18</strong></span>
         </div>
 
         <div class="top-controls">
           <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звуки">🔊</button>
           <button class="icon-btn" onclick="openHowToModal()" title="Как играть">❓</button>
+          
+          <!-- Специальная кнопка администратора (появляется только у вас при активации) -->
+          <button class="admin-pill-btn" id="adminHeaderBtn" onclick="openModal('secretDevModal')">⚙️ Админ</button>
+
           <button class="tt-auth-btn" id="headerAuthBtn" onclick="handleAuthClick()">
             <span id="headerAuthText" data-i18n="login_tt">Войти через TikTok</span>
           </button>
@@ -787,6 +806,7 @@
       </div>
     </div>
 
+    <!-- ВКЛАДКА ПРОФИЛЬ С УМНОЙ КНОПКОЙ -->
     <div id="tab-profile" class="tab-pane">
       <div class="glass-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
@@ -794,7 +814,9 @@
         <div style="font-size:32px; font-weight:900; color:var(--tt-cyan); margin-bottom:18px;">
           <span id="profilePts">0</span> PTS
         </div>
-        <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+        <div id="profileActionBox">
+          <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+        </div>
       </div>
     </div>
   </main>
@@ -831,12 +853,12 @@
     </div>
   </div>
 
-  <!-- ПАНЕЛЬ АДМИНИСТРАТОРА (открывается по ?admin=true в ссылке) -->
+  <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
   <div class="modal-backdrop" id="secretDevModal">
     <div class="modal-window" style="border-color: var(--tt-cyan);">
       <button class="modal-close" onclick="closeModal('secretDevModal')">✕</button>
       <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🛠️ Панель администратора</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Панель доступна только владельцу (через <code>?admin=true</code>):</p>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Управление базой и ссылкой (доступно по <code>?admin=true</code>):</p>
       
       <div style="margin-bottom: 12px;">
         <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Ссылка на Firebase (общая база):</label>
@@ -936,12 +958,11 @@
     delete playersMap["@neon_arena"];
     localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
-    // Имитация живого онлайна (плавная динамика для создания атмосферы популярного стрима)
     function initOnlineCounter() {
-      let currentOnline = Math.floor(Math.random() * 8) + 12; // старт с 12-20 человек
+      let currentOnline = Math.floor(Math.random() * 8) + 12;
       document.getElementById("onlineCount").textContent = currentOnline;
       setInterval(() => {
-        const delta = Math.floor(Math.random() * 5) - 2; // +/- сдвиг
+        const delta = Math.floor(Math.random() * 5) - 2;
         currentOnline = Math.max(8, currentOnline + delta);
         document.getElementById("onlineCount").textContent = currentOnline;
       }, 7000);
@@ -951,6 +972,7 @@
       initOnlineCounter();
       const params = new URLSearchParams(window.location.search);
       if (params.get("admin") === "true") {
+        document.getElementById("adminHeaderBtn").classList.add("visible");
         document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
         openModal('secretDevModal');
       }
@@ -1120,6 +1142,7 @@
       const profileName = document.getElementById("profileName");
       const profileStatus = document.getElementById("profileStatus");
       const profilePts = document.getElementById("profilePts");
+      const profileActionBox = document.getElementById("profileActionBox");
 
       if (currentUser && currentUser.username) {
         const pts = playersMap[currentUser.username] ?? currentUser.pts ?? 0;
@@ -1130,12 +1153,23 @@
         profileName.textContent = currentUser.username;
         profileStatus.textContent = "Профиль TikTok LIVE активен • Очки идут в рейтинг";
         profilePts.textContent = pts.toLocaleString();
+
+        // УМНАЯ КНОПКА В ПРОФИЛЕ ДЛЯ АВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ
+        profileActionBox.innerHTML = `
+          <div style="display:flex; gap:10px; max-width:340px; margin:0 auto;">
+            <button class="primary-btn" style="background:rgba(254,44,85,0.25); border:1px solid rgba(254,44,85,0.5);" onclick="handleAuthClick()">🚪 Сменить аккаунт</button>
+          </div>
+        `;
       } else {
         const lang = localStorage.getItem("lg_lang") || "ru";
         authText.textContent = translations[lang].login_tt;
         profileName.textContent = "@Гость";
         profileStatus.textContent = "Авторизуйтесь через TikTok, чтобы сохранять свои очки в общем рейтинге.";
         profilePts.textContent = "0";
+
+        profileActionBox.innerHTML = `
+          <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+        `;
       }
       renderLeaderboard();
     }
