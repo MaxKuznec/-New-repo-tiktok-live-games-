@@ -10,7 +10,6 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='32' fill='%231e1f24'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23d0bcff' stroke-width='8'/><polygon points='44,34 70,50 44,66' fill='%23efb8c8'/></svg>" />
 
   <style>
-    /* Material Design 3 (M3) Design Tokens */
     :root {
       --m3-bg: #121316;
       --m3-surface: #1a1b20;
@@ -42,7 +41,6 @@
       user-select: none;
     }
 
-    /* Анимированный фон Material You */
     body {
       background: var(--m3-bg);
       background-image: 
@@ -56,7 +54,6 @@
       overflow-x: hidden;
     }
 
-    /* Режим стрима */
     body.stream-mode .top-header,
     body.stream-mode .brand-hero,
     body.stream-mode footer {
@@ -99,7 +96,6 @@
       gap: 8px;
     }
 
-    /* Шапка в стиле M3 Top App Bar */
     .top-header {
       position: sticky;
       top: 0;
@@ -126,7 +122,6 @@
       gap: 12px;
     }
 
-    /* Чипс онлайна */
     .online-badge {
       display: inline-flex;
       align-items: center;
@@ -154,7 +149,6 @@
       gap: 8px;
     }
 
-    /* Кнопки M3 Icon Button */
     .icon-btn {
       background: var(--m3-surface-container);
       border: 1px solid var(--m3-outline-variant);
@@ -177,7 +171,6 @@
       transform: scale(0.95);
     }
 
-    /* Бейдж профиля M3 */
     .header-user-pill {
       display: none;
       align-items: center;
@@ -194,7 +187,6 @@
       display: inline-flex;
     }
 
-    /* Переключатель языка Segmented Button */
     .lang-switcher {
       display: flex;
       background: var(--m3-surface-container);
@@ -221,7 +213,6 @@
       font-weight: 700;
     }
 
-    /* Навигационные вкладки M3 Navigation Bar */
     .nav-tabs {
       display: flex;
       justify-content: space-around;
@@ -252,7 +243,6 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    /* Герой-секция */
     .brand-hero {
       text-align: center;
       padding: 28px 16px 16px;
@@ -298,7 +288,6 @@
       margin: 0 auto;
     }
 
-    /* Контейнер */
     .main-container {
       flex: 1;
       width: 100%;
@@ -321,7 +310,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Карточки M3 Elevated Card */
     .m3-card {
       background: var(--m3-surface);
       border: 1px solid var(--m3-outline-variant);
@@ -335,15 +323,8 @@
       font-size: 20px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 6px;
+      margin-bottom: 16px;
       color: var(--m3-text);
-    }
-
-    .section-desc {
-      font-size: 13px;
-      color: var(--m3-muted);
-      text-align: center;
-      margin-bottom: 20px;
     }
 
     .games-grid {
@@ -352,7 +333,6 @@
       gap: 16px;
     }
 
-    /* Игровая карточка M3 */
     .game-card {
       background: var(--m3-surface-container);
       border: 1px solid var(--m3-outline-variant);
@@ -387,7 +367,6 @@
       line-height: 1.45;
     }
 
-    /* Кнопки M3 Filled Button */
     .primary-btn {
       background: var(--m3-primary);
       color: var(--m3-on-primary);
@@ -409,6 +388,29 @@
       transform: scale(0.97);
     }
 
+    /* Элегантная кнопка «Обновить» в стиле M3 */
+    .m3-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      color: var(--m3-text);
+      padding: 8px 16px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .m3-action-btn:hover {
+      background: var(--m3-surface-container-high);
+      border-color: var(--m3-primary);
+    }
+    .m3-action-btn:active {
+      transform: scale(0.96);
+    }
+
     .arena-toolbar {
       display: flex;
       justify-content: space-between;
@@ -424,7 +426,6 @@
       flex-wrap: wrap;
     }
 
-    /* Чипсы фильтров M3 */
     .mini-tab {
       background: var(--m3-surface-container);
       border: 1px solid var(--m3-outline-variant);
@@ -595,7 +596,6 @@
       100% { transform: translateY(-44px) scale(1.1); opacity: 0; }
     }
 
-    /* Модальные окна M3 Dialog */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -662,16 +662,6 @@
       display: none;
     }
 
-    .step-item {
-      background: var(--m3-surface-container);
-      border: 1px solid var(--m3-outline-variant);
-      border-radius: var(--m3-radius-sm);
-      padding: 12px;
-      margin-bottom: 8px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
     footer {
       border-top: 1px solid var(--m3-outline-variant);
       padding: 16px;
@@ -695,7 +685,6 @@
 
         <div class="top-controls">
           <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звук">🔊</button>
-          <button class="icon-btn" onclick="openHowToModal()" title="Инструкция">?</button>
           
           <button class="admin-pill-btn" id="adminHeaderBtn" onclick="openModal('secretDevModal')" style="display:none; background:rgba(239,184,200,0.15); border:1px solid rgba(239,184,200,0.4); color:#efb8c8; padding:6px 14px; border-radius:var(--m3-radius-sm); font-size:12px; font-weight:600; cursor:pointer;">⚙️ Админ</button>
 
@@ -726,26 +715,24 @@
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
-      <span data-i18n="badge_text">TIKTOK LIVE • MATERIAL DESIGN</span>
+      <span data-i18n="badge_text">TIKTOK LIVE • STREAM GAMES</span>
     </div>
     <h1 class="brand-title">live game</h1>
-    <p class="brand-sub" data-i18n="hero_sub">
-      Интерактивная платформа для стримов в современном минималистичном стиле Google M3.
-    </p>
+    <p class="brand-sub" data-i18n="hero_sub">Интерактивная платформа для трансляций в стиле Material Design.</p>
   </section>
 
   <main class="main-container">
+    <!-- ГЛАВНАЯ -->
     <div id="tab-home" class="tab-pane active">
       <div class="m3-card">
         <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр</h2>
-        <p class="section-desc" data-i18n="catalog_desc">Выберите игру для вывода на экран трансляции.</p>
 
         <div class="games-grid">
           <div class="game-card">
             <div>
               <div class="game-icon">⚔️</div>
               <div class="game-name" data-i18n="g1_title">Битва Тапов: Синие vs Красные</div>
-              <p class="game-info" data-i18n="g1_desc">Перетягивание каната по событиям зрителей.</p>
+              <p class="game-info">Перетягивание каната по событиям зрителей.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('tug', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -754,7 +741,7 @@
             <div>
               <div class="game-icon">🎡</div>
               <div class="game-name" data-i18n="g2_title">Колесо Фортуны LIVE</div>
-              <p class="game-info" data-i18n="g2_desc">Интерактивная рулетка с бонусами.</p>
+              <p class="game-info">Интерактивная рулетка с бонусами.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('wheel', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -763,7 +750,7 @@
             <div>
               <div class="game-icon">⚡</div>
               <div class="game-name" data-i18n="g3_title">Неоновый Реактор TikTok</div>
-              <p class="game-info" data-i18n="g3_desc">Аркада на реакцию и комбо-очки.</p>
+              <p class="game-info">Аркада на реакцию и комбо-очки.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('reactor', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -771,6 +758,7 @@
       </div>
     </div>
 
+    <!-- АРЕНА -->
     <div id="tab-arena" class="tab-pane">
       <div class="m3-card">
         <div class="arena-toolbar">
@@ -783,7 +771,6 @@
         </div>
 
         <h2 class="section-title" id="arenaTitle">⚔️ Битва Тапов: Синие vs Красные</h2>
-        <p class="section-desc" id="arenaSub">События эфира (лайки, подарки) управляют игрой.</p>
 
         <div id="game-tug">
           <div class="tug-score-row">
@@ -819,23 +806,24 @@
       </div>
     </div>
 
+    <!-- РЕЙТИНГ -->
     <div id="tab-leaderboard" class="tab-pane">
       <div class="m3-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
           <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров</h2>
-          <button class="icon-btn" style="width:auto; padding:0 14px; border-radius:var(--m3-radius-sm); font-size:12.5px;" onclick="syncLeaderboardNow()">🔄</button>
+          <!-- Новая аккуратная кнопка обновить в стиле M3 -->
+          <button class="m3-action-btn" onclick="syncLeaderboardNow()">
+            <span>🔄 Обновить</span>
+          </button>
         </div>
-        <p class="section-desc" style="text-align:left; margin-bottom:12px;" data-i18n="lb_desc">
-          Топ активных участников в реальном времени.
-        </p>
         <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </div>
 
+    <!-- ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-pane">
       <div class="m3-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
-        <p class="section-desc" id="profileStatus">Авторизуйтесь, чтобы участвовать в рейтинге.</p>
         <div style="font-size:32px; font-weight:800; color:var(--m3-primary); margin-bottom:18px;">
           <span id="profilePts">0</span> PTS
         </div>
@@ -857,16 +845,6 @@
     </div>
   </div>
 
-  <div class="modal-backdrop" id="howToModal">
-    <div class="modal-window">
-      <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;">💡 Material You Design</h3>
-      <div class="step-item">1. Интерфейс адаптирован под стандарты Google M3.</div>
-      <div class="step-item">2. Используйте вкладку «Лайв-арена» для тестирования событий.</div>
-      <button class="primary-btn" style="margin-top:10px;" onclick="closeModal('howToModal')">Понятно</button>
-    </div>
-  </div>
-
   <div class="modal-backdrop" id="secretDevModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('secretDevModal')">✕</button>
@@ -884,9 +862,9 @@
 
   <script>
     const translations = {
-      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "MATERIAL DESIGN 3 • СТРИМЫ", hero_sub: "Современная минималистичная платформа для трансляций.", catalog_title: "Каталог мини-игр", catalog_desc: "Выберите игру для трансляции.", play_btn: "Запустить", lb_title: "Таблица лидеров", lb_desc: "Топ активных стримеров." },
-      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "MATERIAL DESIGN 3", hero_sub: "Стримдерге арналған заманауи платформа.", catalog_title: "Ойындар", catalog_desc: "Ойынды таңдаңыз.", play_btn: "Бастау", lb_title: "Көшбасшылар", lb_desc: "Үздіктер." },
-      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", badge_text: "MATERIAL DESIGN 3", hero_sub: "Modern minimalist streaming platform.", catalog_title: "Mini-Games", catalog_desc: "Choose a game.", play_btn: "Launch", lb_title: "Leaderboard", lb_desc: "Top streamers." }
+      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE • STREAM GAMES", hero_sub: "Интерактивная платформа для трансляций в стиле Material Design.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
+      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE", hero_sub: "Стримдерге арналған заманауи платформа.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
+      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", badge_text: "TIKTOK LIVE", hero_sub: "Modern minimalist streaming platform.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
     };
 
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
@@ -1009,7 +987,6 @@
 
     function updateUserUI() {
       const profileName = document.getElementById("profileName");
-      const profileStatus = document.getElementById("profileStatus");
       const profilePts = document.getElementById("profilePts");
       const profileActionBox = document.getElementById("profileActionBox");
       const headerUserPill = document.getElementById("headerUserPill");
@@ -1026,7 +1003,6 @@
         headerUserText.textContent = currentUser.username;
 
         profileName.textContent = currentUser.username;
-        profileStatus.textContent = "Стример верифицирован • Очки идут в рейтинг";
         profilePts.textContent = pts.toLocaleString();
 
         profileActionBox.innerHTML = `
@@ -1036,7 +1012,6 @@
         headerUserPill.classList.remove("active");
         headerLoginBtn.style.display = "inline-flex";
         profileName.textContent = "@Гость";
-        profileStatus.textContent = "Авторизуйтесь, чтобы участвовать в рейтинге.";
         profilePts.textContent = "0";
         profileActionBox.innerHTML = `
           <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
@@ -1072,7 +1047,7 @@
       errEl.style.display = "none";
 
       if (!val || val.length < 3) {
-        errEl.textContent = "Введите корректный юзернейм (минимум 3 символа).";
+        errEl.textContent = "Введите корректный юзернейм.";
         errEl.style.display = "block";
         return;
       }
@@ -1121,7 +1096,6 @@
     function openModal(id) { document.getElementById(id).classList.add("open"); }
     function closeModal(id) { document.getElementById(id).classList.remove("open"); }
     function openAuthModal() { openModal("authModal"); }
-    function openHowToModal() { openModal("howToModal"); }
 
     function handleAuthClick() {
       if (currentUser && confirm("Выйти из аккаунта " + currentUser.username + "?")) {
@@ -1138,11 +1112,6 @@
     setLanguage(localStorage.getItem("lg_lang") || "ru");
     syncLeaderboardNow();
     updateUserUI();
-
-    if (!localStorage.getItem("lg_welcomed")) {
-      localStorage.setItem("lg_welcomed", "1");
-      setTimeout(() => openHowToModal(), 500);
-    }
   </script>
 </body>
 </html>
