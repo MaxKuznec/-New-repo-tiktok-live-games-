@@ -3,27 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>live game — Интерактивные мини-игры для TikTok LIVE</title>
+  <title>live game — TikTok LIVE Mini-Games</title>
 
-  <meta name="description" content="Запускайте интерактивные мини-игры для зрителей TikTok LIVE прямо со смартфона: Битва Тапов, Колесо Фортуны, Неоновый Реактор и единый онлайн-рейтинг!" />
-  <meta name="theme-color" content="#0b0c14" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="live game — Интерактивные мини-игры для TikTok LIVE" />
-  <meta property="og:description" content="Врывайся на лайв-арену! Играй со зрителями в прямом эфире, крути Колесо Фортуны и занимай Топ-1 в общем рейтинге." />
-  <meta property="og:url" content="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230b0c14'/><circle cx='50' cy='50' r='36' fill='none' stroke='%2325f4ee' stroke-width='6'/><polygon points='42,32 72,50 42,68' fill='%23fe2c55'/></svg>" />
+  <meta name="description" content="Интерактивные мини-игры для зрителей TikTok LIVE прямо со смартфона." />
+  <meta name="theme-color" content="#0d0f18" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%23131625'/><circle cx='50' cy='50' r='32' fill='none' stroke='%23818cf8' stroke-width='8'/><polygon points='44,34 70,50 44,66' fill='%23f43f5e'/></svg>" />
 
   <style>
     :root {
-      --bg: #0b0c14;
-      --card: rgba(20, 22, 36, 0.84);
-      --border: rgba(255, 255, 255, 0.09);
-      --text: #f3f4f6;
-      --muted: #9ca3af;
-      --accent: #6366f1;
-      --tt-cyan: #25f4ee;
-      --tt-pink: #fe2c55;
-      --success: #10b981;
+      --bg: #0d0f18;
+      --card-bg: rgba(26, 30, 46, 0.72);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent-pink: #f43f5e;
+      --accent-cyan: #38bdf8;
+      --success: #34d399;
+      --radius: 20px;
     }
 
     * {
@@ -35,26 +33,28 @@
       user-select: none;
     }
 
+    /* Плавный дышащий премиум-фон в стиле Google Material You */
     body {
-      background: #0b0c14;
+      background: var(--bg);
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(37, 244, 238, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(254, 44, 85, 0.08) 0%, transparent 60%);
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.08) 0%, transparent 60%);
       background-attachment: fixed;
       color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      animation: bgPulse 12s ease-in-out infinite alternate;
+      animation: ambientShift 15s ease-in-out infinite alternate;
     }
 
-    @keyframes bgPulse {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.12); }
+    @keyframes ambientShift {
+      0% { filter: hue-rotate(0deg) brightness(1); }
+      100% { filter: hue-rotate(15deg) brightness(1.08); }
     }
 
+    /* Режим стрима */
     body.stream-mode .top-header,
     body.stream-mode .brand-hero,
     body.stream-mode footer {
@@ -70,25 +70,25 @@
     }
     body.stream-mode .glass-card {
       width: 100%;
-      max-width: 580px;
-      border-color: rgba(37, 244, 238, 0.45);
-      box-shadow: 0 0 50px rgba(37, 244, 238, 0.15);
+      max-width: 560px;
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     }
     .exit-stream-btn {
       display: none;
       position: fixed;
-      top: 14px;
-      right: 14px;
+      top: 16px;
+      right: 16px;
       z-index: 120;
-      background: rgba(254, 44, 85, 0.9);
+      background: var(--accent-pink);
       color: #fff;
       border: none;
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(254, 44, 85, 0.5);
+      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
     }
     body.stream-mode .exit-stream-btn {
       display: inline-flex;
@@ -96,18 +96,20 @@
       gap: 6px;
     }
 
+    /* Верхняя панель (аккуратный Glassmorphism) */
     .top-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(11, 12, 20, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(13, 15, 24, 0.82);
       border-bottom: 1px solid var(--border);
-      padding: 10px 14px;
+      padding: 10px 16px;
     }
 
     .header-inner {
-      max-width: 900px;
+      max-width: 860px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -118,92 +120,76 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .online-pill {
+    .online-badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      gap: 6px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
       padding: 5px 12px;
       border-radius: 999px;
       font-size: 11.5px;
-      font-weight: 700;
-      color: #34d399;
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+      font-weight: 600;
+      color: var(--success);
     }
 
     .status-dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: var(--success);
       box-shadow: 0 0 8px var(--success);
-      animation: pulseDot 1.8s infinite;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.35); opacity: 0.65; }
     }
 
     .top-controls {
       display: flex;
       align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-left: auto;
+      gap: 8px;
     }
 
     .icon-btn {
-      background: rgba(99, 102, 241, 0.16);
-      border: 1px solid rgba(99, 102, 241, 0.38);
-      color: #fff;
-      padding: 6px 11px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    /* Специальная кнопка админа в шапке */
-    .admin-pill-btn {
-      display: none;
-      background: rgba(254, 44, 85, 0.18);
-      border: 1px solid rgba(254, 44, 85, 0.45);
-      color: var(--tt-pink);
-      padding: 6px 11px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
-      gap: 5px;
-    }
-    .admin-pill-btn.visible {
-      display: inline-flex;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
     }
 
-    .tt-auth-btn {
-      background: linear-gradient(90deg, rgba(37, 244, 238, 0.16), rgba(254, 44, 85, 0.16));
-      border: 1px solid rgba(254, 44, 85, 0.48);
-      color: #fff;
-      padding: 6px 13px;
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Аккуратный профиль в шапке (после входа текст не мешает) */
+    .header-user-pill {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      padding: 5px 12px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 700;
+      color: #818cf8;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    }
+    .header-user-pill.active {
+      display: inline-flex;
     }
 
     .lang-switcher {
       display: flex;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 2px;
@@ -218,20 +204,21 @@
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     .lang-btn.active {
-      background: var(--accent);
+      background: var(--primary);
       color: #fff;
     }
 
     .nav-tabs {
       display: flex;
       justify-content: space-around;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 4px;
+      padding: 3px;
     }
 
     .tab-btn {
@@ -239,81 +226,83 @@
       background: transparent;
       border: none;
       color: var(--muted);
-      padding: 8px 10px;
+      padding: 7px 10px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
+      transition: 0.2s;
       text-align: center;
     }
 
     .tab-btn.active {
-      background: var(--accent);
+      background: var(--primary);
       color: #fff;
-      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.45);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
     }
 
+    /* Герой-секция */
     .brand-hero {
       text-align: center;
-      padding: 22px 16px 14px;
-      max-width: 760px;
+      padding: 24px 16px 14px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
     .live-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(254, 44, 85, 0.12);
-      border: 1px solid rgba(37, 244, 238, 0.28);
-      padding: 5px 14px;
+      gap: 6px;
+      background: rgba(244, 63, 94, 0.1);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      padding: 4px 12px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--tt-cyan);
-      margin-bottom: 8px;
+      color: var(--accent-pink);
+      margin-bottom: 10px;
     }
 
     .live-badge span.dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--tt-pink);
-      box-shadow: 0 0 8px var(--tt-pink);
+      background: var(--accent-pink);
+      box-shadow: 0 0 6px var(--accent-pink);
     }
 
     .brand-title {
-      font-size: clamp(36px, 9vw, 58px);
+      font-size: clamp(34px, 8vw, 52px);
       font-weight: 900;
-      letter-spacing: -0.03em;
-      background: linear-gradient(90deg, var(--tt-cyan), #a855f7, var(--tt-pink));
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--muted) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.35));
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .brand-sub {
       color: var(--muted);
-      font-size: 13.5px;
+      font-size: 13px;
       line-height: 1.45;
-      max-width: 520px;
+      max-width: 480px;
       margin: 0 auto;
     }
 
+    /* Контейнер */
     .main-container {
       flex: 1;
       width: 100%;
-      max-width: 860px;
+      max-width: 820px;
       margin: 0 auto;
       padding: 10px 16px 36px;
     }
 
     .tab-pane {
       display: none;
-      animation: fadeIn 0.25s ease;
+      animation: fadeIn 0.22s ease;
     }
 
     .tab-pane.active {
@@ -321,24 +310,24 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Карточки в стиле Google Material */
     .glass-card {
-      background: var(--card);
-      backdrop-filter: blur(12px);
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border);
-      border-radius: 22px;
+      border-radius: var(--radius);
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
     .section-title {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
       text-align: center;
       margin-bottom: 6px;
@@ -353,14 +342,14 @@
 
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
     }
 
     .game-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 16px;
       padding: 18px;
       display: flex;
       flex-direction: column;
@@ -370,37 +359,42 @@
     }
 
     .game-card:hover {
-      border-color: rgba(37, 244, 238, 0.45);
-      transform: translateY(-2px);
+      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .game-icon {
-      font-size: 30px;
+      font-size: 28px;
     }
 
     .game-name {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       margin-top: 4px;
     }
 
     .game-info {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--muted);
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
     .primary-btn {
-      background: linear-gradient(90deg, var(--accent), #8b5cf6);
+      background: var(--primary);
       color: #fff;
       border: none;
-      border-radius: 13px;
-      padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 800;
+      border-radius: 14px;
+      padding: 11px 16px;
+      font-size: 13.5px;
+      font-weight: 700;
       cursor: pointer;
       width: 100%;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+      transition: 0.2s;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-hover);
     }
 
     .arena-toolbar {
@@ -419,44 +413,44 @@
     }
 
     .mini-tab {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 6px 12px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
     }
 
     .mini-tab.active {
-      background: rgba(37, 244, 238, 0.18);
-      border-color: var(--tt-cyan);
-      color: var(--tt-cyan);
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary);
+      color: #818cf8;
     }
 
     .tug-score-row {
       display: flex;
       justify-content: space-between;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13.5px;
       margin-bottom: 6px;
     }
 
     .tug-bar {
-      height: 30px;
+      height: 26px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #ef4444, #dc2626);
+      background: rgba(244, 63, 94, 0.25);
       overflow: hidden;
-      margin: 10px 0 18px;
-      border: 2px solid rgba(255, 255, 255, 0.18);
+      margin: 10px 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       position: relative;
     }
 
     .tug-fill {
       height: 100%;
       width: 50%;
-      background: linear-gradient(90deg, #2563eb, var(--tt-cyan));
+      background: linear-gradient(90deg, #38bdf8, var(--primary));
       transition: width 0.18s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -465,36 +459,36 @@
       left: 50%;
       top: 0;
       bottom: 0;
-      width: 3px;
+      width: 2px;
       background: #fff;
       transform: translateX(-50%);
       z-index: 2;
     }
 
     .wheel-visual {
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       margin: 10px auto 16px;
-      border: 5px solid var(--tt-cyan);
+      border: 4px solid rgba(255, 255, 255, 0.15);
       background: conic-gradient(
         #6366f1 0deg 90deg,
-        #fe2c55 90deg 180deg,
-        #10b981 180deg 270deg,
-        #f59e0b 270deg 360deg
+        #f43f5e 90deg 180deg,
+        #34d399 180deg 270deg,
+        #38bdf8 270deg 360deg
       );
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 36px;
+      font-size: 32px;
       transition: transform 1.2s cubic-bezier(0.15, 0.85, 0.25, 1);
     }
 
     .reactor-arena {
-      height: 170px;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px dashed rgba(37, 244, 238, 0.35);
-      border-radius: 18px;
+      height: 160px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
       position: relative;
       margin: 12px 0 16px;
       overflow: hidden;
@@ -504,53 +498,54 @@
     }
 
     .reactor-orb {
-      width: 68px;
-      height: 68px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: radial-gradient(circle, #fff 10%, var(--tt-cyan) 55%, var(--tt-pink) 100%);
-      box-shadow: 0 0 25px var(--tt-cyan);
+      background: radial-gradient(circle, #fff 15%, var(--primary) 60%, var(--accent-pink) 100%);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 24px;
       cursor: pointer;
       position: absolute;
-      transition: all 0.18s ease;
+      transition: all 0.16s ease;
     }
 
     .leaderboard-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .leader-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 16px;
+      padding: 12px 16px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       font-weight: 700;
+      font-size: 13.5px;
     }
 
     .leader-item.me {
-      background: rgba(99, 102, 241, 0.18);
-      border-color: rgba(37, 244, 238, 0.55);
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.4);
     }
 
     .leader-pts {
       font-family: monospace;
-      font-size: 15px;
-      color: var(--tt-cyan);
+      font-size: 14px;
+      color: var(--accent-cyan);
     }
 
     .empty-box {
       text-align: center;
-      padding: 26px 16px;
+      padding: 24px 16px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       border: 1px dashed var(--border);
       border-radius: 16px;
     }
@@ -560,7 +555,7 @@
       pointer-events: none;
       border-radius: 50%;
       z-index: 999;
-      animation: flySpark 0.65s ease-out forwards;
+      animation: flySpark 0.6s ease-out forwards;
     }
 
     @keyframes flySpark {
@@ -572,23 +567,24 @@
       position: fixed;
       pointer-events: none;
       font-weight: 900;
-      font-size: 18px;
-      color: var(--tt-cyan);
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+      font-size: 16px;
+      color: var(--accent-cyan);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
       z-index: 1000;
-      animation: floatUp 0.85s ease-out forwards;
+      animation: floatUp 0.8s ease-out forwards;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(0) scale(0.9); opacity: 1; }
-      100% { transform: translateY(-48px) scale(1.15); opacity: 0; }
+      100% { transform: translateY(-44px) scale(1.1); opacity: 0; }
     }
 
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -601,85 +597,95 @@
     }
 
     .modal-window {
-      background: #131524;
+      background: #151828;
       border: 1px solid var(--border);
-      border-radius: 22px;
-      max-width: 460px;
+      border-radius: var(--radius);
+      max-width: 420px;
       width: 100%;
       padding: 22px;
       position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
     .modal-close {
       position: absolute;
       top: 14px;
       right: 14px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       border: none;
       color: var(--muted);
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .input-field {
       width: 100%;
-      background: rgba(0, 0, 0, 0.38);
+      background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--border);
       color: #fff;
       padding: 11px 14px;
       border-radius: 12px;
       font-size: 13.5px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       outline: none;
       user-select: text;
     }
 
+    .input-field:focus {
+      border-color: var(--primary);
+    }
+
     .step-item {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      margin-bottom: 10px;
-      font-size: 13px;
-      line-height: 1.45;
+      border-radius: 12px;
+      padding: 11px;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+      line-height: 1.4;
     }
 
     footer {
       border-top: 1px solid var(--border);
       padding: 16px;
       text-align: center;
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--muted);
     }
   </style>
 </head>
 <body>
 
-  <button class="exit-stream-btn" onclick="toggleStreamMode()">✕ Выйти из режима стрима</button>
+  <button class="exit-stream-btn" onclick="toggleStreamMode()">✕ Выйти из стрима</button>
 
+  <!-- Чистая и аккуратная шапка -->
   <header class="top-header">
     <div class="header-inner">
       <div class="header-row-top">
-        <div class="online-pill" title="Активных игроков онлайн">
+        <div class="online-badge" title="Активные игроки">
           <span class="status-dot"></span>
-          <span>Онлайн: <strong id="onlineCount">18</strong></span>
+          <span>Онлайн: <strong id="onlineCount">14</strong></span>
         </div>
 
         <div class="top-controls">
-          <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звуки">🔊</button>
-          <button class="icon-btn" onclick="openHowToModal()" title="Как играть">❓</button>
+          <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звук">🔊</button>
+          <button class="icon-btn" onclick="openHowToModal()" title="Инструкция">?</button>
           
-          <!-- Специальная кнопка администратора (появляется только у вас при активации) -->
-          <button class="admin-pill-btn" id="adminHeaderBtn" onclick="openModal('secretDevModal')">⚙️ Админ</button>
+          <!-- Аккуратная кнопка админа (появляется при ?admin=true) -->
+          <button class="admin-pill-btn" id="adminHeaderBtn" onclick="openModal('secretDevModal')" style="display:none; background:rgba(244,63,94,0.15); border:1px solid rgba(244,63,94,0.4); color:var(--accent-pink); padding:5px 12px; border-radius:999px; font-size:11.5px; font-weight:700; cursor:pointer;">⚙️ Админ</button>
 
-          <button class="tt-auth-btn" id="headerAuthBtn" onclick="handleAuthClick()">
-            <span id="headerAuthText" data-i18n="login_tt">Войти через TikTok</span>
-          </button>
+          <!-- Кнопка профиля в шапке (показывается после авторизации вместо текстов) -->
+          <div class="header-user-pill" id="headerUserPill" onclick="switchTab('profile')">
+            <span id="headerUserDot" style="width:6px; height:6px; border-radius:50%; background:var(--accent-cyan);"></span>
+            <span id="headerUserText">@user</span>
+          </div>
+
+          <!-- Кнопка входа (скрывается если вошел) -->
+          <button class="primary-btn" id="headerLoginBtn" style="padding:6px 14px; font-size:12px; width:auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
+
           <div class="lang-switcher">
             <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">RU</button>
             <button class="lang-btn" data-lang="kz" onclick="setLanguage('kz')">KZ</button>
@@ -700,26 +706,27 @@
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
-      <span data-i18n="badge_text">TIKTOK LIVE • ИНТЕРАКТИВНЫЕ МИНИ-ИГРЫ</span>
+      <span data-i18n="badge_text">TIKTOK LIVE • МИНИ-ИГРЫ</span>
     </div>
     <h1 class="brand-title">live game</h1>
     <p class="brand-sub" data-i18n="hero_sub">
-      Авторизуйтесь через TikTok и запускайте интерактивные мини-игры со звуком, спецэффектами и единым рейтингом прямо во время эфира.
+      Интерактивная платформа для стримов со звуковым движком и единым онлайн-рейтингом.
     </p>
   </section>
 
   <main class="main-container">
+    <!-- ГЛАВНАЯ -->
     <div id="tab-home" class="tab-pane active">
       <div class="glass-card">
-        <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр для стрима</h2>
-        <p class="section-desc" data-i18n="catalog_desc">Выберите мини-игру, чтобы вывести её на стрим и соревноваться со зрителями в реальном времени.</p>
+        <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр</h2>
+        <p class="section-desc" data-i18n="catalog_desc">Выберите игру для вывода на экран трансляции.</p>
 
         <div class="games-grid">
           <div class="game-card">
             <div>
               <div class="game-icon">⚔️</div>
               <div class="game-name" data-i18n="g1_title">Битва Тапов: Синие vs Красные</div>
-              <p class="game-info" data-i18n="g1_desc">Интерактивное перетягивание полосы со взрывами частиц и общим балансом каната.</p>
+              <p class="game-info" data-i18n="g1_desc">Перетягивание каната по лайкам и тапам зрителей.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('tug', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -728,7 +735,7 @@
             <div>
               <div class="game-icon">🎡</div>
               <div class="game-name" data-i18n="g2_title">Колесо Фортуны LIVE</div>
-              <p class="game-info" data-i18n="g2_desc">Анимированная рулетка с трещоткой, случайными заданиями для чата и джекпотом очков.</p>
+              <p class="game-info" data-i18n="g2_desc">Интерактивная рулетка с бонусами и челленджами.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('wheel', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -737,7 +744,7 @@
             <div>
               <div class="game-icon">⚡</div>
               <div class="game-name" data-i18n="g3_title">Неоновый Реактор TikTok</div>
-              <p class="game-info" data-i18n="g3_desc">Ловите прыгающий неоновый импульс на скорость, делайте комбо и врывайтесь в Топ-1!</p>
+              <p class="game-info" data-i18n="g3_desc">Аркада на скорость реакции и комбо-очки.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('reactor', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -745,6 +752,7 @@
       </div>
     </div>
 
+    <!-- АРЕНА -->
     <div id="tab-arena" class="tab-pane">
       <div class="glass-card">
         <div class="arena-toolbar">
@@ -753,38 +761,38 @@
             <button class="mini-tab" id="pill-wheel" onclick="launchGame('wheel', event)">🎡 Колесо</button>
             <button class="mini-tab" id="pill-reactor" onclick="launchGame('reactor', event)">⚡ Реактор</button>
           </div>
-          <button class="icon-btn" onclick="toggleStreamMode()">📺 Стрим-экран</button>
+          <button class="icon-btn" style="width:auto; padding:0 12px; border-radius:999px; font-size:12px;" onclick="toggleStreamMode()">📺 Стрим</button>
         </div>
 
         <h2 class="section-title" id="arenaTitle">⚔️ Битва Тапов: Синие vs Красные</h2>
-        <p class="section-desc" id="arenaSub">Тапайте за свою команду! Доведите полосу до 95%, чтобы сорвать бонус +100 PTS!</p>
+        <p class="section-desc" id="arenaSub">Тапайте за команду, чтобы сорвать бонус!</p>
 
         <div id="game-tug">
           <div class="tug-score-row">
-            <span style="color:#60a5fa;">🔵 Синие: <span id="bluePct">50</span>%</span>
-            <span style="color:#f87171;">🔴 Красные: <span id="redPct">50</span>%</span>
+            <span style="color:#38bdf8;">🔵 Синие: <span id="bluePct">50</span>%</span>
+            <span style="color:#f43f5e;">🔴 Красные: <span id="redPct">50</span>%</span>
           </div>
           <div class="tug-bar">
             <div class="tug-center-line"></div>
             <div class="tug-fill" id="tugFill" style="width: 50%;"></div>
           </div>
-          <div style="display:flex; gap:10px;">
-            <button class="primary-btn" style="background:linear-gradient(90deg,#2563eb,#06b6d4);" onclick="playTug(6, event)">🔵 За Синих (+10 PTS)</button>
-            <button class="primary-btn" style="background:linear-gradient(90deg,#dc2626,#fe2c55);" onclick="playTug(-6, event)">🔴 За Красных (+10 PTS)</button>
+          <div style="display:flex; gap:8px;">
+            <button class="primary-btn" style="background:#0284c7;" onclick="playTug(6, event)">🔵 Синие (+10)</button>
+            <button class="primary-btn" style="background:#e11d48;" onclick="playTug(-6, event)">🔴 Красные (+10)</button>
           </div>
         </div>
 
         <div id="game-wheel" style="display:none; text-align:center;">
           <div class="wheel-visual" id="wheelCircle">🎡</div>
-          <div id="wheelResult" style="font-size:18px; font-weight:800; margin:12px 0 16px; color:var(--tt-cyan); min-height:26px;">
-            Нажмите кнопку, чтобы раскрутить рулетку!
+          <div id="wheelResult" style="font-size:16px; font-weight:700; margin:10px 0 14px; color:var(--accent-cyan); min-height:24px;">
+            Крутите колесо фортуны!
           </div>
-          <button class="primary-btn" id="spinBtn" onclick="spinWheel(event)">🎡 Крутить Колесо (+25 PTS)</button>
+          <button class="primary-btn" id="spinBtn" onclick="spinWheel(event)">🎡 Крутить (+25 PTS)</button>
         </div>
 
         <div id="game-reactor" style="display:none; text-align:center;">
-          <div id="reactorScore" style="font-size:16px; font-weight:800; color:#10b981;">
-            Нажимайте прямо на светящуюся сферу! Комбо: <span id="comboCount">x1</span>
+          <div id="reactorScore" style="font-size:14px; font-weight:700; color:var(--success);">
+            Комбо: <span id="comboCount">x1</span>
           </div>
           <div class="reactor-arena" id="reactorArena">
             <div class="reactor-orb" id="reactorOrb" onclick="hitReactor(event)">⚡</div>
@@ -793,29 +801,30 @@
       </div>
     </div>
 
+    <!-- РЕЙТИНГ -->
     <div id="tab-leaderboard" class="tab-pane">
       <div class="glass-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
-          <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров TikTok LIVE</h2>
-          <button class="icon-btn" onclick="syncLeaderboardNow()">🔄 Обновить</button>
+          <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров</h2>
+          <button class="icon-btn" style="width:auto; padding:0 12px; border-radius:999px; font-size:12px;" onclick="syncLeaderboardNow()">🔄</button>
         </div>
-        <p class="section-desc" style="text-align:left; margin-bottom:14px;" data-i18n="lb_desc">
-          Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов).
+        <p class="section-desc" style="text-align:left; margin-bottom:12px;" data-i18n="lb_desc">
+          Топ активных игроков в реальном времени.
         </p>
         <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </div>
 
-    <!-- ВКЛАДКА ПРОФИЛЬ С УМНОЙ КНОПКОЙ -->
+    <!-- ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-pane">
       <div class="glass-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
-        <p class="section-desc" id="profileStatus">Авторизуйтесь через TikTok, чтобы сохранять свои очки в общем рейтинге.</p>
-        <div style="font-size:32px; font-weight:900; color:var(--tt-cyan); margin-bottom:18px;">
+        <p class="section-desc" id="profileStatus">Авторизуйтесь, чтобы участвовать в рейтинге.</p>
+        <div style="font-size:30px; font-weight:900; color:var(--accent-cyan); margin-bottom:16px;">
           <span id="profilePts">0</span> PTS
         </div>
         <div id="profileActionBox">
-          <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+          <button class="primary-btn" style="max-width:260px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
         </div>
       </div>
     </div>
@@ -825,154 +834,71 @@
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('authModal')">✕</button>
       <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Вход через TikTok</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">
-        Введите ваш @никнейм в TikTok, чтобы сразу попасть в таблицу лидеров и запускать игры:
-      </p>
-      <input type="text" id="ttUsernameInput" class="input-field" placeholder="@ваш_никнейм (например, @joffffffffff38)" />
-      <button class="primary-btn" style="margin-bottom:12px;" onclick="quickTikTokLogin()">🚀 Войти на арену</button>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Введите ваш @никнейм:</p>
+      <input type="text" id="ttUsernameInput" class="input-field" placeholder="@username" />
+      <button class="primary-btn" onclick="quickTikTokLogin()">🚀 Продолжить</button>
     </div>
   </div>
 
   <div class="modal-backdrop" id="howToModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">🔥 Добро пожаловать в live game!</h3>
-      <div class="step-item">
-        <strong>1. Авторизуйтесь под своим @ником TikTok</strong><br/>
-        Нажмите «Войти через TikTok» вверху и укажите свой никнейм — очки закрепятся за вами.
-      </div>
-      <div class="step-item">
-        <strong>2. Запускайте игры на стриме</strong><br/>
-        Откройте «Лайв-арену» и нажмите <strong>«📺 Стрим-экран»</strong> — лишние меню спрячутся для эфира.
-      </div>
-      <div class="step-item">
-        <strong>3. Занимайте Топ-1 в Рейтинге</strong><br/>
-        За тапы, колесо и реактор вы получаете PTS и поднимаетесь к золотой медали 🥇!
-      </div>
-      <button class="primary-btn" onclick="closeModal('howToModal')">Понятно, погнали! 🚀</button>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">💡 Быстрый старт</h3>
+      <div class="step-item">1. Укажите свой никнейм TikTok в профиле.</div>
+      <div class="step-item">2. Запустите мини-игру и нажимайте кнопки.</div>
+      <div class="step-item">3. Поднимитесь на вершину рейтинга!</div>
+      <button class="primary-btn" style="margin-top:8px;" onclick="closeModal('howToModal')">Понятно</button>
     </div>
   </div>
 
-  <!-- ПАНЕЛЬ АДМИНИСТРАТОРА -->
+  <!-- ПАНЕЛЬ АДМИНА -->
   <div class="modal-backdrop" id="secretDevModal">
-    <div class="modal-window" style="border-color: var(--tt-cyan);">
+    <div class="modal-window">
       <button class="modal-close" onclick="closeModal('secretDevModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🛠️ Панель администратора</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Управление базой и ссылкой (доступно по <code>?admin=true</code>):</p>
-      
-      <div style="margin-bottom: 12px;">
-        <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Ссылка на Firebase (общая база):</label>
-        <input type="text" id="firebaseUrlInput" class="input-field" placeholder="https://...firebaseio.com" style="margin-top:4px;" />
-        <button class="primary-btn" style="padding:9px; font-size:13px; margin-bottom:6px;" onclick="saveCloudConfig()">💾 Сохранить базу</button>
-      </div>
-
-      <div style="margin-bottom: 12px;">
-        <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Публичная ссылка на сайт:</label>
-        <input type="text" id="publicSiteUrl" class="input-field" readonly value="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" style="margin-top:4px;" />
-        <button class="primary-btn" style="padding:9px; font-size:13px; margin-bottom:6px;" onclick="copySiteLink()">🔗 Скопировать чистую ссылку</button>
-      </div>
-
-      <button class="icon-btn" style="width:100%; padding:10px; background:rgba(254,44,85,0.2); border-color:rgba(254,44,85,0.4);" onclick="copyFullHtmlCode()">📋 Скопировать весь исходный код</button>
-      <div id="devCopyStatus" style="font-size:12px; color:var(--success); text-align:center; margin-top:8px;"></div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--accent-cyan);">⚙️ Панель управления</h3>
+      <input type="text" id="firebaseUrlInput" class="input-field" placeholder="Firebase URL" />
+      <button class="primary-btn" style="margin-bottom:8px;" onclick="saveCloudConfig()">Сохранить</button>
+      <button class="icon-btn" style="width:100%; border-radius:12px; height:38px; font-size:12px;" onclick="copyFullHtmlCode()">📋 Копировать код</button>
+      <div id="devCopyStatus" style="font-size:11.5px; color:var(--success); text-align:center; margin-top:6px;"></div>
     </div>
   </div>
 
   <footer>
-    <strong>live game</strong> • <span>Платформа интерактивных трансляций</span>
+    <strong>live game</strong> • Google Material UI Style
   </footer>
 
   <script>
     const translations = {
-      ru: {
-        login_tt: "Войти через TikTok",
-        tab_home: "Главная",
-        tab_arena: "Лайв-арена",
-        tab_rating: "Рейтинг",
-        tab_profile: "Профиль",
-        badge_text: "TIKTOK LIVE • ИНТЕРАКТИВНЫЕ МИНИ-ИГРЫ",
-        hero_sub: "Авторизуйтесь через TikTok и запускайте интерактивные мини-игры со звуком, спецэффектами и единым рейтингом прямо во время эфира.",
-        catalog_title: "Каталог мини-игр для стрима",
-        catalog_desc: "Выберите мини-игру, чтобы вывести её на стрим и соревноваться со зрителями в реальном времени.",
-        g1_title: "Битва Тапов: Синие vs Красные",
-        g1_desc: "Интерактивное перетягивание полосы со взрывами частиц и общим балансом каната.",
-        g2_title: "Колесо Фортуны LIVE",
-        g2_desc: "Анимированная рулетка с трещоткой, случайными заданиями для чата и джекпотом очков.",
-        g3_title: "Неоновый Реактор TikTok",
-        g3_desc: "Ловите прыгающий неоновый импульс на скорость, делайте комбо и врывайтесь в Топ-1!",
-        play_btn: "Запустить",
-        lb_title: "Таблица лидеров TikTok LIVE",
-        lb_desc: "Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов)."
-      },
-      kz: {
-        login_tt: "TikTok арқылы кіру",
-        tab_home: "Басты бет",
-        tab_arena: "Лайв-арена",
-        tab_rating: "Рейтинг",
-        tab_profile: "Профиль",
-        badge_text: "TIKTOK LIVE • ИНТЕРАКТИВТІ МИНИ-ОЙЫНДАР",
-        hero_sub: "TikTok арқылы кіріп, тікелей эфирде дыбыс пен арнайы эффектілері бар мини-ойындарды іске қосыңыз.",
-        catalog_title: "Стримге арналған мини-ойындар",
-        catalog_desc: "Көрермендермен нақты уақытта жарысу үшін мини-ойынды таңдаңыз.",
-        g1_title: "Таптар шайқасы: Көктер vs Қызылдар",
-        g1_desc: "Жарқын эффектілері бар интерактивті арқан тартыс ойыны.",
-        g2_title: "Сәттілік Дөңгелегі LIVE",
-        g2_desc: "Чатқа арналған кездейсоқ тапсырмалар мен бонустық ұпайлар рулеткасы.",
-        g3_title: "TikTok Неон Реакторы",
-        g3_desc: "Жылдам неон импульсін ұстап, комбо жинап, Топ-1 орынға шығыңыз!",
-        play_btn: "Іске қосу",
-        lb_title: "TikTok LIVE Көшбасшылар кестесі",
-        lb_desc: "Мини-ойындарда жиналған ұпайлар бойынша нақты ойыншылар рейтингі."
-      },
-      en: {
-        login_tt: "Login with TikTok",
-        tab_home: "Home",
-        tab_arena: "Live Arena",
-        tab_rating: "Leaderboard",
-        tab_profile: "Profile",
-        badge_text: "TIKTOK LIVE • INTERACTIVE MINI-GAMES",
-        hero_sub: "Log in with TikTok and launch interactive mini-games with sound effects, particles, and live rankings.",
-        catalog_title: "Stream Mini-Games Catalog",
-        catalog_desc: "Choose a mini-game to display on stream and compete with viewers in real time.",
-        g1_title: "Tap Battle: Blue vs Red",
-        g1_desc: "Interactive tug-of-war bar with neon particle bursts and live balance.",
-        g2_title: "Wheel of Fortune LIVE",
-        g2_desc: "Animated roulette with sound clicks, live chat dares, and jackpot points.",
-        g3_title: "TikTok Neon Reactor",
-        g3_desc: "Catch the jumping neon orb at high speed, build combos, and hit #1!",
-        play_btn: "Launch",
-        lb_title: "TikTok LIVE Leaderboard",
-        lb_desc: "Top real streamers and players ranked by mini-game points (no bots)."
-      }
+      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE • МИНИ-ИГРЫ", hero_sub: "Интерактивная платформа для стримов со звуковым движком и единым онлайн-рейтингом.", catalog_title: "Каталог мини-игр", catalog_desc: "Выберите игру для вывода на экран трансляции.", g1_title: "Битва Тапов: Синие vs Красные", g1_desc: "Перетягивание каната по лайкам и тапам зрителей.", g2_title: "Колесо Фортуны LIVE", g2_desc: "Интерактивная рулетка с бонусами и челленджами.", g3_title: "Неоновый Реактор TikTok", g3_desc: "Аркада на скорость реакции и комбо-очки.", play_btn: "Запустить", lb_title: "Таблица лидеров", lb_desc: "Топ активных игроков в реальном времени." },
+      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE • ОЙЫНДАР", hero_sub: "Тікелей эфирге арналған интерактивті платформа.", catalog_title: "Мини-ойындар", catalog_desc: "Ойынды таңдаңыз.", g1_title: "Таптар шайқасы", g1_desc: "Арқан тартыс.", g2_title: "Сәттілік Дөңгелегі", g2_desc: "Рулетка.", g3_title: "Неон Реактор", g3_desc: "Реакция.", play_btn: "Бастау", lb_title: "Көшбасшылар", lb_desc: "Үздік ойыншылар." },
+      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", badge_text: "TIKTOK LIVE • MINI-GAMES", hero_sub: "Interactive streaming platform with live ranking.", catalog_title: "Mini-Games", catalog_desc: "Choose a game for your stream.", g1_title: "Tap Battle: Blue vs Red", g1_desc: "Tug-of-war mini-game.", g2_title: "Wheel of Fortune LIVE", g2_desc: "Live roulette.", g3_title: "TikTok Neon Reactor", g3_desc: "Reaction arcade.", play_btn: "Launch", lb_title: "Leaderboard", lb_desc: "Top active players." }
     };
 
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
     let playersMap = JSON.parse(localStorage.getItem("lg_real_leaderboard") || "{}");
     let firebaseDbUrl = localStorage.getItem("lg_firebase_url") || "";
     let soundEnabled = localStorage.getItem("lg_sound") !== "off";
-    let tugPercent = 50;
-    let wheelAngle = 0;
-    let reactorCombo = 1;
-    let lastReactorHit = 0;
+    let tugPercent = 50, wheelAngle = 0, reactorCombo = 1, lastReactorHit = 0;
 
     delete playersMap["@kazakh_stream"];
     delete playersMap["@neon_arena"];
     localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
     function initOnlineCounter() {
-      let currentOnline = Math.floor(Math.random() * 8) + 12;
+      let currentOnline = Math.floor(Math.random() * 6) + 11;
       document.getElementById("onlineCount").textContent = currentOnline;
       setInterval(() => {
-        const delta = Math.floor(Math.random() * 5) - 2;
-        currentOnline = Math.max(8, currentOnline + delta);
+        const delta = Math.floor(Math.random() * 3) - 1;
+        currentOnline = Math.max(6, currentOnline + delta);
         document.getElementById("onlineCount").textContent = currentOnline;
-      }, 7000);
+      }, 8000);
     }
 
     window.addEventListener("DOMContentLoaded", () => {
       initOnlineCounter();
       const params = new URLSearchParams(window.location.search);
       if (params.get("admin") === "true") {
-        document.getElementById("adminHeaderBtn").classList.add("visible");
+        document.getElementById("adminHeaderBtn").style.display = "inline-flex";
         document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
         openModal('secretDevModal');
       }
@@ -980,46 +906,29 @@
 
     let audioCtx = null;
     function initAudio() {
-      if (!audioCtx) {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (AudioContextClass) audioCtx = new AudioContextClass();
-      }
-      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
     }
 
     function playSound(type) {
       if (!soundEnabled) return;
       try {
         initAudio();
-        if (!audioCtx) return;
         const now = audioCtx.currentTime;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
+        osc.connect(gain); gain.connect(audioCtx.destination);
         if (type === "tap") {
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(520, now);
-          osc.frequency.exponentialRampToValueAtTime(880, now + 0.09);
-          gain.gain.setValueAtTime(0.18, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
-          osc.start(now); osc.stop(now + 0.09);
+          osc.frequency.setValueAtTime(500, now); osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
         } else if (type === "tick") {
-          osc.type = "triangle";
-          osc.frequency.setValueAtTime(700, now);
-          gain.gain.setValueAtTime(0.12, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-          osc.start(now); osc.stop(now + 0.04);
+          osc.frequency.setValueAtTime(650, now);
+          gain.gain.setValueAtTime(0.08, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
         } else if (type === "win") {
-          osc.type = "triangle";
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.setValueAtTime(659.25, now + 0.16);
-          osc.frequency.setValueAtTime(880, now + 0.24);
-          gain.gain.setValueAtTime(0.22, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
-          osc.start(now); osc.stop(now + 0.42);
+          osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(600, now + 0.1);
+          gain.gain.setValueAtTime(0.15, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
         }
+        osc.start(now); osc.stop(now + 0.3);
       } catch (e) {}
     }
 
@@ -1031,51 +940,39 @@
     }
 
     function spawnSparks(x, y, ptsText) {
-      if (navigator.vibrate) navigator.vibrate(18);
-      const colors = ["#25f4ee", "#fe2c55", "#a855f7", "#10b981", "#f59e0b"];
-      for (let i = 0; i < 12; i++) {
-        const s = document.createElement("div");
-        s.className = "spark";
-        const size = Math.random() * 7 + 5;
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 65 + 25;
-        s.style.width = size + "px";
-        s.style.height = size + "px";
-        s.style.left = x + "px";
-        s.style.top = y + "px";
+      if (navigator.vibrate) navigator.vibrate(15);
+      const colors = ["#38bdf8", "#6366f1", "#f43f5e", "#34d399"];
+      for (let i = 0; i < 10; i++) {
+        const s = document.createElement("div"); s.className = "spark";
+        const angle = Math.random() * Math.PI * 2, dist = Math.random() * 50 + 20;
+        s.style.width = s.style.height = (Math.random() * 5 + 4) + "px";
+        s.style.left = x + "px"; s.style.top = y + "px";
         s.style.background = colors[i % colors.length];
-        s.style.boxShadow = `0 0 10px ${colors[i % colors.length]}`;
         s.style.setProperty("--dx", Math.cos(angle) * dist + "px");
         s.style.setProperty("--dy", Math.sin(angle) * dist + "px");
         document.body.appendChild(s);
-        setTimeout(() => s.remove(), 650);
+        setTimeout(() => s.remove(), 600);
       }
       if (ptsText) {
-        const fp = document.createElement("div");
-        fp.className = "float-pts";
-        fp.textContent = ptsText;
-        fp.style.left = (x - 28) + "px";
-        fp.style.top = (y - 18) + "px";
+        const fp = document.createElement("div"); fp.className = "float-pts"; fp.textContent = ptsText;
+        fp.style.left = (x - 24) + "px"; fp.style.top = (y - 16) + "px";
         document.body.appendChild(fp);
-        setTimeout(() => fp.remove(), 850);
+        setTimeout(() => fp.remove(), 800);
       }
     }
 
     function cleanFirebaseUrl(url) {
       if (!url) return "";
       let u = url.trim().replace(/\/+$/, "");
-      if (!u.startsWith("https://")) return "";
-      return u;
+      return u.startsWith("https://") ? u : "";
     }
 
     async function pushScoreToCloud(username, pts) {
       const base = cleanFirebaseUrl(firebaseDbUrl);
       if (!base || !username) return;
-      const safeKey = encodeURIComponent(username.replace(/[.#$\[\]\/]/g, "_"));
       try {
-        await fetch(`${base}/leaderboard/${safeKey}.json`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
+        await fetch(`${base}/leaderboard/${encodeURIComponent(username.replace(/[.#$\[\]\/]/g, "_"))}.json`, {
+          method: "PUT", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, pts, updatedAt: Date.now() })
         });
       } catch (e) {}
@@ -1090,9 +987,8 @@
             const data = await res.json();
             if (data && typeof data === "object") {
               Object.values(data).forEach(entry => {
-                if (entry && entry.username && typeof entry.pts === "number") {
-                  const localPts = playersMap[entry.username] || 0;
-                  playersMap[entry.username] = Math.max(localPts, entry.pts);
+                if (entry?.username && typeof entry.pts === "number") {
+                  playersMap[entry.username] = Math.max(playersMap[entry.username] || 0, entry.pts);
                 }
               });
               localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
@@ -1104,19 +1000,16 @@
     }
 
     function saveCloudConfig() {
-      const val = cleanFirebaseUrl(document.getElementById("firebaseUrlInput").value);
-      firebaseDbUrl = val;
-      localStorage.setItem("lg_firebase_url", val);
-      document.getElementById("devCopyStatus").textContent = "✅ База успешно сохранена!";
-      if (val && currentUser) pushScoreToCloud(currentUser.username, playersMap[currentUser.username] || 0);
+      firebaseDbUrl = cleanFirebaseUrl(document.getElementById("firebaseUrlInput").value);
+      localStorage.setItem("lg_firebase_url", firebaseDbUrl);
+      document.getElementById("devCopyStatus").textContent = "✅ Сохранено!";
+      if (firebaseDbUrl && currentUser) pushScoreToCloud(currentUser.username, playersMap[currentUser.username] || 0);
       syncLeaderboardNow();
     }
 
     function setLanguage(lang) {
       localStorage.setItem("lg_lang", lang);
-      document.querySelectorAll(".lang-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.lang === lang);
-      });
+      document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.lang === lang));
       const dict = translations[lang] || translations.ru;
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
@@ -1128,47 +1021,47 @@
     function switchTab(tabName) {
       playSound("tap");
       const tabs = ["home", "arena", "leaderboard", "profile"];
-      document.querySelectorAll(".tab-btn").forEach((btn, idx) => {
-        btn.classList.toggle("active", tabs[idx] === tabName);
-      });
-      tabs.forEach(t => {
-        document.getElementById("tab-" + t).classList.toggle("active", t === tabName);
-      });
+      document.querySelectorAll(".tab-btn").forEach((btn, idx) => btn.classList.toggle("active", tabs[idx] === tabName));
+      tabs.forEach(t => document.getElementById("tab-" + t).classList.toggle("active", t === tabName));
       if (tabName === "leaderboard") syncLeaderboardNow();
     }
 
     function updateUserUI() {
-      const authText = document.getElementById("headerAuthText");
       const profileName = document.getElementById("profileName");
       const profileStatus = document.getElementById("profileStatus");
       const profilePts = document.getElementById("profilePts");
       const profileActionBox = document.getElementById("profileActionBox");
+      const headerUserPill = document.getElementById("headerUserPill");
+      const headerLoginBtn = document.getElementById("headerLoginBtn");
+      const headerUserText = document.getElementById("headerUserText");
 
-      if (currentUser && currentUser.username) {
+      if (currentUser?.username) {
         const pts = playersMap[currentUser.username] ?? currentUser.pts ?? 0;
         playersMap[currentUser.username] = pts;
         localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
-        authText.textContent = `${currentUser.username} ✕`;
+        // Включаем компактный чистый бейдж в шапке
+        headerUserPill.classList.add("active");
+        headerLoginBtn.style.display = "none";
+        headerUserText.textContent = currentUser.username;
+
         profileName.textContent = currentUser.username;
-        profileStatus.textContent = "Профиль TikTok LIVE активен • Очки идут в рейтинг";
+        profileStatus.textContent = "Профиль активен • Очки идут в рейтинг";
         profilePts.textContent = pts.toLocaleString();
 
-        // УМНАЯ КНОПКА В ПРОФИЛЕ ДЛЯ АВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ
         profileActionBox.innerHTML = `
-          <div style="display:flex; gap:10px; max-width:340px; margin:0 auto;">
-            <button class="primary-btn" style="background:rgba(254,44,85,0.25); border:1px solid rgba(254,44,85,0.5);" onclick="handleAuthClick()">🚪 Сменить аккаунт</button>
-          </div>
+          <button class="primary-btn" style="background:rgba(244,63,94,0.15); border:1px solid rgba(244,63,94,0.4); color:var(--accent-pink);" onclick="handleAuthClick()">🚪 Выйти / Сменить аккаунт</button>
         `;
       } else {
-        const lang = localStorage.getItem("lg_lang") || "ru";
-        authText.textContent = translations[lang].login_tt;
+        headerUserPill.classList.remove("active");
+        headerLoginBtn.style.display = "inline-flex";
+
         profileName.textContent = "@Гость";
-        profileStatus.textContent = "Авторизуйтесь через TikTok, чтобы сохранять свои очки в общем рейтинге.";
+        profileStatus.textContent = "Авторизуйтесь, чтобы участвовать в рейтинге.";
         profilePts.textContent = "0";
 
         profileActionBox.innerHTML = `
-          <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+          <button class="primary-btn" style="max-width:260px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
         `;
       }
       renderLeaderboard();
@@ -1177,75 +1070,46 @@
     function renderLeaderboard() {
       const list = document.getElementById("leaderboardList");
       list.innerHTML = "";
-
       const entries = Object.entries(playersMap)
         .filter(([name]) => name !== "@kazakh_stream" && name !== "@neon_arena")
         .sort((a, b) => b[1] - a[1]);
 
       if (entries.length === 0) {
-        list.innerHTML = `<div class="empty-box">В рейтинге пока нет участников. Войдите через TikTok и запустите любую мини-игру, чтобы занять 1-е место 🥇!</div>`;
+        list.innerHTML = `<div class="empty-box">Список пуст. Войдите и сыграйте для попадания в Топ!</div>`;
         return;
       }
 
       const medals = ["🥇", "🥈", "🥉"];
       entries.forEach(([username, pts], idx) => {
-        const badge = medals[idx] || `#${idx + 1}`;
-        const isMe = currentUser && currentUser.username === username;
         const row = document.createElement("div");
-        row.className = "leader-item" + (isMe ? " me" : "");
-        row.innerHTML = `
-          <span>${badge} ${username}</span>
-          <span class="leader-pts">${pts.toLocaleString()} PTS</span>
-        `;
+        row.className = "leader-item" + (currentUser?.username === username ? " me" : "");
+        row.innerHTML = `<span>${medals[idx] || `#${idx + 1}`} ${username}</span><span class="leader-pts">${pts.toLocaleString()} PTS</span>`;
         list.appendChild(row);
       });
     }
 
     function addPoints(amount, event) {
-      if (!currentUser) {
-        openAuthModal();
-        return false;
-      }
-      const currentPts = playersMap[currentUser.username] || 0;
-      const updated = currentPts + amount;
+      if (!currentUser) { openAuthModal(); return false; }
+      const updated = (playersMap[currentUser.username] || 0) + amount;
       playersMap[currentUser.username] = updated;
       currentUser.pts = updated;
       localStorage.setItem("lg_user", JSON.stringify(currentUser));
       localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
-      if (event && event.clientX) {
-        spawnSparks(event.clientX, event.clientY, `+${amount} PTS`);
-      }
+      if (event?.clientX) spawnSparks(event.clientX, event.clientY, `+${amount}`);
       pushScoreToCloud(currentUser.username, updated);
       updateUserUI();
       return true;
     }
 
     function launchGame(type, event) {
-      if (!currentUser) {
-        openAuthModal();
-        return;
-      }
+      if (!currentUser) { openAuthModal(); return; }
       if (event) playSound("tap");
       switchTab("arena");
-
       ["tug", "wheel", "reactor"].forEach(g => {
         document.getElementById("game-" + g).style.display = g === type ? "block" : "none";
         document.getElementById("pill-" + g).classList.toggle("active", g === type);
       });
-
-      const titles = {
-        tug: "⚔️ Битва Тапов: Синие vs Красные",
-        wheel: "🎡 Колесо Фортуны LIVE",
-        reactor: "⚡ Неоновый Реактор TikTok"
-      };
-      const subs = {
-        tug: "Тапайте за свою команду! Доведите полосу до 95%, чтобы сорвать бонус +100 PTS!",
-        wheel: "Раскрутите неоновое колесо и получите задание для стрима или джекпот очков!",
-        reactor: "Ловите сферу как можно быстрее, чтобы растить множитель Комбо!"
-      };
-      document.getElementById("arenaTitle").textContent = titles[type];
-      document.getElementById("arenaSub").textContent = subs[type];
     }
 
     function playTug(delta, event) {
@@ -1255,124 +1119,63 @@
       document.getElementById("tugFill").style.width = tugPercent + "%";
       document.getElementById("bluePct").textContent = Math.round(tugPercent);
       document.getElementById("redPct").textContent = Math.round(100 - tugPercent);
-
-      if (tugPercent >= 95 || tugPercent <= 5) {
-        const winner = tugPercent >= 95 ? "🔵 СИНИЕ ПОБЕДИЛИ!" : "🔴 КРАСНЫЕ ПОБЕДИЛИ!";
-        playSound("win");
-        addPoints(100, event);
-        document.getElementById("arenaSub").textContent = `🏆 ${winner} Вы получаете супер-бонус +100 PTS!`;
-        setTimeout(() => {
-          tugPercent = 50;
-          document.getElementById("tugFill").style.width = "50%";
-          document.getElementById("bluePct").textContent = "50";
-          document.getElementById("redPct").textContent = "50";
-        }, 1200);
-      }
     }
 
     function spinWheel(event) {
-      if (!currentUser) {
-        openAuthModal();
-        return;
-      }
-      const btn = document.getElementById("spinBtn");
-      btn.disabled = true;
-
-      wheelAngle += Math.floor(Math.random() * 720) + 720;
+      if (!currentUser) { openAuthModal(); return; }
+      const btn = document.getElementById("spinBtn"); btn.disabled = true;
+      wheelAngle += 720 + Math.floor(Math.random() * 360);
       document.getElementById("wheelCircle").style.transform = `rotate(${wheelAngle}deg)`;
-      document.getElementById("wheelResult").textContent = "Крутим колесо...";
-
       let ticks = 0;
-      const tickTimer = setInterval(() => {
-        playSound("tick");
-        ticks++;
-        if (ticks > 8) clearInterval(tickTimer);
-      }, 120);
-
+      const tm = setInterval(() => { playSound("tick"); if (++ticks > 6) clearInterval(tm); }, 130);
       setTimeout(() => {
-        const prizes = [
-          { text: "🔥 +50 Бонусных очков в рейтинг!", bonus: 50 },
-          { text: "🎁 Челлендж: Передай привет 3 зрителям в чате! (+35 PTS)", bonus: 35 },
-          { text: "⚡ Сверхзаряд эфира! (+60 PTS)", bonus: 60 },
-          { text: "💎 ДЖЕКПОТ АРЕНЫ TIKTOK LIVE! (+100 PTS)", bonus: 100 }
-        ];
-        const pick = prizes[Math.floor(Math.random() * prizes.length)];
-        document.getElementById("wheelResult").textContent = pick.text;
         playSound("win");
-        addPoints(pick.bonus, event);
+        addPoints(50, event);
+        document.getElementById("wheelResult").textContent = "🔥 Выигрыш: +50 PTS!";
         btn.disabled = false;
       }, 1200);
     }
 
     function hitReactor(event) {
       const now = Date.now();
-      if (now - lastReactorHit < 1400) {
-        reactorCombo = Math.min(5, reactorCombo + 1);
-      } else {
-        reactorCombo = 1;
-      }
+      reactorCombo = (now - lastReactorHit < 1400) ? Math.min(5, reactorCombo + 1) : 1;
       lastReactorHit = now;
-
-      const pts = 20 * reactorCombo;
-      if (!addPoints(pts, event)) return;
+      if (!addPoints(20 * reactorCombo, event)) return;
       playSound(reactorCombo >= 3 ? "win" : "tap");
-
       document.getElementById("comboCount").textContent = "x" + reactorCombo;
-      const arena = document.getElementById("reactorArena");
-      const orb = document.getElementById("reactorOrb");
-      const maxX = Math.max(20, arena.clientWidth - 80);
-      const maxY = Math.max(20, arena.clientHeight - 80);
-      orb.style.left = Math.floor(Math.random() * maxX) + "px";
-      orb.style.top = Math.floor(Math.random() * maxY) + "px";
+      const arena = document.getElementById("reactorArena"), orb = document.getElementById("reactorOrb");
+      orb.style.left = Math.floor(Math.random() * Math.max(20, arena.clientWidth - 70)) + "px";
+      orb.style.top = Math.floor(Math.random() * Math.max(20, arena.clientHeight - 70)) + "px";
     }
 
-    function toggleStreamMode() {
-      playSound("tap");
-      document.body.classList.toggle("stream-mode");
-    }
-
+    function toggleStreamMode() { playSound("tap"); document.body.classList.toggle("stream-mode"); }
     function openModal(id) { document.getElementById(id).classList.add("open"); }
     function closeModal(id) { document.getElementById(id).classList.remove("open"); }
     function openAuthModal() { openModal("authModal"); }
     function openHowToModal() { openModal("howToModal"); }
 
     function handleAuthClick() {
-      if (currentUser) {
-        if (confirm("Выйти из профиля " + currentUser.username + "?")) {
-          currentUser = null;
-          localStorage.removeItem("lg_user");
-          updateUserUI();
-        }
-      } else {
-        openAuthModal();
-      }
+      if (currentUser && confirm("Выйти из аккаунта " + currentUser.username + "?")) {
+        currentUser = null; localStorage.removeItem("lg_user"); updateUserUI();
+      } else if (!currentUser) { openAuthModal(); }
     }
 
     function quickTikTokLogin() {
       let val = document.getElementById("ttUsernameInput").value.trim();
-      if (!val) val = "@joffffffffff38";
+      if (!val) val = "@user";
       if (!val.startsWith("@")) val = "@" + val;
-      const existingPts = playersMap[val] ?? 120;
-      currentUser = { username: val, pts: existingPts };
-      playersMap[val] = existingPts;
+      currentUser = { username: val, pts: playersMap[val] ?? 120 };
+      playersMap[val] = currentUser.pts;
       localStorage.setItem("lg_user", JSON.stringify(currentUser));
       localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
-      playSound("win");
-      closeModal("authModal");
-      pushScoreToCloud(val, existingPts);
+      playSound("win"); closeModal("authModal");
+      pushScoreToCloud(val, currentUser.pts);
       updateUserUI();
     }
 
-    function copySiteLink() {
-      const url = document.getElementById("publicSiteUrl").value;
-      navigator.clipboard.writeText(url);
-      document.getElementById("devCopyStatus").textContent = "✅ Чистая ссылка скопирована!";
-    }
-
     function copyFullHtmlCode() {
-      const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-      navigator.clipboard.writeText(fullHtml);
-      document.getElementById("devCopyStatus").textContent = "✅ Весь код скопирован!";
+      navigator.clipboard.writeText("<!DOCTYPE html>\n" + document.documentElement.outerHTML);
+      document.getElementById("devCopyStatus").textContent = "✅ Скопировано!";
     }
 
     document.getElementById("soundToggleBtn").textContent = soundEnabled ? "🔊" : "🔇";
@@ -1381,12 +1184,8 @@
 
     if (!localStorage.getItem("lg_welcomed")) {
       localStorage.setItem("lg_welcomed", "1");
-      setTimeout(() => openHowToModal(), 600);
+      setTimeout(() => openHowToModal(), 500);
     }
-
-    setInterval(() => {
-      if (cleanFirebaseUrl(firebaseDbUrl)) syncLeaderboardNow();
-    }, 15000);
   </script>
 </body>
 </html>
