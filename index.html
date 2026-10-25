@@ -843,7 +843,7 @@
             <div class="chat-msg bot">Привет! Я умный ИИ-помощник платформы live game. Готов ответить на любые вопросы по стримам, авторизации и мини-играм #game #live!</div>
           </div>
           <div class="chat-input-row">
-            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь (например: Как войти?)..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
+            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь (например: Как выйти в топ?)..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
             <button class="primary-btn" style="width:auto; padding:0 16px;" onclick="sendChatMessage()">➤</button>
           </div>
         </div>
@@ -913,7 +913,7 @@
       }
     });
 
-    // УМНЫЙ ИИ-ПОМОЩНИК С АНАЛИЗОМ ВОПРОСОВ (#game, #live, #сайт)
+    // ИСПРАВЛЕННЫЙ УМНЫЙ ИИ-ПОМОЩНИК С ТОЧНЫМ РАСПОЗНАВАНИЕМ ЗАПРОСОВ
     function sendChatMessage() {
       const input = document.getElementById("chatInput");
       const text = input.value.trim();
@@ -936,20 +936,20 @@
         
         const lower = text.toLowerCase();
         
-        if (lower.includes("авториз") || lower.includes("войти") || lower.includes("вход") || lower.includes("ник")) {
-          botDiv.textContent = "👤 Чтобы авторизоваться, нажмите кнопку «Войти» в шапке сайта и введите свой реальный TikTok юзернейм (например, @username). Система проверит аккаунт #сайт";
+        if (lower.includes("топ") || lower.includes("рейтинг") || lower.includes("очки") || lower.includes("pts")) {
+          botDiv.textContent = "🏆 Чтобы выйти в топ рейтинга #сайт, активно запускайте #game во время #live трансляции. Каждый лайк, тапание и подарок приносят PTS, которые поднимают вас на вершину таблицы лидеров!";
+        } else if (lower.includes("авториз") || lower.includes("войти") || lower.includes("вход") || lower.includes("ник")) {
+          botDiv.textContent = "👤 Для авторизации нажмите кнопку «Войти» в верхней панели #сайт и введите свой реальный TikTok юзернейм. Без входа очки в #game не будут сохраняться в таблице лидеров.";
         } else if (lower.includes("выйти") || lower.includes("сменить") || lower.includes("аккаунт")) {
-          botDiv.textContent = "🚪 Выйти из аккаунта можно во вкладке «Профиль», нажав кнопку выхода. После этого вы сможете зайти под другим никнеймом #сайт";
-        } else if (lower.includes("таб") || lower.includes("канат") || lower.includes("синие") || lower.includes("красные")) {
-          botDiv.textContent = "⚔️ «Битва тапов» (#game) — это интерактивное перетягивание шкалы, которая реагирует на лайки и тапы зрителей во время #live трансляции!";
+          botDiv.textContent = "🚪 Выйти из аккаунта или сменить никнейм можно в разделе «Профиль» #сайт, нажав соответствующую кнопку.";
+        } else if (lower.includes("таб") || lower.includes("канат") || lower.includes("синие") || lower.includes("красные") || lower.includes("лайк")) {
+          botDiv.textContent = "⚔️ «Битва тапов» (#game) работает прямо во время #live трансляции: зрители ставят лайки, а шкала автоматически двигается в сторону команды победителей!";
         } else if (lower.includes("колесо") || lower.includes("рулетк") || lower.includes("подар")) {
-          botDiv.textContent = "🎡 «Колесо Фортуны» (#game) автоматически вращается и выдает случайные челленджи, когда зрители присылают донаты и подарки в #live эфире.";
-        } else if (lower.includes("реактор") || lower.includes("комбо") || lower.includes("сфер")) {
-          botDiv.textContent = "⚡ «Неоновый Реактор» (#game) увеличивает множитель комбо при высокой активности чата на #live трансляции.";
-        } else if (lower.includes("очки") || lower.includes("pts") || lower.includes("рейтинг") || lower.includes("топ")) {
-          botDiv.textContent = "🏆 Все набранные очки (PTS) автоматически сохраняются в облаке и выводятся в разделе «Рейтинг» #сайт для всех участников #live.";
+          botDiv.textContent = "🎡 «Колесо Фортуны» (#game) автоматически вращается при отправке платных подарков зрителями в #live эфире.";
+        } else if (lower.includes("реактор") || lower.includes("комбо")) {
+          botDiv.textContent = "⚡ «Неоновый Реактор» (#game) разгоняет комбо-множитель при высокой активности чата на #live трансляции.";
         } else {
-          botDiv.textContent = "💡 Отличный вопрос про #live и #game! Наша платформа работает полностью в реальном времени. Если у вас возникли вопросы по настройке, загляните в раздел «Лайв-арена» или перепроверьте подключение.";
+          botDiv.textContent = "💡 Отличный вопрос по платформе #сайт и #live! Убедитесь, что вы авторизованы под своим никнеймом и открыли вкладку «Лайв-арена» для запуска #game.";
         }
 
         msgs.appendChild(botDiv);
