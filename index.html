@@ -45,7 +45,6 @@
       overflow-x: hidden;
     }
 
-    /* Режим чистого экрана для стрима */
     body.stream-mode .top-header,
     body.stream-mode .brand-hero,
     body.stream-mode footer {
@@ -87,7 +86,6 @@
       gap: 6px;
     }
 
-    /* Верхняя панель */
     .top-header {
       position: sticky;
       top: 0;
@@ -266,7 +264,6 @@
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.35));
       margin-bottom: 8px;
-      cursor: pointer;
     }
 
     .brand-sub {
@@ -665,13 +662,13 @@
     </div>
   </header>
 
-  <!-- Заголовок с защищенным секретом (5 тапов + пин-код) -->
+  <!-- Абсолютно чистый заголовок без каких-либо секретных кликов -->
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
       <span data-i18n="badge_text">TIKTOK LIVE • ИНТЕРАКТИВНЫЕ МИНИ-ИГРЫ</span>
     </div>
-    <h1 class="brand-title" id="secretTitle" onclick="handleSecretClick()">live game</h1>
+    <h1 class="brand-title">live game</h1>
     <p class="brand-sub" data-i18n="hero_sub">
       Авторизуйтесь через TikTok и запускайте интерактивные мини-игры со звуком, спецэффектами и единым рейтингом прямо во время эфира.
     </p>
@@ -787,7 +784,6 @@
     </div>
   </main>
 
-  <!-- МОДАЛКА: Вход через TikTok -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('authModal')">✕</button>
@@ -800,7 +796,6 @@
     </div>
   </div>
 
-  <!-- МОДАЛКА: Инструкция -->
   <div class="modal-backdrop" id="howToModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
@@ -821,23 +816,12 @@
     </div>
   </div>
 
-  <!-- ЗАЩИЩЕННОЕ ОКНО ПИН-КОДА ДЛЯ РЕЖИМА РАЗРАБОТЧИКА -->
-  <div class="modal-backdrop" id="pinModal">
-    <div class="modal-window" style="max-width: 340px; text-align: center;">
-      <button class="modal-close" onclick="closeModal('pinModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🔒 Владелец сайта</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Введите пин-код владельца (по умолчанию: <b>777</b>):</p>
-      <input type="password" id="devPinInput" class="input-field" placeholder="Пин-код" style="text-align:center; font-size:18px; letter-spacing:4px;" />
-      <button class="primary-btn" onclick="checkDevPin()">Открыть меню</button>
-    </div>
-  </div>
-
-  <!-- МЕНЮ ВЛАДЕЛЬЦА -->
+  <!-- МЕНЮ ВЛАДЕЛЬЦА (ОТКРЫВАЕТСЯ ТОЛЬКО ЧЕРЕЗ URL С КЛЮЧОМ: ?admin=true) -->
   <div class="modal-backdrop" id="secretDevModal">
     <div class="modal-window" style="border-color: var(--tt-cyan);">
       <button class="modal-close" onclick="closeModal('secretDevModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🛠️ Меню владельца сайта</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Защита срабатывает только по 5 тапам и пин-коду. Зрители сюда не попадут:</p>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🛠️ Панель администратора</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Эта панель доступна только по секретной ссылке (в конце вашего URL добавлено <code>?admin=true</code>):</p>
       
       <div style="margin-bottom: 12px;">
         <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Ссылка на Firebase (общая база):</label>
@@ -846,9 +830,9 @@
       </div>
 
       <div style="margin-bottom: 12px;">
-        <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Публичная ссылка на сайт:</label>
+        <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Публичная ссылка на сайт (для зрителей):</label>
         <input type="text" id="publicSiteUrl" class="input-field" readonly value="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" style="margin-top:4px;" />
-        <button class="primary-btn" style="padding:9px; font-size:13px; margin-bottom:6px;" onclick="copySiteLink()">🔗 Скопировать ссылку</button>
+        <button class="primary-btn" style="padding:9px; font-size:13px; margin-bottom:6px;" onclick="copySiteLink()">🔗 Скопировать чистую ссылку</button>
       </div>
 
       <button class="icon-btn" style="width:100%; padding:10px; background:rgba(254,44,85,0.2); border-color:rgba(254,44,85,0.4);" onclick="copyFullHtmlCode()">📋 Скопировать весь исходный код (index.html)</button>
@@ -932,36 +916,19 @@
     let wheelAngle = 0;
     let reactorCombo = 1;
     let lastReactorHit = 0;
-    let titleClicks = 0;
-    let titleClickTimer = null;
 
     delete playersMap["@kazakh_stream"];
     delete playersMap["@neon_arena"];
     localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
-    // Надежная защита: 5 быстрых тапов открывают окно ввода пин-кода
-    function handleSecretClick() {
-      titleClicks++;
-      clearTimeout(titleClickTimer);
-      if (titleClicks >= 5) {
-        titleClicks = 0;
-        openModal('pinModal');
-      } else {
-        titleClickTimer = setTimeout(() => { titleClicks = 0; }, 800);
-      }
-    }
-
-    function checkDevPin() {
-      const pin = document.getElementById("devPinInput").value.trim();
-      if (pin === "777") {
-        closeModal('pinModal');
-        document.getElementById("devPinInput").value = "";
+    // Проверка секретного ключа в адресной строке при открытии сайта
+    window.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("admin") === "true") {
         document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
         openModal('secretDevModal');
-      } else {
-        alert("Неверный пин-код!");
       }
-    }
+    });
 
     let audioCtx = null;
     function initAudio() {
@@ -1349,13 +1316,13 @@
     function copySiteLink() {
       const url = document.getElementById("publicSiteUrl").value;
       navigator.clipboard.writeText(url);
-      document.getElementById("devCopyStatus").textContent = "✅ Ссылка скопирована!";
+      document.getElementById("devCopyStatus").textContent = "✅ Чистая ссылка скопирована!";
     }
 
     function copyFullHtmlCode() {
       const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
       navigator.clipboard.writeText(fullHtml);
-      document.getElementById("devCopyStatus").textContent = "✅ Весь код index.html скопирован!";
+      document.getElementById("devCopyStatus").textContent = "✅ Весь код скопирован!";
     }
 
     document.getElementById("soundToggleBtn").textContent = soundEnabled ? "🔊" : "🔇";
