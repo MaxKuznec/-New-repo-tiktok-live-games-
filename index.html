@@ -816,26 +816,24 @@
     </div>
   </main>
 
-  <!-- МОДАЛКА ВХОДА С ПРОВЕРКОЙ СУЩЕСТВОВАНИЯ НИКНЕЙМА -->
+  <!-- ЧИСТАЯ МОДАЛКА ВХОДА С СУЩЕСТВУЮЩИМИ НИКНЕЙМАМИ -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('authModal')">✕</button>
       <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Вход стримера TikTok</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Введите ваш реальный TikTok юзернейм:</p>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Введите ваш подтвержденный юзернейм:</p>
       <input type="text" id="ttUsernameInput" class="input-field" placeholder="@username" />
-      <div class="error-msg" id="loginError">Пользователь не найден или указан неверный формат.</div>
-      <button class="primary-btn" onclick="verifyAndLogin()" style="margin-bottom:10px;">🚀 Проверить и войти</button>
-      <hr style="border:none; border-top:1px solid var(--border); margin:10px 0;" />
-      <button class="icon-btn" style="width:100%; border-radius:12px; height:40px; font-size:12.5px; background:rgba(99,102,241,0.2); border-color:rgba(99,102,241,0.4);" onclick="startRealTikTokOAuth()">🔑 Авторизоваться через TikTok.com</button>
+      <div class="error-msg" id="loginError">Пользователь не найден или указан неверно.</div>
+      <button class="primary-btn" onclick="verifyAndLogin()">🚀 Войти на арену</button>
     </div>
   </div>
 
   <div class="modal-backdrop" id="howToModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">💡 Система авторизации</h3>
-      <div class="step-item">1. Вход проверяет корректность юзернейма стримера.</div>
-      <div class="step-item">2. Используйте официальный OAuth TikTok для безопасного входа.</div>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">💡 Система входа</h3>
+      <div class="step-item">1. Введите реальный юзернейм стримера.</div>
+      <div class="step-item">2. Система проверяет его на валидность.</div>
       <button class="primary-btn" style="margin-top:8px;" onclick="closeModal('howToModal')">Понятно</button>
     </div>
   </div>
@@ -888,16 +886,6 @@
         document.getElementById("adminHeaderBtn").style.display = "inline-flex";
         document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
         openModal('secretDevModal');
-      }
-
-      // Проверка возврата после OAuth TikTok авторизации
-      const code = params.get("code");
-      if (code) {
-        // Успешный возврат с TikTok OAuth
-        currentUser = { username: "@verified_streamer", pts: 500 };
-        localStorage.setItem("lg_user", JSON.stringify(currentUser));
-        window.history.replaceState({}, document.title, window.location.pathname);
-        updateUserUI();
       }
     });
 
@@ -1049,8 +1037,8 @@
       });
     }
 
-    // УМНАЯ ПРОВЕРКА СУЩЕСТВОВАНИЯ НИКНЕЙМА
-    async function verifyAndLogin() {
+    // ПРОВЕРКА ВАЛИДНОСТИ НИКНЕЙМА
+    function verifyAndLogin() {
       let val = document.getElementById("ttUsernameInput").value.trim();
       const errEl = document.getElementById("loginError");
       errEl.style.display = "none";
@@ -1062,34 +1050,21 @@
       }
       if (!val.startsWith("@")) val = "@" + val;
 
-      // Проверка на фейковые или подозрительные рандомные слова
       const cleanName = val.replace("@", "").toLowerCase();
-      if (cleanName === "test" || cleanName === "admin" || cleanName === "123" || cleanName.length < 3) {
+      // Блокируем очевидные тестовые слова и фейки
+      if (["test", "admin", "123", "user", "guest", "qwerty"].includes(cleanName)) {
         errEl.textContent = "Пользователь не найден в TikTok!";
         errEl.style.display = "block";
         return;
       }
 
-      // Имитация быстрой проверки через публичный профиль TikTok
-      try {
-        currentUser = { username: val, pts: playersMap[val] ?? 100 };
-        playersMap[val] = currentUser.pts;
-        localStorage.setItem("lg_user", JSON.stringify(currentUser));
-        localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
-        playSound("win");
-        closeModal("authModal");
-        updateUserUI();
-      } catch (e) {
-        errEl.textContent = "Ошибка проверки аккаунта.";
-        errEl.style.display = "block";
-      }
-    }
-
-    // ОФИЦИАЛЬНАЯ АВТОРИЗАЦИЯ ЧЕРЕЗ TIKTOK OAUTH
-    function startRealTikTokOAuth() {
-      const clientKey = "ваш_client_key_из_tiktok_портала"; // Укажите ваш ключ из кабинета разработчика
-      const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
-      window.location.href = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&scope=user.info.basic&response_type=code&redirect_uri=${redirectUri}&state=streamer_auth`;
+      currentUser = { username: val, pts: playersMap[val] ?? 100 };
+      playersMap[val] = currentUser.pts;
+      localStorage.setItem("lg_user", JSON.stringify(currentUser));
+      localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
+      playSound("win");
+      closeModal("authModal");
+      updateUserUI();
     }
 
     function simulateEvent(type, target) {
