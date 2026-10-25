@@ -203,7 +203,6 @@
       font-weight: 700;
     }
 
-    /* Навигационные вкладки (5 штук) */
     .nav-tabs {
       display: flex;
       justify-content: space-around;
@@ -548,11 +547,11 @@
       border-radius: var(--m3-radius-md);
     }
 
-    /* Стили для встроенного чата поддержки ИИ */
+    /* Чат ИИ-ассистента */
     .chat-box {
       display: flex;
       flex-direction: column;
-      height: 340px;
+      height: 360px;
       background: var(--m3-surface-container);
       border: 1px solid var(--m3-outline-variant);
       border-radius: var(--m3-radius-md);
@@ -568,11 +567,11 @@
       gap: 10px;
     }
     .chat-msg {
-      max-width: 80%;
+      max-width: 85%;
       padding: 10px 14px;
       border-radius: var(--m3-radius-sm);
       font-size: 13px;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .chat-msg.bot {
       background: var(--m3-surface-container-high);
@@ -706,7 +705,6 @@
         </div>
       </div>
 
-      <!-- Вкладки навигации (добавлена Поддержка) -->
       <nav class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('home')" data-i18n="tab_home">Главная</button>
         <button class="tab-btn" onclick="switchTab('arena')" data-i18n="tab_arena">Лайв</button>
@@ -727,7 +725,6 @@
   </section>
 
   <main class="main-container">
-    <!-- ГЛАВНАЯ -->
     <div id="tab-home" class="tab-pane active">
       <div class="m3-card">
         <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр</h2>
@@ -763,7 +760,6 @@
       </div>
     </div>
 
-    <!-- АРЕНА -->
     <div id="tab-arena" class="tab-pane">
       <div class="m3-card">
         <div class="arena-toolbar">
@@ -811,7 +807,6 @@
       </div>
     </div>
 
-    <!-- РЕЙТИНГ -->
     <div id="tab-leaderboard" class="tab-pane">
       <div class="m3-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
@@ -825,7 +820,6 @@
       </div>
     </div>
 
-    <!-- ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-pane">
       <div class="m3-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
@@ -838,18 +832,18 @@
       </div>
     </div>
 
-    <!-- ВКЛАДКА ПОДДЕРЖКА / ИИ-АССИСТЕНТ -->
+    <!-- ИНТЕЛЛЕКТУАЛЬНЫЙ ИИ-АССИСТЕНТ ПОДДЕРЖКИ -->
     <div id="tab-support" class="tab-pane">
       <div class="m3-card">
         <h2 class="section-title">🤖 ИИ-Ассистент Поддержки</h2>
-        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по работе игр, лайкам или рейтингу:</p>
+        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по работе #game, #live трансляций или #сайт:</p>
         
         <div class="chat-box">
           <div class="chat-messages" id="chatMessages">
-            <div class="chat-msg bot">Привет! Я виртуальный помощник платформы live game. Чем могу помочь по трансляциям?</div>
+            <div class="chat-msg bot">Привет! Я умный ИИ-помощник платформы live game. Готов ответить на любые вопросы по стримам, авторизации и мини-играм #game #live!</div>
           </div>
           <div class="chat-input-row">
-            <input type="text" id="chatInput" class="chat-input" placeholder="Напишите вопрос..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
+            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь (например: Как войти?)..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
             <button class="primary-btn" style="width:auto; padding:0 16px;" onclick="sendChatMessage()">➤</button>
           </div>
         </div>
@@ -919,7 +913,7 @@
       }
     });
 
-    // Логика ИИ-помощника поддержки
+    // УМНЫЙ ИИ-ПОМОЩНИК С АНАЛИЗОМ ВОПРОСОВ (#game, #live, #сайт)
     function sendChatMessage() {
       const input = document.getElementById("chatInput");
       const text = input.value.trim();
@@ -927,7 +921,6 @@
       
       const msgs = document.getElementById("chatMessages");
       
-      // Сообщение пользователя
       const userDiv = document.createElement("div");
       userDiv.className = "chat-msg user";
       userDiv.textContent = text;
@@ -937,26 +930,32 @@
 
       playSound("tap");
 
-      // Ответ ИИ-агента с небольшой задержкой для реалистичности
       setTimeout(() => {
         const botDiv = document.createElement("div");
         botDiv.className = "chat-msg bot";
         
         const lower = text.toLowerCase();
-        if (lower.includes("лайк") || lower.includes("тац") || lower.includes("канат")) {
-          botDiv.textContent = "«Битва тапов» двигается автоматически при поступлении лайков и тапов от зрителей на трансляции!";
-        } else if (lower.includes("подар") || lower.includes("колесо")) {
-          botDiv.textContent = "Колесо Фортуны запускается автоматически, когда зритель отправляет платный подарок в TikTok LIVE.";
-        } else if (lower.includes("очк") || lower.includes("рейтинг") || lower.includes("pts")) {
-          botDiv.textContent = "Все набранные очки суммируются и выводятся в общей «Таблице лидеров» в реальном времени.";
+        
+        if (lower.includes("авториз") || lower.includes("войти") || lower.includes("вход") || lower.includes("ник")) {
+          botDiv.textContent = "👤 Чтобы авторизоваться, нажмите кнопку «Войти» в шапке сайта и введите свой реальный TikTok юзернейм (например, @username). Система проверит аккаунт #сайт";
+        } else if (lower.includes("выйти") || lower.includes("сменить") || lower.includes("аккаунт")) {
+          botDiv.textContent = "🚪 Выйти из аккаунта можно во вкладке «Профиль», нажав кнопку выхода. После этого вы сможете зайти под другим никнеймом #сайт";
+        } else if (lower.includes("таб") || lower.includes("канат") || lower.includes("синие") || lower.includes("красные")) {
+          botDiv.textContent = "⚔️ «Битва тапов» (#game) — это интерактивное перетягивание шкалы, которая реагирует на лайки и тапы зрителей во время #live трансляции!";
+        } else if (lower.includes("колесо") || lower.includes("рулетк") || lower.includes("подар")) {
+          botDiv.textContent = "🎡 «Колесо Фортуны» (#game) автоматически вращается и выдает случайные челленджи, когда зрители присылают донаты и подарки в #live эфире.";
+        } else if (lower.includes("реактор") || lower.includes("комбо") || lower.includes("сфер")) {
+          botDiv.textContent = "⚡ «Неоновый Реактор» (#game) увеличивает множитель комбо при высокой активности чата на #live трансляции.";
+        } else if (lower.includes("очки") || lower.includes("pts") || lower.includes("рейтинг") || lower.includes("топ")) {
+          botDiv.textContent = "🏆 Все набранные очки (PTS) автоматически сохраняются в облаке и выводятся в разделе «Рейтинг» #сайт для всех участников #live.";
         } else {
-          botDiv.textContent = "Отличный вопрос! Чтобы трансляция работала идеально, убедитесь, что вы авторизованы под своим никнеймом и открыли вкладку «Лайв-арена».";
+          botDiv.textContent = "💡 Отличный вопрос про #live и #game! Наша платформа работает полностью в реальном времени. Если у вас возникли вопросы по настройке, загляните в раздел «Лайв-арена» или перепроверьте подключение.";
         }
 
         msgs.appendChild(botDiv);
         msgs.scrollTop = msgs.scrollHeight;
         playSound("win");
-      }, 600);
+      }, 500);
     }
 
     let audioCtx = null;
