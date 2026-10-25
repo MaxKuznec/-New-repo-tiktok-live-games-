@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>live game — Интерактивные мини-игры для TikTok LIVE</title>
 
-  <!-- ЭТАП 4: OpenGraph & SEO мета-теги для красивого превью ссылки в соцсетях и мессенджерах -->
   <meta name="description" content="Запускайте интерактивные мини-игры для зрителей TikTok LIVE прямо со смартфона: Битва Тапов, Колесо Фортуны, Неоновый Реактор и единый онлайн-рейтинг!" />
   <meta name="theme-color" content="#0b0c14" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="live game — Интерактивные мини-игры для TikTok LIVE" />
   <meta property="og:description" content="Врывайся на лайв-арену! Играй со зрителями в прямом эфире, крути Колесо Фортуны и занимай Топ-1 в общем рейтинге." />
   <meta property="og:url" content="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230b0c14'/><circle cx='50' cy='50' r='36' fill='none' stroke='%2325f4ee' stroke-width='6'/><polygon points='42,32 72,50 42,68' fill='%23fe2c55'/></svg>" />
 
   <style>
@@ -48,7 +45,7 @@
       overflow-x: hidden;
     }
 
-    /* ЭТАП 3: Режим "Чистый экран для стрима" */
+    /* Режим чистого экрана для стрима */
     body.stream-mode .top-header,
     body.stream-mode .brand-hero,
     body.stream-mode footer {
@@ -90,7 +87,7 @@
       gap: 6px;
     }
 
-    /* Шапка и навигация */
+    /* Верхняя панель */
     .top-header {
       position: sticky;
       top: 0;
@@ -128,7 +125,6 @@
       font-size: 11px;
       font-weight: 700;
       color: #34d399;
-      cursor: pointer;
     }
 
     .status-dot {
@@ -162,11 +158,6 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
-      transition: 0.2s;
-    }
-
-    .icon-btn:active {
-      transform: scale(0.94);
     }
 
     .tt-auth-btn {
@@ -181,7 +172,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: 0.2s;
     }
 
     .lang-switcher {
@@ -201,7 +191,6 @@
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     .lang-btn.active {
@@ -228,7 +217,6 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
       text-align: center;
     }
 
@@ -238,7 +226,6 @@
       box-shadow: 0 2px 12px rgba(99, 102, 241, 0.45);
     }
 
-    /* Главный блок под вкладками */
     .brand-hero {
       text-align: center;
       padding: 22px 16px 14px;
@@ -279,6 +266,7 @@
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.35));
       margin-bottom: 8px;
+      cursor: pointer;
     }
 
     .brand-sub {
@@ -289,7 +277,6 @@
       margin: 0 auto;
     }
 
-    /* Контейнер вкладок */
     .main-container {
       flex: 1;
       width: 100%;
@@ -312,7 +299,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Карточки и сетка игр */
     .glass-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -353,7 +339,6 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 12px;
-      transition: 0.2s;
     }
 
     .game-card:hover {
@@ -387,15 +372,9 @@
       font-weight: 800;
       cursor: pointer;
       width: 100%;
-      transition: transform 0.12s, opacity 0.2s;
       box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
     }
 
-    .primary-btn:active {
-      transform: scale(0.96);
-    }
-
-    /* Арена и мини-игры */
     .arena-toolbar {
       display: flex;
       justify-content: space-between;
@@ -444,7 +423,6 @@
       margin: 10px 0 18px;
       border: 2px solid rgba(255, 255, 255, 0.18);
       position: relative;
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.35);
     }
 
     .tug-fill {
@@ -452,7 +430,6 @@
       width: 50%;
       background: linear-gradient(90deg, #2563eb, var(--tt-cyan));
       transition: width 0.18s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 0 20px var(--tt-cyan);
     }
 
     .tug-center-line {
@@ -466,7 +443,6 @@
       z-index: 2;
     }
 
-    /* Колесо Фортуны */
     .wheel-visual {
       width: 150px;
       height: 150px;
@@ -483,11 +459,9 @@
       align-items: center;
       justify-content: center;
       font-size: 36px;
-      box-shadow: 0 0 28px rgba(37, 244, 238, 0.35);
       transition: transform 1.2s cubic-bezier(0.15, 0.85, 0.25, 1);
     }
 
-    /* Неоновый Реактор */
     .reactor-arena {
       height: 170px;
       background: rgba(0, 0, 0, 0.4);
@@ -516,7 +490,6 @@
       transition: all 0.18s ease;
     }
 
-    /* Таблица лидеров */
     .leaderboard-list {
       display: flex;
       flex-direction: column;
@@ -554,7 +527,6 @@
       border-radius: 16px;
     }
 
-    /* ЭТАП 2: Частицы и всплывающие очки */
     .spark {
       position: fixed;
       pointer-events: none;
@@ -584,7 +556,6 @@
       100% { transform: translateY(-48px) scale(1.15); opacity: 0; }
     }
 
-    /* Модальные окна */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -640,10 +611,6 @@
       user-select: text;
     }
 
-    .input-field:focus {
-      border-color: var(--tt-cyan);
-    }
-
     .step-item {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
@@ -665,23 +632,19 @@
 </head>
 <body>
 
-  <!-- Кнопка выхода из полноэкранного режима стрима -->
   <button class="exit-stream-btn" onclick="toggleStreamMode()">✕ Выйти из режима стрима</button>
 
-  <!-- Верхняя панель -->
   <header class="top-header">
     <div class="header-inner">
       <div class="header-row-top">
-        <div class="online-pill" onclick="openCloudModal()" title="Настройка общей онлайн-базы">
+        <div class="online-pill">
           <span class="status-dot"></span>
           <span id="cloudStatusText">LIVE • Онлайн</span>
         </div>
 
         <div class="top-controls">
-          <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звуковые эффекты">🔊</button>
-          <button class="icon-btn" onclick="openHowToModal()" title="Как это работает">❓</button>
-          <button class="icon-btn" onclick="openCloudModal()" title="Общая база игроков">☁️</button>
-          <button class="icon-btn" onclick="openShareModal()" title="Ссылка и код сайта">🔗</button>
+          <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звуки">🔊</button>
+          <button class="icon-btn" onclick="openHowToModal()" title="Как играть">❓</button>
           <button class="tt-auth-btn" id="headerAuthBtn" onclick="handleAuthClick()">
             <span id="headerAuthText" data-i18n="login_tt">Войти через TikTok</span>
           </button>
@@ -702,21 +665,19 @@
     </div>
   </header>
 
-  <!-- Заголовок live game под вкладками -->
+  <!-- Заголовок с защищенным секретом (5 тапов + пин-код) -->
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
       <span data-i18n="badge_text">TIKTOK LIVE • ИНТЕРАКТИВНЫЕ МИНИ-ИГРЫ</span>
     </div>
-    <h1 class="brand-title">live game</h1>
+    <h1 class="brand-title" id="secretTitle" onclick="handleSecretClick()">live game</h1>
     <p class="brand-sub" data-i18n="hero_sub">
       Авторизуйтесь через TikTok и запускайте интерактивные мини-игры со звуком, спецэффектами и единым рейтингом прямо во время эфира.
     </p>
   </section>
 
-  <!-- Основной контент -->
   <main class="main-container">
-    <!-- ВКЛАДКА 1: ГЛАВНАЯ -->
     <div id="tab-home" class="tab-pane active">
       <div class="glass-card">
         <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр для стрима</h2>
@@ -753,7 +714,6 @@
       </div>
     </div>
 
-    <!-- ВКЛАДКА 2: ЛАЙВ-АРЕНА -->
     <div id="tab-arena" class="tab-pane">
       <div class="glass-card">
         <div class="arena-toolbar">
@@ -762,13 +722,12 @@
             <button class="mini-tab" id="pill-wheel" onclick="launchGame('wheel', event)">🎡 Колесо</button>
             <button class="mini-tab" id="pill-reactor" onclick="launchGame('reactor', event)">⚡ Реактор</button>
           </div>
-          <button class="icon-btn" onclick="toggleStreamMode()" title="Скрыть меню для записи эфира">📺 Стрим-экран</button>
+          <button class="icon-btn" onclick="toggleStreamMode()">📺 Стрим-экран</button>
         </div>
 
         <h2 class="section-title" id="arenaTitle">⚔️ Битва Тапов: Синие vs Красные</h2>
         <p class="section-desc" id="arenaSub">Тапайте за свою команду! Доведите полосу до 95%, чтобы сорвать бонус +100 PTS!</p>
 
-        <!-- Игра 1: Перетягивание -->
         <div id="game-tug">
           <div class="tug-score-row">
             <span style="color:#60a5fa;">🔵 Синие: <span id="bluePct">50</span>%</span>
@@ -784,7 +743,6 @@
           </div>
         </div>
 
-        <!-- Игра 2: Колесо Фортуны -->
         <div id="game-wheel" style="display:none; text-align:center;">
           <div class="wheel-visual" id="wheelCircle">🎡</div>
           <div id="wheelResult" style="font-size:18px; font-weight:800; margin:12px 0 16px; color:var(--tt-cyan); min-height:26px;">
@@ -793,7 +751,6 @@
           <button class="primary-btn" id="spinBtn" onclick="spinWheel(event)">🎡 Крутить Колесо (+25 PTS)</button>
         </div>
 
-        <!-- Игра 3: Неоновый Реактор -->
         <div id="game-reactor" style="display:none; text-align:center;">
           <div id="reactorScore" style="font-size:16px; font-weight:800; color:#10b981;">
             Нажимайте прямо на светящуюся сферу! Комбо: <span id="comboCount">x1</span>
@@ -805,12 +762,11 @@
       </div>
     </div>
 
-    <!-- ВКЛАДКА 3: РЕЙТИНГ (ЧИСТЫЙ + ОБЛАЧНЫЙ) -->
     <div id="tab-leaderboard" class="tab-pane">
       <div class="glass-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
           <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров TikTok LIVE</h2>
-          <button class="icon-btn" onclick="syncLeaderboardNow()">🔄 Обновить рейтинг</button>
+          <button class="icon-btn" onclick="syncLeaderboardNow()">🔄 Обновить</button>
         </div>
         <p class="section-desc" style="text-align:left; margin-bottom:14px;" data-i18n="lb_desc">
           Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов).
@@ -819,7 +775,6 @@
       </div>
     </div>
 
-    <!-- ВКЛАДКА 4: ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-pane">
       <div class="glass-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
@@ -827,15 +782,12 @@
         <div style="font-size:32px; font-weight:900; color:var(--tt-cyan); margin-bottom:18px;">
           <span id="profilePts">0</span> PTS
         </div>
-        <div style="display:flex; gap:10px; max-width:360px; margin:0 auto;">
-          <button class="primary-btn" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
-          <button class="icon-btn" style="padding:12px 16px;" onclick="openCloudModal()">☁️ База</button>
-        </div>
+        <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
       </div>
     </div>
   </main>
 
-  <!-- МОДАЛКА 1: Вход через TikTok -->
+  <!-- МОДАЛКА: Вход через TikTok -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('authModal')">✕</button>
@@ -845,77 +797,70 @@
       </p>
       <input type="text" id="ttUsernameInput" class="input-field" placeholder="@ваш_никнейм (например, @joffffffffff38)" />
       <button class="primary-btn" style="margin-bottom:12px;" onclick="quickTikTokLogin()">🚀 Войти на арену</button>
-      <hr style="border:none; border-top:1px solid var(--border); margin:12px 0;" />
-      <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Для разработчиков (TikTok OAuth 2.0 Client Key):</p>
-      <input type="text" id="ttClientKey" class="input-field" placeholder="TikTok Client Key (необязательно)" />
-      <button class="icon-btn" style="width:100%; padding:10px;" onclick="startRealOAuth()">Авторизоваться через TikTok.com</button>
     </div>
   </div>
 
-  <!-- МОДАЛКА 2: ЭТАП 1 (Общая онлайн-база Firebase Realtime DB) -->
-  <div class="modal-backdrop" id="cloudModal">
-    <div class="modal-window">
-      <button class="modal-close" onclick="closeModal('cloudModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">☁️ Единый онлайн-рейтинг (Firebase)</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px; line-height:1.45;">
-        Чтобы все зрители со своих телефонов видели <strong>единую таблицу лидеров</strong> и вместе перетягивали канат, вставьте ссылку на вашу бесплатную базу <strong>Firebase Realtime Database</strong>:
-      </p>
-      <input type="text" id="firebaseUrlInput" class="input-field" placeholder="https://ваш-проект-default-rtdb.firebaseio.com" />
-      <button class="primary-btn" style="margin-bottom:10px;" onclick="saveCloudConfig()">💾 Подключить общую базу</button>
-      <div class="step-item" style="font-size:12px; color:var(--muted);">
-        💡 <strong>Как получить ссылку за 1 минуту:</strong><br/>
-        1. Зайдите в <em>console.firebase.google.com</em> → создайте проект.<br/>
-        2. В меню выберите <strong>Realtime Database</strong> → <strong>Create Database</strong> (в режиме <em>Test mode</em>).<br/>
-        3. Скопируйте ссылку вида <code>https://...firebaseio.com</code> и вставьте выше!
-      </div>
-      <div id="cloudSaveMsg" style="font-size:12px; color:var(--success); text-align:center; margin-top:6px;"></div>
-    </div>
-  </div>
-
-  <!-- МОДАЛКА 3: ЭТАП 3 (Инструкция для новых игроков и стримеров) -->
+  <!-- МОДАЛКА: Инструкция -->
   <div class="modal-backdrop" id="howToModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
       <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">🔥 Добро пожаловать в live game!</h3>
       <div class="step-item">
         <strong>1. Авторизуйтесь под своим @ником TikTok</strong><br/>
-        Нажмите «Войти через TikTok» вверху и укажите свой никнейм — все заработанные очки закрепятся за вами.
+        Нажмите «Войти через TikTok» вверху и укажите свой никнейм — очки закрепятся за вами.
       </div>
       <div class="step-item">
         <strong>2. Запускайте игры на стриме</strong><br/>
-        Откройте «Лайв-арену» и нажмите кнопку <strong>«📺 Стрим-экран»</strong> — лишние кнопки спрячутся, и экран будет готов для трансляции в TikTok LIVE или PRISM Live.
+        Откройте «Лайв-арену» и нажмите <strong>«📺 Стрим-экран»</strong> — лишние меню спрячутся для эфира.
       </div>
       <div class="step-item">
         <strong>3. Занимайте Топ-1 в Рейтинге</strong><br/>
-        За каждый тап, прокрутку колеса или пойманный импульс реактора вы получаете PTS и поднимаетесь к золотой медали 🥇!
+        За тапы, колесо и реактор вы получаете PTS и поднимаетесь к золотой медали 🥇!
       </div>
       <button class="primary-btn" onclick="closeModal('howToModal')">Понятно, погнали! 🚀</button>
     </div>
   </div>
 
-  <!-- МОДАЛКА 4: Поделиться ссылкой и скопировать код -->
-  <div class="modal-backdrop" id="shareModal">
-    <div class="modal-window">
-      <button class="modal-close" onclick="closeModal('shareModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">🔗 Ссылка для продвижения сайта</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">
-        Отправляйте эту ссылку зрителям или закрепите её в шапке профиля TikTok:
-      </p>
-      <input type="text" id="publicSiteUrl" class="input-field" readonly value="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" />
-      <button class="primary-btn" style="margin-bottom:10px;" onclick="shareOrCopyLink()">📤 Поделиться ссылкой / Скопировать</button>
-      <button class="icon-btn" style="width:100%; padding:11px;" onclick="copyFullHtmlCode()">📋 Скопировать весь код сайта (index.html)</button>
-      <div id="copyStatus" style="font-size:12px; color:var(--success); text-align:center; margin-top:8px;"></div>
+  <!-- ЗАЩИЩЕННОЕ ОКНО ПИН-КОДА ДЛЯ РЕЖИМА РАЗРАБОТЧИКА -->
+  <div class="modal-backdrop" id="pinModal">
+    <div class="modal-window" style="max-width: 340px; text-align: center;">
+      <button class="modal-close" onclick="closeModal('pinModal')">✕</button>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🔒 Владелец сайта</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Введите пин-код владельца (по умолчанию: <b>777</b>):</p>
+      <input type="password" id="devPinInput" class="input-field" placeholder="Пин-код" style="text-align:center; font-size:18px; letter-spacing:4px;" />
+      <button class="primary-btn" onclick="checkDevPin()">Открыть меню</button>
+    </div>
+  </div>
+
+  <!-- МЕНЮ ВЛАДЕЛЬЦА -->
+  <div class="modal-backdrop" id="secretDevModal">
+    <div class="modal-window" style="border-color: var(--tt-cyan);">
+      <button class="modal-close" onclick="closeModal('secretDevModal')">✕</button>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--tt-cyan);">🛠️ Меню владельца сайта</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Защита срабатывает только по 5 тапам и пин-коду. Зрители сюда не попадут:</p>
+      
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Ссылка на Firebase (общая база):</label>
+        <input type="text" id="firebaseUrlInput" class="input-field" placeholder="https://...firebaseio.com" style="margin-top:4px;" />
+        <button class="primary-btn" style="padding:9px; font-size:13px; margin-bottom:6px;" onclick="saveCloudConfig()">💾 Сохранить базу</button>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Публичная ссылка на сайт:</label>
+        <input type="text" id="publicSiteUrl" class="input-field" readonly value="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" style="margin-top:4px;" />
+        <button class="primary-btn" style="padding:9px; font-size:13px; margin-bottom:6px;" onclick="copySiteLink()">🔗 Скопировать ссылку</button>
+      </div>
+
+      <button class="icon-btn" style="width:100%; padding:10px; background:rgba(254,44,85,0.2); border-color:rgba(254,44,85,0.4);" onclick="copyFullHtmlCode()">📋 Скопировать весь исходный код (index.html)</button>
+      <div id="devCopyStatus" style="font-size:12px; color:var(--success); text-align:center; margin-top:8px;"></div>
     </div>
   </div>
 
   <footer>
-    <strong>live game</strong> • <span data-i18n="footer_note">Звуковой движок, спецэффекты и синхронизация рейтинга активны</span>
+    <strong>live game</strong> • <span>Платформа интерактивных трансляций</span>
   </footer>
 
   <script>
-    /* ==========================================================
-       СЛОВАРЬ ПЕРЕВОДОВ (RU / KZ / EN)
-    ========================================================== */
     const translations = {
       ru: {
         login_tt: "Войти через TikTok",
@@ -935,8 +880,7 @@
         g3_desc: "Ловите прыгающий неоновый импульс на скорость, делайте комбо и врывайтесь в Топ-1!",
         play_btn: "Запустить",
         lb_title: "Таблица лидеров TikTok LIVE",
-        lb_desc: "Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов).",
-        footer_note: "Звуковой движок, спецэффекты и синхронизация рейтинга активны"
+        lb_desc: "Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов)."
       },
       kz: {
         login_tt: "TikTok арқылы кіру",
@@ -956,8 +900,7 @@
         g3_desc: "Жылдам неон импульсін ұстап, комбо жинап, Топ-1 орынға шығыңыз!",
         play_btn: "Іске қосу",
         lb_title: "TikTok LIVE Көшбасшылар кестесі",
-        lb_desc: "Мини-ойындарда жиналған ұпайлар бойынша нақты ойыншылар рейтингі.",
-        footer_note: "Дыбыс қозғалтқышы, эффектілер және рейтинг синхрондауы белсенді"
+        lb_desc: "Мини-ойындарда жиналған ұпайлар бойынша нақты ойыншылар рейтингі."
       },
       en: {
         login_tt: "Login with TikTok",
@@ -977,14 +920,10 @@
         g3_desc: "Catch the jumping neon orb at high speed, build combos, and hit #1!",
         play_btn: "Launch",
         lb_title: "TikTok LIVE Leaderboard",
-        lb_desc: "Top real streamers and players ranked by mini-game points (no bots).",
-        footer_note: "Sound engine, particle effects, and leaderboard sync are active"
+        lb_desc: "Top real streamers and players ranked by mini-game points (no bots)."
       }
     };
 
-    /* ==========================================================
-       СОСТОЯНИЕ ПРИЛОЖЕНИЯ И ОЧИСТКА ОТ СТАРЫХ БОТОВ
-    ========================================================== */
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
     let playersMap = JSON.parse(localStorage.getItem("lg_real_leaderboard") || "{}");
     let firebaseDbUrl = localStorage.getItem("lg_firebase_url") || "";
@@ -993,25 +932,44 @@
     let wheelAngle = 0;
     let reactorCombo = 1;
     let lastReactorHit = 0;
+    let titleClicks = 0;
+    let titleClickTimer = null;
 
-    // Полное удаление старых демо-ботов
     delete playersMap["@kazakh_stream"];
     delete playersMap["@neon_arena"];
     localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
-    /* ==========================================================
-       ЭТАП 2: ЗВУКОВОЙ ДВИЖОК (Web Audio API) + ЧАСТИЦЫ + ВИБРО
-    ========================================================== */
-    let audioCtx = null;
+    // Надежная защита: 5 быстрых тапов открывают окно ввода пин-кода
+    function handleSecretClick() {
+      titleClicks++;
+      clearTimeout(titleClickTimer);
+      if (titleClicks >= 5) {
+        titleClicks = 0;
+        openModal('pinModal');
+      } else {
+        titleClickTimer = setTimeout(() => { titleClicks = 0; }, 800);
+      }
+    }
 
+    function checkDevPin() {
+      const pin = document.getElementById("devPinInput").value.trim();
+      if (pin === "777") {
+        closeModal('pinModal');
+        document.getElementById("devPinInput").value = "";
+        document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
+        openModal('secretDevModal');
+      } else {
+        alert("Неверный пин-код!");
+      }
+    }
+
+    let audioCtx = null;
     function initAudio() {
       if (!audioCtx) {
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
         if (AudioContextClass) audioCtx = new AudioContextClass();
       }
-      if (audioCtx && audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
     }
 
     function playSound(type) {
@@ -1031,25 +989,21 @@
           osc.frequency.exponentialRampToValueAtTime(880, now + 0.09);
           gain.gain.setValueAtTime(0.18, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
-          osc.start(now);
-          osc.stop(now + 0.09);
+          osc.start(now); osc.stop(now + 0.09);
         } else if (type === "tick") {
           osc.type = "triangle";
           osc.frequency.setValueAtTime(700, now);
           gain.gain.setValueAtTime(0.12, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-          osc.start(now);
-          osc.stop(now + 0.04);
+          osc.start(now); osc.stop(now + 0.04);
         } else if (type === "win") {
           osc.type = "triangle";
           osc.frequency.setValueAtTime(440, now);
-          osc.frequency.setValueAtTime(554.37, now + 0.08);
           osc.frequency.setValueAtTime(659.25, now + 0.16);
           osc.frequency.setValueAtTime(880, now + 0.24);
           gain.gain.setValueAtTime(0.22, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
-          osc.start(now);
-          osc.stop(now + 0.42);
+          osc.start(now); osc.stop(now + 0.42);
         }
       } catch (e) {}
     }
@@ -1092,9 +1046,6 @@
       }
     }
 
-    /* ==========================================================
-       ЭТАП 1: ОБЩАЯ ОНЛАЙН-БАЗА FIREBASE + LOKAL BACKUP
-    ========================================================== */
     function cleanFirebaseUrl(url) {
       if (!url) return "";
       let u = url.trim().replace(/\/+$/, "");
@@ -1151,19 +1102,11 @@
       firebaseDbUrl = val;
       localStorage.setItem("lg_firebase_url", val);
       updateCloudIndicator();
-      const msg = document.getElementById("cloudSaveMsg");
-      if (val) {
-        msg.textContent = "✅ Общая облачная база подключена! Синхронизируем...";
-        if (currentUser) pushScoreToCloud(currentUser.username, playersMap[currentUser.username] || 0);
-        syncLeaderboardNow();
-      } else {
-        msg.textContent = "Включен автономный режим.";
-      }
+      document.getElementById("devCopyStatus").textContent = "✅ База успешно сохранена!";
+      if (val && currentUser) pushScoreToCloud(currentUser.username, playersMap[currentUser.username] || 0);
+      syncLeaderboardNow();
     }
 
-    /* ==========================================================
-       НАВИГАЦИЯ, МУЛЬТИЯЗЫЧНОСТЬ И ПРОФИЛЬ
-    ========================================================== */
     function setLanguage(lang) {
       localStorage.setItem("lg_lang", lang);
       document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -1261,9 +1204,6 @@
       return true;
     }
 
-    /* ==========================================================
-       ИГРОВАЯ ЛОГИКА (3 МИНИ-ИГРЫ)
-    ========================================================== */
     function launchGame(type, event) {
       if (!currentUser) {
         openAuthModal();
@@ -1325,7 +1265,6 @@
       document.getElementById("wheelCircle").style.transform = `rotate(${wheelAngle}deg)`;
       document.getElementById("wheelResult").textContent = "Крутим колесо...";
 
-      // Звук трещотки при вращении
       let ticks = 0;
       const tickTimer = setInterval(() => {
         playSound("tick");
@@ -1370,28 +1309,15 @@
       orb.style.top = Math.floor(Math.random() * maxY) + "px";
     }
 
-    /* ==========================================================
-       ЭТАП 3: СТРИМ-ЭКРАН И МОДАЛЬНЫЕ ОКНА
-    ========================================================== */
     function toggleStreamMode() {
       playSound("tap");
       document.body.classList.toggle("stream-mode");
     }
 
-    function openModal(id) {
-      document.getElementById(id).classList.add("open");
-    }
-    function closeModal(id) {
-      document.getElementById(id).classList.remove("open");
-    }
-
+    function openModal(id) { document.getElementById(id).classList.add("open"); }
+    function closeModal(id) { document.getElementById(id).classList.remove("open"); }
     function openAuthModal() { openModal("authModal"); }
-    function openCloudModal() {
-      document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
-      openModal("cloudModal");
-    }
     function openHowToModal() { openModal("howToModal"); }
-    function openShareModal() { openModal("shareModal"); }
 
     function handleAuthClick() {
       if (currentUser) {
@@ -1420,52 +1346,28 @@
       updateUserUI();
     }
 
-    function startRealOAuth() {
-      const key = document.getElementById("ttClientKey").value.trim();
-      if (!key) {
-        alert("Введите Client Key или используйте быстрый вход по @никнейму выше.");
-        return;
-      }
-      const redirectUri = encodeURIComponent(window.location.origin + window.location.pathname);
-      const state = Math.random().toString(36).substring(2);
-      window.location.href = `https://www.tiktok.com/v2/auth/authorize/?client_key=${encodeURIComponent(key)}&scope=user.info.basic&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
-    }
-
-    function shareOrCopyLink() {
+    function copySiteLink() {
       const url = document.getElementById("publicSiteUrl").value;
-      if (navigator.share) {
-        navigator.share({
-          title: "live game — TikTok LIVE Мини-игры",
-          text: "Заходи на мою лайв-арену и соревнуйся в рейтинге!",
-          url: url
-        }).catch(() => {});
-      } else {
-        navigator.clipboard.writeText(url);
-        document.getElementById("copyStatus").textContent = "✅ Ссылка скопирована в буфер обмена!";
-      }
+      navigator.clipboard.writeText(url);
+      document.getElementById("devCopyStatus").textContent = "✅ Ссылка скопирована!";
     }
 
     function copyFullHtmlCode() {
       const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
       navigator.clipboard.writeText(fullHtml);
-      document.getElementById("copyStatus").textContent = "✅ Весь код index.html скопирован!";
+      document.getElementById("devCopyStatus").textContent = "✅ Весь код index.html скопирован!";
     }
 
-    /* ==========================================================
-       ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
-    ========================================================== */
     document.getElementById("soundToggleBtn").textContent = soundEnabled ? "🔊" : "🔇";
     updateCloudIndicator();
     setLanguage(localStorage.getItem("lg_lang") || "ru");
     syncLeaderboardNow();
 
-    // Показываем подсказку при самом первом визите нового человека
     if (!localStorage.getItem("lg_welcomed")) {
       localStorage.setItem("lg_welcomed", "1");
       setTimeout(() => openHowToModal(), 600);
     }
 
-    // Автообновление онлайн-рейтинга каждые 15 секунд
     setInterval(() => {
       if (cleanFirebaseUrl(firebaseDbUrl)) syncLeaderboardNow();
     }, 15000);
