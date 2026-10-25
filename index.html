@@ -3,50 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>live game — TikTok LIVE Mini-Games</title>
+  <title>live game — Material Design Stream Platform</title>
 
-  <meta name="description" content="Интерактивные мини-игры для зрителей TikTok LIVE прямо со смартфона." />
-  <meta name="theme-color" content="#0d0f18" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%23131625'/><circle cx='50' cy='50' r='32' fill='none' stroke='%23818cf8' stroke-width='8'/><polygon points='44,34 70,50 44,66' fill='%23f43f5e'/></svg>" />
+  <meta name="description" content="Интерактивные мини-игры для зрителей TikTok LIVE в стиле Material Design." />
+  <meta name="theme-color" content="#121316" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='32' fill='%231e1f24'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23d0bcff' stroke-width='8'/><polygon points='44,34 70,50 44,66' fill='%23efb8c8'/></svg>" />
 
   <style>
+    /* Material Design 3 (M3) Design Tokens */
     :root {
-      --bg: #0d0f18;
-      --card-bg: rgba(26, 30, 46, 0.72);
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --primary: #6366f1;
-      --primary-hover: #4f46e5;
-      --accent-pink: #f43f5e;
-      --accent-cyan: #38bdf8;
-      --success: #34d399;
-      --radius: 20px;
+      --m3-bg: #121316;
+      --m3-surface: #1a1b20;
+      --m3-surface-container: #222328;
+      --m3-surface-container-high: #2d2e35;
+      --m3-primary: #d0bcff;
+      --m3-on-primary: #381e72;
+      --m3-primary-container: #4f378b;
+      --m3-on-primary-container: #eaddff;
+      --m3-secondary-container: #4a4458;
+      --m3-on-secondary-container: #e8def8;
+      --m3-outline: #8e9099;
+      --m3-outline-variant: #44474f;
+      --m3-text: #e3e2e6;
+      --m3-muted: #c4c6d0;
+      --m3-error: #ffb4ab;
+      --m3-success: #6dd58c;
+      --m3-radius-lg: 28px;
+      --m3-radius-md: 20px;
+      --m3-radius-sm: 12px;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
 
+    /* Анимированный фон Material You */
     body {
-      background: var(--bg);
+      background: var(--m3-bg);
       background-image: 
-        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
-        radial-gradient(circle at 85% 90%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.08) 0%, transparent 60%);
+        radial-gradient(circle at 10% 15%, rgba(208, 188, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(239, 184, 200, 0.06) 0%, transparent 40%);
       background-attachment: fixed;
-      color: var(--text);
+      color: var(--m3-text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
     }
 
+    /* Режим стрима */
     body.stream-mode .top-header,
     body.stream-mode .brand-hero,
     body.stream-mode footer {
@@ -54,17 +64,18 @@
     }
     body.stream-mode .main-container {
       max-width: 100%;
-      padding: 12px;
+      padding: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
     }
-    body.stream-mode .glass-card {
+    body.stream-mode .m3-card {
       width: 100%;
-      max-width: 560px;
-      border-color: rgba(99, 102, 241, 0.35);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      max-width: 600px;
+      background: var(--m3-surface-container-high);
+      border: 1px solid var(--m3-outline-variant);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.5);
     }
     .exit-stream-btn {
       display: none;
@@ -72,35 +83,36 @@
       top: 16px;
       right: 16px;
       z-index: 120;
-      background: var(--accent-pink);
-      color: #fff;
+      background: var(--m3-primary-container);
+      color: var(--m3-on-primary-container);
       border: none;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
     body.stream-mode .exit-stream-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
+    /* Шапка в стиле M3 Top App Bar */
     .top-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(13, 15, 24, 0.82);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
+      background: rgba(18, 19, 22, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--m3-outline-variant);
+      padding: 12px 16px;
     }
 
     .header-inner {
-      max-width: 860px;
+      max-width: 840px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -111,28 +123,29 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
     }
 
+    /* Чипс онлайна */
     .online-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.25);
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--success);
+      gap: 8px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      padding: 6px 14px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--m3-success);
     }
 
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 8px var(--success);
+      background: var(--m3-success);
+      box-shadow: 0 0 6px var(--m3-success);
     }
 
     .top-controls {
@@ -141,99 +154,108 @@
       gap: 8px;
     }
 
+    /* Кнопки M3 Icon Button */
     .icon-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 36px;
-      height: 36px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      color: var(--m3-text);
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s;
+      font-size: 15px;
+      transition: background 0.2s, transform 0.1s;
     }
 
     .icon-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--m3-surface-container-high);
+    }
+    .icon-btn:active {
+      transform: scale(0.95);
     }
 
+    /* Бейдж профиля M3 */
     .header-user-pill {
       display: none;
       align-items: center;
-      gap: 6px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #818cf8;
+      gap: 8px;
+      background: var(--m3-primary-container);
+      color: var(--m3-on-primary-container);
+      padding: 6px 14px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 12.5px;
+      font-weight: 500;
       cursor: pointer;
     }
     .header-user-pill.active {
       display: inline-flex;
     }
 
+    /* Переключатель языка Segmented Button */
     .lang-switcher {
       display: flex;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      border-radius: 999px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-sm);
       padding: 2px;
     }
 
     .lang-btn {
       background: transparent;
       border: none;
-      color: var(--muted);
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
+      color: var(--m3-muted);
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
     }
 
     .lang-btn.active {
-      background: var(--primary);
-      color: #fff;
+      background: var(--m3-primary);
+      color: var(--m3-on-primary);
+      font-weight: 700;
     }
 
+    /* Навигационные вкладки M3 Navigation Bar */
     .nav-tabs {
       display: flex;
       justify-content: space-around;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 3px;
+      background: var(--m3-surface-container);
+      border-radius: var(--m3-radius-md);
+      padding: 4px;
+      border: 1px solid var(--m3-outline-variant);
     }
 
     .tab-btn {
       flex: 1;
       background: transparent;
       border: none;
-      color: var(--muted);
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 600;
+      color: var(--m3-muted);
+      padding: 8px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
       cursor: pointer;
       transition: 0.2s;
       text-align: center;
     }
 
     .tab-btn.active {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+      background: var(--m3-primary);
+      color: var(--m3-on-primary);
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
+    /* Герой-секция */
     .brand-hero {
       text-align: center;
-      padding: 24px 16px 14px;
+      padding: 28px 16px 16px;
       max-width: 720px;
       margin: 0 auto;
     }
@@ -241,56 +263,53 @@
     .live-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(244, 63, 94, 0.1);
-      border: 1px solid rgba(244, 63, 94, 0.25);
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+      gap: 8px;
+      background: var(--m3-secondary-container);
+      color: var(--m3-on-secondary-container);
+      padding: 5px 14px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--accent-pink);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .live-badge span.dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--accent-pink);
-      box-shadow: 0 0 6px var(--accent-pink);
+      background: var(--m3-error);
     }
 
     .brand-title {
-      font-size: clamp(34px, 8vw, 52px);
-      font-weight: 900;
+      font-size: clamp(36px, 8vw, 54px);
+      font-weight: 800;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #fff 30%, var(--muted) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+      color: var(--m3-text);
+      margin-bottom: 8px;
     }
 
     .brand-sub {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-      max-width: 480px;
+      color: var(--m3-muted);
+      font-size: 13.5px;
+      line-height: 1.5;
+      max-width: 500px;
       margin: 0 auto;
     }
 
+    /* Контейнер */
     .main-container {
       flex: 1;
       width: 100%;
       max-width: 820px;
       margin: 0 auto;
-      padding: 10px 16px 36px;
+      padding: 10px 16px 40px;
     }
 
     .tab-pane {
       display: none;
-      animation: fadeIn 0.22s ease;
+      animation: fadeIn 0.25s ease;
     }
 
     .tab-pane.active {
@@ -298,146 +317,154 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .glass-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
+    /* Карточки M3 Elevated Card */
+    .m3-card {
+      background: var(--m3-surface);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-lg);
+      padding: 24px;
       margin-bottom: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     .section-title {
       font-size: 20px;
-      font-weight: 800;
+      font-weight: 700;
       text-align: center;
       margin-bottom: 6px;
+      color: var(--m3-text);
     }
 
     .section-desc {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--m3-muted);
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .games-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 14px;
+      gap: 16px;
     }
 
+    /* Игровая карточка M3 */
     .game-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-md);
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px;
-      transition: 0.2s;
+      gap: 14px;
+      transition: background 0.2s, transform 0.2s;
     }
 
     .game-card:hover {
-      border-color: rgba(99, 102, 241, 0.4);
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--m3-surface-container-high);
+      transform: translateY(-2px);
     }
 
     .game-icon {
-      font-size: 28px;
+      font-size: 32px;
     }
 
     .game-name {
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 700;
+      color: var(--m3-text);
       margin-top: 4px;
     }
 
     .game-info {
       font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1.4;
+      color: var(--m3-muted);
+      line-height: 1.45;
     }
 
+    /* Кнопки M3 Filled Button */
     .primary-btn {
-      background: var(--primary);
-      color: #fff;
+      background: var(--m3-primary);
+      color: var(--m3-on-primary);
       border: none;
-      border-radius: 14px;
-      padding: 11px 16px;
+      border-radius: var(--m3-radius-sm);
+      padding: 12px 18px;
       font-size: 13.5px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
       width: 100%;
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
-      transition: 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background 0.2s, transform 0.1s;
     }
 
     .primary-btn:hover {
-      background: var(--primary-hover);
+      filter: brightness(1.08);
+    }
+    .primary-btn:active {
+      transform: scale(0.97);
     }
 
     .arena-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
     .game-With-pills {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
+    /* Чипсы фильтров M3 */
     .mini-tab {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 11.5px;
-      font-weight: 700;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      color: var(--m3-text);
+      padding: 6px 14px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 12px;
+      font-weight: 500;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     .mini-tab.active {
-      background: rgba(99, 102, 241, 0.2);
-      border-color: var(--primary);
-      color: #818cf8;
+      background: var(--m3-primary-container);
+      color: var(--m3-on-primary-container);
+      border-color: var(--m3-primary);
     }
 
     .tug-score-row {
       display: flex;
       justify-content: space-between;
-      font-weight: 800;
-      font-size: 13.5px;
-      margin-bottom: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 8px;
     }
 
     .tug-bar {
-      height: 26px;
+      height: 28px;
       border-radius: 999px;
-      background: rgba(244, 63, 94, 0.25);
+      background: rgba(255,255,255,0.06);
       overflow: hidden;
-      margin: 10px 0 16px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin: 12px 0 18px;
+      border: 1px solid var(--m3-outline-variant);
       position: relative;
     }
 
     .tug-fill {
       height: 100%;
       width: 50%;
-      background: linear-gradient(90deg, #38bdf8, var(--primary));
+      background: linear-gradient(90deg, #38bdf8, var(--m3-primary));
       transition: width 0.18s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -457,12 +484,12 @@
       height: 140px;
       border-radius: 50%;
       margin: 10px auto 16px;
-      border: 4px solid rgba(255, 255, 255, 0.15);
+      border: 4px solid var(--m3-outline-variant);
       background: conic-gradient(
-        #6366f1 0deg 90deg,
-        #f43f5e 90deg 180deg,
-        #34d399 180deg 270deg,
-        #38bdf8 270deg 360deg
+        #c4c6d0 0deg 90deg,
+        #efb8c8 90deg 180deg,
+        #6dd58c 180deg 270deg,
+        #d0bcff 270deg 360deg
       );
       display: flex;
       align-items: center;
@@ -473,9 +500,9 @@
 
     .reactor-arena {
       height: 160px;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px dashed rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
+      background: var(--m3-surface-container);
+      border: 1px dashed var(--m3-outline-variant);
+      border-radius: var(--m3-radius-md);
       position: relative;
       margin: 12px 0 16px;
       overflow: hidden;
@@ -488,53 +515,55 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: radial-gradient(circle, #fff 15%, var(--primary) 60%, var(--accent-pink) 100%);
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+      background: var(--m3-primary);
+      color: var(--m3-on-primary);
+      box-shadow: 0 0 16px rgba(208, 188, 255, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       cursor: pointer;
       position: absolute;
-      transition: all 0.16s ease;
+      transition: all 0.15s ease;
     }
 
     .leaderboard-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
     .leader-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      font-weight: 700;
+      padding: 14px 18px;
+      border-radius: var(--m3-radius-sm);
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      font-weight: 600;
       font-size: 13.5px;
     }
 
     .leader-item.me {
-      background: rgba(99, 102, 241, 0.15);
-      border-color: rgba(99, 102, 241, 0.4);
+      background: var(--m3-primary-container);
+      color: var(--m3-on-primary-container);
+      border-color: var(--m3-primary);
     }
 
     .leader-pts {
       font-family: monospace;
-      font-size: 14px;
-      color: var(--accent-cyan);
+      font-size: 14.5px;
+      color: var(--m3-primary);
     }
 
     .empty-box {
       text-align: center;
-      padding: 24px 16px;
-      color: var(--muted);
+      padding: 28px 16px;
+      color: var(--m3-muted);
       font-size: 13px;
-      border: 1px dashed var(--border);
-      border-radius: 16px;
+      border: 1px dashed var(--m3-outline-variant);
+      border-radius: var(--m3-radius-md);
     }
 
     .spark {
@@ -553,10 +582,10 @@
     .float-pts {
       position: fixed;
       pointer-events: none;
-      font-weight: 900;
+      font-weight: 800;
       font-size: 16px;
-      color: var(--accent-cyan);
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      color: var(--m3-primary);
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
       z-index: 1000;
       animation: floatUp 0.8s ease-out forwards;
     }
@@ -566,12 +595,13 @@
       100% { transform: translateY(-44px) scale(1.1); opacity: 0; }
     }
 
+    /* Модальные окна M3 Dialog */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -584,25 +614,25 @@
     }
 
     .modal-window {
-      background: #151828;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      max-width: 420px;
+      background: var(--m3-surface);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-lg);
+      max-width: 400px;
       width: 100%;
-      padding: 22px;
+      padding: 24px;
       position: relative;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.6);
     }
 
     .modal-close {
       position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(255, 255, 255, 0.06);
+      top: 16px;
+      right: 16px;
+      background: var(--m3-surface-container);
       border: none;
-      color: var(--muted);
-      width: 28px;
-      height: 28px;
+      color: var(--m3-muted);
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       cursor: pointer;
       font-size: 14px;
@@ -610,44 +640,44 @@
 
     .input-field {
       width: 100%;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 11px 14px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      margin-bottom: 8px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline);
+      color: var(--m3-text);
+      padding: 12px 16px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 14px;
+      margin-bottom: 12px;
       outline: none;
-      user-select: text;
     }
 
     .input-field:focus {
-      border-color: var(--primary);
+      border-color: var(--m3-primary);
+      border-width: 2px;
     }
 
     .error-msg {
-      color: var(--accent-pink);
+      color: var(--m3-error);
       font-size: 12px;
       margin-bottom: 10px;
       display: none;
     }
 
     .step-item {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 11px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-sm);
+      padding: 12px;
       margin-bottom: 8px;
-      font-size: 12.5px;
-      line-height: 1.4;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     footer {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--m3-outline-variant);
       padding: 16px;
       text-align: center;
-      font-size: 11.5px;
-      color: var(--muted);
+      font-size: 12px;
+      color: var(--m3-muted);
     }
   </style>
 </head>
@@ -667,14 +697,14 @@
           <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звук">🔊</button>
           <button class="icon-btn" onclick="openHowToModal()" title="Инструкция">?</button>
           
-          <button class="admin-pill-btn" id="adminHeaderBtn" onclick="openModal('secretDevModal')" style="display:none; background:rgba(244,63,94,0.15); border:1px solid rgba(244,63,94,0.4); color:var(--accent-pink); padding:5px 12px; border-radius:999px; font-size:11.5px; font-weight:700; cursor:pointer;">⚙️ Админ</button>
+          <button class="admin-pill-btn" id="adminHeaderBtn" onclick="openModal('secretDevModal')" style="display:none; background:rgba(239,184,200,0.15); border:1px solid rgba(239,184,200,0.4); color:#efb8c8; padding:6px 14px; border-radius:var(--m3-radius-sm); font-size:12px; font-weight:600; cursor:pointer;">⚙️ Админ</button>
 
           <div class="header-user-pill" id="headerUserPill" onclick="switchTab('profile')">
-            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent-cyan);"></span>
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--m3-primary);"></span>
             <span id="headerUserText">@user</span>
           </div>
 
-          <button class="primary-btn" id="headerLoginBtn" style="padding:6px 14px; font-size:12px; width:auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
+          <button class="primary-btn" id="headerLoginBtn" style="padding:7px 16px; font-size:12.5px; width:auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
 
           <div class="lang-switcher">
             <button class="lang-btn active" data-lang="ru" onclick="setLanguage('ru')">RU</button>
@@ -696,17 +726,17 @@
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
-      <span data-i18n="badge_text">TIKTOK LIVE • МИНИ-ИГРЫ</span>
+      <span data-i18n="badge_text">TIKTOK LIVE • MATERIAL DESIGN</span>
     </div>
     <h1 class="brand-title">live game</h1>
     <p class="brand-sub" data-i18n="hero_sub">
-      Интерактивная платформа для стримов со звуковым движком и единым онлайн-рейтингом.
+      Интерактивная платформа для стримов в современном минималистичном стиле Google M3.
     </p>
   </section>
 
   <main class="main-container">
     <div id="tab-home" class="tab-pane active">
-      <div class="glass-card">
+      <div class="m3-card">
         <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр</h2>
         <p class="section-desc" data-i18n="catalog_desc">Выберите игру для вывода на экран трансляции.</p>
 
@@ -715,7 +745,7 @@
             <div>
               <div class="game-icon">⚔️</div>
               <div class="game-name" data-i18n="g1_title">Битва Тапов: Синие vs Красные</div>
-              <p class="game-info" data-i18n="g1_desc">Перетягивание каната по лайкам и тапам зрителей.</p>
+              <p class="game-info" data-i18n="g1_desc">Перетягивание каната по событиям зрителей.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('tug', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -724,7 +754,7 @@
             <div>
               <div class="game-icon">🎡</div>
               <div class="game-name" data-i18n="g2_title">Колесо Фортуны LIVE</div>
-              <p class="game-info" data-i18n="g2_desc">Интерактивная рулетка с бонусами и челленджами.</p>
+              <p class="game-info" data-i18n="g2_desc">Интерактивная рулетка с бонусами.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('wheel', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -733,7 +763,7 @@
             <div>
               <div class="game-icon">⚡</div>
               <div class="game-name" data-i18n="g3_title">Неоновый Реактор TikTok</div>
-              <p class="game-info" data-i18n="g3_desc">Аркада на скорость реакции и комбо-очки.</p>
+              <p class="game-info" data-i18n="g3_desc">Аркада на реакцию и комбо-очки.</p>
             </div>
             <button class="primary-btn" onclick="launchGame('reactor', event)" data-i18n="play_btn">Запустить</button>
           </div>
@@ -742,86 +772,85 @@
     </div>
 
     <div id="tab-arena" class="tab-pane">
-      <div class="glass-card">
+      <div class="m3-card">
         <div class="arena-toolbar">
           <div class="game-With-pills">
             <button class="mini-tab active" id="pill-tug" onclick="launchGame('tug', event)">⚔️ Тапы</button>
             <button class="mini-tab" id="pill-wheel" onclick="launchGame('wheel', event)">🎡 Колесо</button>
             <button class="mini-tab" id="pill-reactor" onclick="launchGame('reactor', event)">⚡ Реактор</button>
           </div>
-          <button class="icon-btn" style="width:auto; padding:0 12px; border-radius:999px; font-size:12px;" onclick="toggleStreamMode()">📺 Стрим</button>
+          <button class="icon-btn" style="width:auto; padding:0 14px; border-radius:var(--m3-radius-sm); font-size:12.5px;" onclick="toggleStreamMode()">📺 Стрим</button>
         </div>
 
         <h2 class="section-title" id="arenaTitle">⚔️ Битва Тапов: Синие vs Красные</h2>
-        <p class="section-desc" id="arenaSub">Реальные события эфира (лайки, подарки) двигают шкалу!</p>
+        <p class="section-desc" id="arenaSub">События эфира (лайки, подарки) управляют игрой.</p>
 
         <div id="game-tug">
           <div class="tug-score-row">
             <span style="color:#38bdf8;">🔵 Синие: <span id="bluePct">50</span>%</span>
-            <span style="color:#f43f5e;">🔴 Красные: <span id="redPct">50</span>%</span>
+            <span style="color:#efb8c8;">🔴 Красные: <span id="redPct">50</span>%</span>
           </div>
           <div class="tug-bar">
             <div class="tug-center-line"></div>
             <div class="tug-fill" id="tugFill" style="width: 50%;"></div>
           </div>
-          <div style="display:flex; gap:8px;">
-            <button class="primary-btn" style="background:#0284c7;" onclick="simulateEvent('like', 'blue')">👍 Синий лайк</button>
-            <button class="primary-btn" style="background:#e11d48;" onclick="simulateEvent('like', 'red')">❤️ Красный лайк</button>
+          <div style="display:flex; gap:10px;">
+            <button class="primary-btn" style="background:#38bdf8; color:#000;" onclick="simulateEvent('like', 'blue')">👍 Синий лайк</button>
+            <button class="primary-btn" style="background:#efb8c8; color:#381e72;" onclick="simulateEvent('like', 'red')">❤️ Красный лайк</button>
           </div>
         </div>
 
         <div id="game-wheel" style="display:none; text-align:center;">
           <div class="wheel-visual" id="wheelCircle">🎡</div>
-          <div id="wheelResult" style="font-size:16px; font-weight:700; margin:10px 0 14px; color:var(--accent-cyan); min-height:24px;">
+          <div id="wheelResult" style="font-size:15px; font-weight:600; margin:12px 0 16px; color:var(--m3-primary); min-height:24px;">
             Подарок от зрителя крутит колесо!
           </div>
           <button class="primary-btn" onclick="simulateEvent('gift', 'wheel')">🎁 Симулировать подарок</button>
         </div>
 
         <div id="game-reactor" style="display:none; text-align:center;">
-          <div id="reactorScore" style="font-size:14px; font-weight:700; color:var(--success);">
-            Комбо от чата: <span id="comboCount">x1</span>
+          <div id="reactorScore" style="font-size:14px; font-weight:600; color:var(--m3-success); margin-bottom: 8px;">
+            Комбо: <span id="comboCount">x1</span>
           </div>
           <div class="reactor-arena" id="reactorArena">
-            <div class="reactor-orb" id="reactorOrb" onclick="simulateEvent('comment', 'reactor')">💬</div>
+            <div class="reactor-orb" id="reactorOrb" onclick="simulateEvent('comment', 'reactor')">⚡</div>
           </div>
         </div>
       </div>
     </div>
 
     <div id="tab-leaderboard" class="tab-pane">
-      <div class="glass-card">
+      <div class="m3-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
           <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров</h2>
-          <button class="icon-btn" style="width:auto; padding:0 12px; border-radius:999px; font-size:12px;" onclick="syncLeaderboardNow()">🔄</button>
+          <button class="icon-btn" style="width:auto; padding:0 14px; border-radius:var(--m3-radius-sm); font-size:12.5px;" onclick="syncLeaderboardNow()">🔄</button>
         </div>
         <p class="section-desc" style="text-align:left; margin-bottom:12px;" data-i18n="lb_desc">
-          Топ активных зрителей и игроков по реальным донатам и лайкам.
+          Топ активных участников в реальном времени.
         </p>
         <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </div>
 
     <div id="tab-profile" class="tab-pane">
-      <div class="glass-card" style="text-align:center;">
+      <div class="m3-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
         <p class="section-desc" id="profileStatus">Авторизуйтесь, чтобы участвовать в рейтинге.</p>
-        <div style="font-size:30px; font-weight:900; color:var(--accent-cyan); margin-bottom:16px;">
+        <div style="font-size:32px; font-weight:800; color:var(--m3-primary); margin-bottom:18px;">
           <span id="profilePts">0</span> PTS
         </div>
         <div id="profileActionBox">
-          <button class="primary-btn" style="max-width:260px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
+          <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- ЧИСТАЯ МОДАЛКА ВХОДА С СУЩЕСТВУЮЩИМИ НИКНЕЙМАМИ -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('authModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Вход стримера TikTok</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Введите ваш подтвержденный юзернейм:</p>
+      <h3 style="font-size:18px; font-weight:700; margin-bottom:8px;">Вход стримера</h3>
+      <p style="font-size:13px; color:var(--m3-muted); margin-bottom:14px;">Введите ваш подтвержденный юзернейм:</p>
       <input type="text" id="ttUsernameInput" class="input-field" placeholder="@username" />
       <div class="error-msg" id="loginError">Пользователь не найден или указан неверно.</div>
       <button class="primary-btn" onclick="verifyAndLogin()">🚀 Войти на арену</button>
@@ -831,33 +860,33 @@
   <div class="modal-backdrop" id="howToModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">💡 Система входа</h3>
-      <div class="step-item">1. Введите реальный юзернейм стримера.</div>
-      <div class="step-item">2. Система проверяет его на валидность.</div>
-      <button class="primary-btn" style="margin-top:8px;" onclick="closeModal('howToModal')">Понятно</button>
+      <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;">💡 Material You Design</h3>
+      <div class="step-item">1. Интерфейс адаптирован под стандарты Google M3.</div>
+      <div class="step-item">2. Используйте вкладку «Лайв-арена» для тестирования событий.</div>
+      <button class="primary-btn" style="margin-top:10px;" onclick="closeModal('howToModal')">Понятно</button>
     </div>
   </div>
 
   <div class="modal-backdrop" id="secretDevModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('secretDevModal')">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px; color:var(--accent-cyan);">⚙️ Панель управления</h3>
+      <h3 style="font-size:18px; font-weight:700; margin-bottom:8px; color:var(--m3-primary);">⚙️ Панель управления</h3>
       <input type="text" id="firebaseUrlInput" class="input-field" placeholder="Firebase URL" />
       <button class="primary-btn" style="margin-bottom:8px;" onclick="saveCloudConfig()">Сохранить</button>
-      <button class="icon-btn" style="width:100%; border-radius:12px; height:38px; font-size:12px;" onclick="copyFullHtmlCode()">📋 Копировать код</button>
-      <div id="devCopyStatus" style="font-size:11.5px; color:var(--success); text-align:center; margin-top:6px;"></div>
+      <button class="icon-btn" style="width:100%; border-radius:var(--m3-radius-sm); height:40px; font-size:12.5px;" onclick="copyFullHtmlCode()">📋 Копировать код</button>
+      <div id="devCopyStatus" style="font-size:12px; color:var(--m3-success); text-align:center; margin-top:8px;"></div>
     </div>
   </div>
 
   <footer>
-    <strong>live game</strong> • Verified Streamer Authentication
+    <strong>live game</strong> • Material Design 3 Platform
   </footer>
 
   <script>
     const translations = {
-      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE • СТРИМЫ", hero_sub: "Интерактивная платформа со строгой проверкой аккаунтов стримеров.", catalog_title: "Каталог мини-игр", catalog_desc: "Выберите игру для трансляции.", play_btn: "Запустить", lb_title: "Таблица лидеров", lb_desc: "Топ активных стримеров." },
-      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE", hero_sub: "Стримдерге арналған платформа.", catalog_title: "Ойындар", catalog_desc: "Ойынды таңдаңыз.", play_btn: "Бастау", lb_title: "Көшбасшылар", lb_desc: "Үздіктер." },
-      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", badge_text: "TIKTOK LIVE", hero_sub: "Interactive streaming platform with account verification.", catalog_title: "Mini-Games", catalog_desc: "Choose a game.", play_btn: "Launch", lb_title: "Leaderboard", lb_desc: "Top streamers." }
+      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "MATERIAL DESIGN 3 • СТРИМЫ", hero_sub: "Современная минималистичная платформа для трансляций.", catalog_title: "Каталог мини-игр", catalog_desc: "Выберите игру для трансляции.", play_btn: "Запустить", lb_title: "Таблица лидеров", lb_desc: "Топ активных стримеров." },
+      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "MATERIAL DESIGN 3", hero_sub: "Стримдерге арналған заманауи платформа.", catalog_title: "Ойындар", catalog_desc: "Ойынды таңдаңыз.", play_btn: "Бастау", lb_title: "Көшбасшылар", lb_desc: "Үздіктер." },
+      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", badge_text: "MATERIAL DESIGN 3", hero_sub: "Modern minimalist streaming platform.", catalog_title: "Mini-Games", catalog_desc: "Choose a game.", play_btn: "Launch", lb_title: "Leaderboard", lb_desc: "Top streamers." }
     };
 
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
@@ -899,10 +928,10 @@
         osc.connect(gain); gain.connect(audioCtx.destination);
         if (type === "tap") {
           osc.frequency.setValueAtTime(500, now); osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
         } else if (type === "win") {
           osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(600, now + 0.1);
-          gain.gain.setValueAtTime(0.15, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          gain.gain.setValueAtTime(0.12, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
         }
         osc.start(now); osc.stop(now + 0.3);
       } catch (e) {}
@@ -1001,7 +1030,7 @@
         profilePts.textContent = pts.toLocaleString();
 
         profileActionBox.innerHTML = `
-          <button class="primary-btn" style="background:rgba(244,63,94,0.15); border:1px solid rgba(244,63,94,0.4); color:var(--accent-pink);" onclick="handleAuthClick()">🚪 Выйти / Сменить аккаунт</button>
+          <button class="primary-btn" style="background:var(--m3-surface-container-high); border:1px solid var(--m3-outline); color:var(--m3-error);" onclick="handleAuthClick()">🚪 Выйти / Сменить аккаунт</button>
         `;
       } else {
         headerUserPill.classList.remove("active");
@@ -1010,7 +1039,7 @@
         profileStatus.textContent = "Авторизуйтесь, чтобы участвовать в рейтинге.";
         profilePts.textContent = "0";
         profileActionBox.innerHTML = `
-          <button class="primary-btn" style="max-width:260px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
+          <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
         `;
       }
       renderLeaderboard();
@@ -1037,7 +1066,6 @@
       });
     }
 
-    // ПРОВЕРКА ВАЛИДНОСТИ НИКНЕЙМА
     function verifyAndLogin() {
       let val = document.getElementById("ttUsernameInput").value.trim();
       const errEl = document.getElementById("loginError");
@@ -1051,7 +1079,6 @@
       if (!val.startsWith("@")) val = "@" + val;
 
       const cleanName = val.replace("@", "").toLowerCase();
-      // Блокируем очевидные тестовые слова и фейки
       if (["test", "admin", "123", "user", "guest", "qwerty"].includes(cleanName)) {
         errEl.textContent = "Пользователь не найден в TikTok!";
         errEl.style.display = "block";
