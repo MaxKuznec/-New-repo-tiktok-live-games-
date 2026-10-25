@@ -3,18 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>live game — TikTok LIVE Mini-Games</title>
+  <title>live game — Интерактивные мини-игры для TikTok LIVE</title>
+
+  <!-- ЭТАП 4: OpenGraph & SEO мета-теги для красивого превью ссылки в соцсетях и мессенджерах -->
+  <meta name="description" content="Запускайте интерактивные мини-игры для зрителей TikTok LIVE прямо со смартфона: Битва Тапов, Колесо Фортуны, Неоновый Реактор и единый онлайн-рейтинг!" />
+  <meta name="theme-color" content="#0b0c14" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="live game — Интерактивные мини-игры для TikTok LIVE" />
+  <meta property="og:description" content="Врывайся на лайв-арену! Играй со зрителями в прямом эфире, крути Колесо Фортуны и занимай Топ-1 в общем рейтинге." />
+  <meta property="og:url" content="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230b0c14'/><circle cx='50' cy='50' r='36' fill='none' stroke='%2325f4ee' stroke-width='6'/><polygon points='42,32 72,50 42,68' fill='%23fe2c55'/></svg>" />
+
   <style>
     :root {
       --bg: #0b0c14;
-      --card: rgba(20, 22, 36, 0.85);
-      --border: rgba(255, 255, 255, 0.08);
+      --card: rgba(20, 22, 36, 0.88);
+      --border: rgba(255, 255, 255, 0.09);
       --text: #f3f4f6;
       --muted: #9ca3af;
       --accent: #6366f1;
       --tt-cyan: #25f4ee;
       --tt-pink: #fe2c55;
       --success: #10b981;
+      --warning: #f59e0b;
     }
 
     * {
@@ -23,10 +36,11 @@
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     body {
-      background: radial-gradient(circle at 50% 0%, #1a1836 0%, var(--bg) 65%);
+      background: radial-gradient(circle at 50% 0%, #1a1836 0%, var(--bg) 68%);
       color: var(--text);
       min-height: 100vh;
       display: flex;
@@ -34,15 +48,57 @@
       overflow-x: hidden;
     }
 
-    /* Header & Navigation */
+    /* ЭТАП 3: Режим "Чистый экран для стрима" */
+    body.stream-mode .top-header,
+    body.stream-mode .brand-hero,
+    body.stream-mode footer {
+      display: none !important;
+    }
+    body.stream-mode .main-container {
+      max-width: 100%;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    body.stream-mode .glass-card {
+      width: 100%;
+      max-width: 580px;
+      border-color: rgba(37, 244, 238, 0.45);
+      box-shadow: 0 0 50px rgba(37, 244, 238, 0.15);
+    }
+    .exit-stream-btn {
+      display: none;
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 120;
+      background: rgba(254, 44, 85, 0.9);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(254, 44, 85, 0.5);
+    }
+    body.stream-mode .exit-stream-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Шапка и навигация */
     .top-header {
       position: sticky;
       top: 0;
       z-index: 50;
       backdrop-filter: blur(16px);
-      background: rgba(11, 12, 20, 0.82);
+      background: rgba(11, 12, 20, 0.84);
       border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
+      padding: 10px 14px;
     }
 
     .header-inner {
@@ -61,28 +117,47 @@
       flex-wrap: wrap;
     }
 
+    .online-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #34d399;
+      cursor: pointer;
+    }
+
     .status-dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 10px var(--success);
-      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--success);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.65; }
     }
 
     .top-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
       margin-left: auto;
     }
 
     .icon-btn {
-      background: rgba(99, 102, 241, 0.18);
-      border: 1px solid rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.16);
+      border: 1px solid rgba(99, 102, 241, 0.38);
       color: #fff;
-      padding: 7px 12px;
+      padding: 6px 11px;
       border-radius: 999px;
       cursor: pointer;
       font-size: 13px;
@@ -90,22 +165,22 @@
       transition: 0.2s;
     }
 
-    .icon-btn:hover {
-      background: rgba(99, 102, 241, 0.32);
+    .icon-btn:active {
+      transform: scale(0.94);
     }
 
     .tt-auth-btn {
-      background: linear-gradient(90deg, rgba(37, 244, 238, 0.15), rgba(254, 44, 85, 0.15));
-      border: 1px solid rgba(254, 44, 85, 0.45);
+      background: linear-gradient(90deg, rgba(37, 244, 238, 0.16), rgba(254, 44, 85, 0.16));
+      border: 1px solid rgba(254, 44, 85, 0.48);
       color: #fff;
-      padding: 7px 14px;
+      padding: 6px 13px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: 0.2s;
     }
 
@@ -114,16 +189,16 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 3px;
+      padding: 2px;
     }
 
     .lang-btn {
       background: transparent;
       border: none;
       color: var(--muted);
-      padding: 5px 10px;
+      padding: 4px 8px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       transition: 0.2s;
@@ -163,10 +238,10 @@
       box-shadow: 0 2px 12px rgba(99, 102, 241, 0.45);
     }
 
-    /* Brand Hero Section */
+    /* Главный блок под вкладками */
     .brand-hero {
       text-align: center;
-      padding: 28px 16px 18px;
+      padding: 22px 16px 14px;
       max-width: 760px;
       margin: 0 auto;
     }
@@ -184,7 +259,7 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--tt-cyan);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .live-badge span.dot {
@@ -196,31 +271,31 @@
     }
 
     .brand-title {
-      font-size: clamp(38px, 9vw, 62px);
+      font-size: clamp(36px, 9vw, 58px);
       font-weight: 900;
       letter-spacing: -0.03em;
       background: linear-gradient(90deg, var(--tt-cyan), #a855f7, var(--tt-pink));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.35));
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .brand-sub {
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
+      font-size: 13.5px;
+      line-height: 1.45;
       max-width: 520px;
       margin: 0 auto;
     }
 
-    /* Content Container */
+    /* Контейнер вкладок */
     .main-container {
       flex: 1;
       width: 100%;
       max-width: 860px;
       margin: 0 auto;
-      padding: 12px 16px 40px;
+      padding: 10px 16px 36px;
     }
 
     .tab-pane {
@@ -237,28 +312,30 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards & Games Grid */
+    /* Карточки и сетка игр */
     .glass-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 22px;
+      padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
+      position: relative;
+      overflow: hidden;
     }
 
     .section-title {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .section-desc {
       font-size: 13px;
       color: var(--muted);
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .games-grid {
@@ -280,17 +357,18 @@
     }
 
     .game-card:hover {
-      border-color: rgba(37, 244, 238, 0.4);
+      border-color: rgba(37, 244, 238, 0.45);
       transform: translateY(-2px);
     }
 
     .game-icon {
-      font-size: 28px;
+      font-size: 30px;
     }
 
     .game-name {
       font-size: 17px;
       font-weight: 800;
+      margin-top: 4px;
     }
 
     .game-info {
@@ -303,20 +381,142 @@
       background: linear-gradient(90deg, var(--accent), #8b5cf6);
       color: #fff;
       border: none;
-      border-radius: 12px;
-      padding: 11px 16px;
+      border-radius: 13px;
+      padding: 12px 16px;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       width: 100%;
-      transition: 0.2s;
+      transition: transform 0.12s, opacity 0.2s;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
     }
 
-    .primary-btn:hover {
-      opacity: 0.92;
+    .primary-btn:active {
+      transform: scale(0.96);
     }
 
-    /* Leaderboard */
+    /* Арена и мини-игры */
+    .arena-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .game-With-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mini-tab {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .mini-tab.active {
+      background: rgba(37, 244, 238, 0.18);
+      border-color: var(--tt-cyan);
+      color: var(--tt-cyan);
+    }
+
+    .tug-score-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .tug-bar {
+      height: 30px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ef4444, #dc2626);
+      overflow: hidden;
+      margin: 10px 0 18px;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      position: relative;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.35);
+    }
+
+    .tug-fill {
+      height: 100%;
+      width: 50%;
+      background: linear-gradient(90deg, #2563eb, var(--tt-cyan));
+      transition: width 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 0 20px var(--tt-cyan);
+    }
+
+    .tug-center-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #fff;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    /* Колесо Фортуны */
+    .wheel-visual {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 10px auto 16px;
+      border: 5px solid var(--tt-cyan);
+      background: conic-gradient(
+        #6366f1 0deg 90deg,
+        #fe2c55 90deg 180deg,
+        #10b981 180deg 270deg,
+        #f59e0b 270deg 360deg
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 0 28px rgba(37, 244, 238, 0.35);
+      transition: transform 1.2s cubic-bezier(0.15, 0.85, 0.25, 1);
+    }
+
+    /* Неоновый Реактор */
+    .reactor-arena {
+      height: 170px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed rgba(37, 244, 238, 0.35);
+      border-radius: 18px;
+      position: relative;
+      margin: 12px 0 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reactor-orb {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 10%, var(--tt-cyan) 55%, var(--tt-pink) 100%);
+      box-shadow: 0 0 25px var(--tt-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      position: absolute;
+      transition: all 0.18s ease;
+    }
+
+    /* Таблица лидеров */
     .leaderboard-list {
       display: flex;
       flex-direction: column;
@@ -335,8 +535,8 @@
     }
 
     .leader-item.me {
-      background: rgba(99, 102, 241, 0.16);
-      border-color: rgba(99, 102, 241, 0.5);
+      background: rgba(99, 102, 241, 0.18);
+      border-color: rgba(37, 244, 238, 0.55);
     }
 
     .leader-pts {
@@ -347,23 +547,53 @@
 
     .empty-box {
       text-align: center;
-      padding: 28px 16px;
+      padding: 26px 16px;
       color: var(--muted);
       font-size: 14px;
       border: 1px dashed var(--border);
       border-radius: 16px;
     }
 
-    /* Modals */
+    /* ЭТАП 2: Частицы и всплывающие очки */
+    .spark {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 999;
+      animation: flySpark 0.65s ease-out forwards;
+    }
+
+    @keyframes flySpark {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+    }
+
+    .float-pts {
+      position: fixed;
+      pointer-events: none;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--tt-cyan);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      animation: floatUp 0.85s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.9); opacity: 1; }
+      100% { transform: translateY(-48px) scale(1.15); opacity: 0; }
+    }
+
+    /* Модальные окна */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.76);
+      background: rgba(0, 0, 0, 0.78);
       backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 100;
+      z-index: 200;
       padding: 16px;
     }
 
@@ -375,16 +605,18 @@
       background: #131524;
       border: 1px solid var(--border);
       border-radius: 22px;
-      max-width: 440px;
+      max-width: 460px;
       width: 100%;
       padding: 22px;
       position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .modal-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 14px;
+      right: 14px;
       background: rgba(255, 255, 255, 0.08);
       border: none;
       color: var(--muted);
@@ -392,40 +624,34 @@
       height: 30px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .input-field {
       width: 100%;
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.38);
       border: 1px solid var(--border);
       color: #fff;
       padding: 11px 14px;
       border-radius: 12px;
-      font-size: 14px;
-      margin-bottom: 12px;
+      font-size: 13.5px;
+      margin-bottom: 10px;
       outline: none;
+      user-select: text;
     }
 
     .input-field:focus {
       border-color: var(--tt-cyan);
     }
 
-    /* Mini-game Arena */
-    .tug-bar {
-      height: 26px;
-      border-radius: 999px;
-      background: #ef4444;
-      overflow: hidden;
-      margin: 16px 0;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .tug-fill {
-      height: 100%;
-      width: 50%;
-      background: linear-gradient(90deg, #3b82f6, var(--tt-cyan));
-      transition: width 0.15s ease;
+    .step-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     footer {
@@ -439,13 +665,23 @@
 </head>
 <body>
 
-  <!-- Top Bar -->
+  <!-- Кнопка выхода из полноэкранного режима стрима -->
+  <button class="exit-stream-btn" onclick="toggleStreamMode()">✕ Выйти из режима стрима</button>
+
+  <!-- Верхняя панель -->
   <header class="top-header">
     <div class="header-inner">
       <div class="header-row-top">
-        <div class="status-dot" title="TikTok LIVE Ready"></div>
+        <div class="online-pill" onclick="openCloudModal()" title="Настройка общей онлайн-базы">
+          <span class="status-dot"></span>
+          <span id="cloudStatusText">LIVE • Онлайн</span>
+        </div>
+
         <div class="top-controls">
-          <button class="icon-btn" onclick="openShareModal()" title="Ссылка на сайт">🔗</button>
+          <button class="icon-btn" id="soundToggleBtn" onclick="toggleSound()" title="Звуковые эффекты">🔊</button>
+          <button class="icon-btn" onclick="openHowToModal()" title="Как это работает">❓</button>
+          <button class="icon-btn" onclick="openCloudModal()" title="Общая база игроков">☁️</button>
+          <button class="icon-btn" onclick="openShareModal()" title="Ссылка и код сайта">🔗</button>
           <button class="tt-auth-btn" id="headerAuthBtn" onclick="handleAuthClick()">
             <span id="headerAuthText" data-i18n="login_tt">Войти через TikTok</span>
           </button>
@@ -466,7 +702,7 @@
     </div>
   </header>
 
-  <!-- Hero Title under tabs -->
+  <!-- Заголовок live game под вкладками -->
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
@@ -474,133 +710,212 @@
     </div>
     <h1 class="brand-title">live game</h1>
     <p class="brand-sub" data-i18n="hero_sub">
-      Авторизуйтесь через TikTok и запускайте интерактивные мини-игры для зрителей прямо во время эфира.
+      Авторизуйтесь через TikTok и запускайте интерактивные мини-игры со звуком, спецэффектами и единым рейтингом прямо во время эфира.
     </p>
   </section>
 
-  <!-- Main Content -->
+  <!-- Основной контент -->
   <main class="main-container">
-    <!-- TAB 1: HOME -->
+    <!-- ВКЛАДКА 1: ГЛАВНАЯ -->
     <div id="tab-home" class="tab-pane active">
       <div class="glass-card">
         <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр для стрима</h2>
-        <p class="section-desc" data-i18n="catalog_desc">Выберите игру, чтобы запустить её на экране трансляции и зарабатывать очки рейтинга.</p>
+        <p class="section-desc" data-i18n="catalog_desc">Выберите мини-игру, чтобы вывести её на стрим и соревноваться со зрителями в реальном времени.</p>
+
         <div class="games-grid">
           <div class="game-card">
             <div>
               <div class="game-icon">⚔️</div>
               <div class="game-name" data-i18n="g1_title">Битва Тапов: Синие vs Красные</div>
-              <p class="game-info" data-i18n="g1_desc">Перетягивание каната за лайки и подарки зрителей. Чья команда победит?</p>
+              <p class="game-info" data-i18n="g1_desc">Интерактивное перетягивание полосы со взрывами частиц и общим балансом каната.</p>
             </div>
-            <button class="primary-btn" onclick="launchGame('tug')" data-i18n="play_btn">Запустить</button>
+            <button class="primary-btn" onclick="launchGame('tug', event)" data-i18n="play_btn">Запустить</button>
           </div>
 
           <div class="game-card">
             <div>
               <div class="game-icon">🎡</div>
               <div class="game-name" data-i18n="g2_title">Колесо Фортуны LIVE</div>
-              <p class="game-info" data-i18n="g2_desc">Случайные челленджи, бонусные очки и задания для зрителей вашего стрима.</p>
+              <p class="game-info" data-i18n="g2_desc">Анимированная рулетка с трещоткой, случайными заданиями для чата и джекпотом очков.</p>
             </div>
-            <button class="primary-btn" onclick="launchGame('wheel')" data-i18n="play_btn">Запустить</button>
+            <button class="primary-btn" onclick="launchGame('wheel', event)" data-i18n="play_btn">Запустить</button>
           </div>
 
           <div class="game-card">
             <div>
               <div class="game-icon">⚡</div>
               <div class="game-name" data-i18n="g3_title">Неоновый Реактор TikTok</div>
-              <p class="game-info" data-i18n="g3_desc">Скоростная игра на реакцию: ловите импульсы эфира и поднимайтесь в топ-1.</p>
+              <p class="game-info" data-i18n="g3_desc">Ловите прыгающий неоновый импульс на скорость, делайте комбо и врывайтесь в Топ-1!</p>
             </div>
-            <button class="primary-btn" onclick="launchGame('reactor')" data-i18n="play_btn">Запустить</button>
+            <button class="primary-btn" onclick="launchGame('reactor', event)" data-i18n="play_btn">Запустить</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 2: ARENA -->
+    <!-- ВКЛАДКА 2: ЛАЙВ-АРЕНА -->
     <div id="tab-arena" class="tab-pane">
-      <div class="glass-card" id="arenaBox">
-        <h2 class="section-title" id="arenaTitle" data-i18n="g1_title">Битва Тапов: Синие vs Красные</h2>
-        <p class="section-desc" id="arenaSub">Нажимайте кнопки, чтобы протестировать интерактив и получить очки в рейтинг!</p>
+      <div class="glass-card">
+        <div class="arena-toolbar">
+          <div class="game-With-pills">
+            <button class="mini-tab active" id="pill-tug" onclick="launchGame('tug', event)">⚔️ Тапы</button>
+            <button class="mini-tab" id="pill-wheel" onclick="launchGame('wheel', event)">🎡 Колесо</button>
+            <button class="mini-tab" id="pill-reactor" onclick="launchGame('reactor', event)">⚡ Реактор</button>
+          </div>
+          <button class="icon-btn" onclick="toggleStreamMode()" title="Скрыть меню для записи эфира">📺 Стрим-экран</button>
+        </div>
 
-        <!-- Game 1: Tug of War -->
+        <h2 class="section-title" id="arenaTitle">⚔️ Битва Тапов: Синие vs Красные</h2>
+        <p class="section-desc" id="arenaSub">Тапайте за свою команду! Доведите полосу до 95%, чтобы сорвать бонус +100 PTS!</p>
+
+        <!-- Игра 1: Перетягивание -->
         <div id="game-tug">
+          <div class="tug-score-row">
+            <span style="color:#60a5fa;">🔵 Синие: <span id="bluePct">50</span>%</span>
+            <span style="color:#f87171;">🔴 Красные: <span id="redPct">50</span>%</span>
+          </div>
           <div class="tug-bar">
+            <div class="tug-center-line"></div>
             <div class="tug-fill" id="tugFill" style="width: 50%;"></div>
           </div>
           <div style="display:flex; gap:10px;">
-            <button class="primary-btn" style="background:#3b82f6;" onclick="playTug(6)">🔵 Синие (+10 PTS)</button>
-            <button class="primary-btn" style="background:#ef4444;" onclick="playTug(-6)">🔴 Красные (+10 PTS)</button>
+            <button class="primary-btn" style="background:linear-gradient(90deg,#2563eb,#06b6d4);" onclick="playTug(6, event)">🔵 За Синих (+10 PTS)</button>
+            <button class="primary-btn" style="background:linear-gradient(90deg,#dc2626,#fe2c55);" onclick="playTug(-6, event)">🔴 За Красных (+10 PTS)</button>
           </div>
         </div>
 
-        <!-- Game 2: Wheel -->
+        <!-- Игра 2: Колесо Фортуны -->
         <div id="game-wheel" style="display:none; text-align:center;">
-          <div id="wheelResult" style="font-size:20px; font-weight:800; margin:18px 0; color:var(--tt-cyan);">Крутите колесо!</div>
-          <button class="primary-btn" onclick="spinWheel()">🎡 Крутить (+25 PTS)</button>
+          <div class="wheel-visual" id="wheelCircle">🎡</div>
+          <div id="wheelResult" style="font-size:18px; font-weight:800; margin:12px 0 16px; color:var(--tt-cyan); min-height:26px;">
+            Нажмите кнопку, чтобы раскрутить рулетку!
+          </div>
+          <button class="primary-btn" id="spinBtn" onclick="spinWheel(event)">🎡 Крутить Колесо (+25 PTS)</button>
         </div>
 
-        <!-- Game 3: Reactor -->
+        <!-- Игра 3: Неоновый Реактор -->
         <div id="game-reactor" style="display:none; text-align:center;">
-          <div id="reactorScore" style="font-size:20px; font-weight:800; margin:18px 0; color:#10b981;">Импульс готов!</div>
-          <button class="primary-btn" onclick="hitReactor()">⚡ Поймать импульс (+30 PTS)</button>
+          <div id="reactorScore" style="font-size:16px; font-weight:800; color:#10b981;">
+            Нажимайте прямо на светящуюся сферу! Комбо: <span id="comboCount">x1</span>
+          </div>
+          <div class="reactor-arena" id="reactorArena">
+            <div class="reactor-orb" id="reactorOrb" onclick="hitReactor(event)">⚡</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: LEADERBOARD (NO BOTS) -->
+    <!-- ВКЛАДКА 3: РЕЙТИНГ (ЧИСТЫЙ + ОБЛАЧНЫЙ) -->
     <div id="tab-leaderboard" class="tab-pane">
       <div class="glass-card">
-        <h2 class="section-title" data-i18n="lb_title">Таблица лидеров TikTok LIVE</h2>
-        <p class="section-desc" data-i18n="lb_desc">Топ реальных стримеров и игроков по набранным очкам в мини-играх.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+          <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров TikTok LIVE</h2>
+          <button class="icon-btn" onclick="syncLeaderboardNow()">🔄 Обновить рейтинг</button>
+        </div>
+        <p class="section-desc" style="text-align:left; margin-bottom:14px;" data-i18n="lb_desc">
+          Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов).
+        </p>
         <div class="leaderboard-list" id="leaderboardList"></div>
       </div>
     </div>
 
-    <!-- TAB 4: PROFILE -->
+    <!-- ВКЛАДКА 4: ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-pane">
       <div class="glass-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
-        <p class="section-desc" id="profileStatus">Авторизуйтесь через TikTok, чтобы сохранять свои очки.</p>
-        <div style="font-size:26px; font-weight:900; color:var(--tt-cyan); margin-bottom:18px;">
+        <p class="section-desc" id="profileStatus">Авторизуйтесь через TikTok, чтобы сохранять свои очки в общем рейтинге.</p>
+        <div style="font-size:32px; font-weight:900; color:var(--tt-cyan); margin-bottom:18px;">
           <span id="profilePts">0</span> PTS
         </div>
-        <button class="primary-btn" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+        <div style="display:flex; gap:10px; max-width:360px; margin:0 auto;">
+          <button class="primary-btn" onclick="openAuthModal()" data-i18n="login_tt">Войти через TikTok</button>
+          <button class="icon-btn" style="padding:12px 16px;" onclick="openCloudModal()">☁️ База</button>
+        </div>
       </div>
     </div>
   </main>
 
-  <!-- Auth Modal -->
+  <!-- МОДАЛКА 1: Вход через TikTok -->
   <div class="modal-backdrop" id="authModal">
     <div class="modal-window">
-      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+      <button class="modal-close" onclick="closeModal('authModal')">✕</button>
       <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Вход через TikTok</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">Введите ваш @никнейм TikTok для мгновенного входа на арену или укажите Client Key для OAuth 2.0:</p>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:14px;">
+        Введите ваш @никнейм в TikTok, чтобы сразу попасть в таблицу лидеров и запускать игры:
+      </p>
       <input type="text" id="ttUsernameInput" class="input-field" placeholder="@ваш_никнейм (например, @joffffffffff38)" />
-      <button class="primary-btn" style="margin-bottom:10px;" onclick="quickTikTokLogin()">🚀 Войти и играть</button>
+      <button class="primary-btn" style="margin-bottom:12px;" onclick="quickTikTokLogin()">🚀 Войти на арену</button>
       <hr style="border:none; border-top:1px solid var(--border); margin:12px 0;" />
+      <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Для разработчиков (TikTok OAuth 2.0 Client Key):</p>
       <input type="text" id="ttClientKey" class="input-field" placeholder="TikTok Client Key (необязательно)" />
-      <button class="icon-btn" style="width:100%; padding:10px;" onclick="startRealOAuth()">Авторизоваться через TikTok.com (OAuth)</button>
+      <button class="icon-btn" style="width:100%; padding:10px;" onclick="startRealOAuth()">Авторизоваться через TikTok.com</button>
     </div>
   </div>
 
-  <!-- Share Modal -->
+  <!-- МОДАЛКА 2: ЭТАП 1 (Общая онлайн-база Firebase Realtime DB) -->
+  <div class="modal-backdrop" id="cloudModal">
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeModal('cloudModal')">✕</button>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">☁️ Единый онлайн-рейтинг (Firebase)</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px; line-height:1.45;">
+        Чтобы все зрители со своих телефонов видели <strong>единую таблицу лидеров</strong> и вместе перетягивали канат, вставьте ссылку на вашу бесплатную базу <strong>Firebase Realtime Database</strong>:
+      </p>
+      <input type="text" id="firebaseUrlInput" class="input-field" placeholder="https://ваш-проект-default-rtdb.firebaseio.com" />
+      <button class="primary-btn" style="margin-bottom:10px;" onclick="saveCloudConfig()">💾 Подключить общую базу</button>
+      <div class="step-item" style="font-size:12px; color:var(--muted);">
+        💡 <strong>Как получить ссылку за 1 минуту:</strong><br/>
+        1. Зайдите в <em>console.firebase.google.com</em> → создайте проект.<br/>
+        2. В меню выберите <strong>Realtime Database</strong> → <strong>Create Database</strong> (в режиме <em>Test mode</em>).<br/>
+        3. Скопируйте ссылку вида <code>https://...firebaseio.com</code> и вставьте выше!
+      </div>
+      <div id="cloudSaveMsg" style="font-size:12px; color:var(--success); text-align:center; margin-top:6px;"></div>
+    </div>
+  </div>
+
+  <!-- МОДАЛКА 3: ЭТАП 3 (Инструкция для новых игроков и стримеров) -->
+  <div class="modal-backdrop" id="howToModal">
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeModal('howToModal')">✕</button>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:12px;">🔥 Добро пожаловать в live game!</h3>
+      <div class="step-item">
+        <strong>1. Авторизуйтесь под своим @ником TikTok</strong><br/>
+        Нажмите «Войти через TikTok» вверху и укажите свой никнейм — все заработанные очки закрепятся за вами.
+      </div>
+      <div class="step-item">
+        <strong>2. Запускайте игры на стриме</strong><br/>
+        Откройте «Лайв-арену» и нажмите кнопку <strong>«📺 Стрим-экран»</strong> — лишние кнопки спрячутся, и экран будет готов для трансляции в TikTok LIVE или PRISM Live.
+      </div>
+      <div class="step-item">
+        <strong>3. Занимайте Топ-1 в Рейтинге</strong><br/>
+        За каждый тап, прокрутку колеса или пойманный импульс реактора вы получаете PTS и поднимаетесь к золотой медали 🥇!
+      </div>
+      <button class="primary-btn" onclick="closeModal('howToModal')">Понятно, погнали! 🚀</button>
+    </div>
+  </div>
+
+  <!-- МОДАЛКА 4: Поделиться ссылкой и скопировать код -->
   <div class="modal-backdrop" id="shareModal">
     <div class="modal-window">
-      <button class="modal-close" onclick="closeShareModal()">✕</button>
-      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">Ссылка на ваш сайт live game</h3>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Ваша постоянная публичная ссылка на GitHub Pages:</p>
+      <button class="modal-close" onclick="closeModal('shareModal')">✕</button>
+      <h3 style="font-size:18px; font-weight:800; margin-bottom:8px;">🔗 Ссылка для продвижения сайта</h3>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:10px;">
+        Отправляйте эту ссылку зрителям или закрепите её в шапке профиля TikTok:
+      </p>
       <input type="text" id="publicSiteUrl" class="input-field" readonly value="https://maxkuznec.github.io/-New-repo-tiktok-live-games-/" />
-      <button class="primary-btn" style="margin-bottom:10px;" onclick="copyPublicLink()">🔗 Скопировать ссылку на сайт</button>
+      <button class="primary-btn" style="margin-bottom:10px;" onclick="shareOrCopyLink()">📤 Поделиться ссылкой / Скопировать</button>
       <button class="icon-btn" style="width:100%; padding:11px;" onclick="copyFullHtmlCode()">📋 Скопировать весь код сайта (index.html)</button>
       <div id="copyStatus" style="font-size:12px; color:var(--success); text-align:center; margin-top:8px;"></div>
     </div>
   </div>
 
   <footer>
-    <strong>live game</strong> • <span data-i18n="footer_note">Настройки языка и TikTok-профиль сохраняются автоматически</span>
+    <strong>live game</strong> • <span data-i18n="footer_note">Звуковой движок, спецэффекты и синхронизация рейтинга активны</span>
   </footer>
 
   <script>
+    /* ==========================================================
+       СЛОВАРЬ ПЕРЕВОДОВ (RU / KZ / EN)
+    ========================================================== */
     const translations = {
       ru: {
         login_tt: "Войти через TikTok",
@@ -609,19 +924,19 @@
         tab_rating: "Рейтинг",
         tab_profile: "Профиль",
         badge_text: "TIKTOK LIVE • ИНТЕРАКТИВНЫЕ МИНИ-ИГРЫ",
-        hero_sub: "Авторизуйтесь через TikTok и запускайте интерактивные мини-игры для зрителей прямо во время эфира.",
+        hero_sub: "Авторизуйтесь через TikTok и запускайте интерактивные мини-игры со звуком, спецэффектами и единым рейтингом прямо во время эфира.",
         catalog_title: "Каталог мини-игр для стрима",
-        catalog_desc: "Выберите игру, чтобы запустить её на экране трансляции и зарабатывать очки рейтинга.",
+        catalog_desc: "Выберите мини-игру, чтобы вывести её на стрим и соревноваться со зрителями в реальном времени.",
         g1_title: "Битва Тапов: Синие vs Красные",
-        g1_desc: "Перетягивание каната за лайки и подарки зрителей. Чья команда победит?",
+        g1_desc: "Интерактивное перетягивание полосы со взрывами частиц и общим балансом каната.",
         g2_title: "Колесо Фортуны LIVE",
-        g2_desc: "Случайные челленджи, бонусные очки и задания для зрителей вашего стрима.",
+        g2_desc: "Анимированная рулетка с трещоткой, случайными заданиями для чата и джекпотом очков.",
         g3_title: "Неоновый Реактор TikTok",
-        g3_desc: "Скоростная игра на реакцию: ловите импульсы эфира и поднимайтесь в топ-1.",
+        g3_desc: "Ловите прыгающий неоновый импульс на скорость, делайте комбо и врывайтесь в Топ-1!",
         play_btn: "Запустить",
         lb_title: "Таблица лидеров TikTok LIVE",
-        lb_desc: "Топ реальных стримеров и игроков по набранным очкам в мини-играх.",
-        footer_note: "Настройки языка и TikTok-профиль сохраняются автоматически"
+        lb_desc: "Топ реальных стримеров и игроков по набранным очкам в мини-играх (без ботов).",
+        footer_note: "Звуковой движок, спецэффекты и синхронизация рейтинга активны"
       },
       kz: {
         login_tt: "TikTok арқылы кіру",
@@ -630,19 +945,19 @@
         tab_rating: "Рейтинг",
         tab_profile: "Профиль",
         badge_text: "TIKTOK LIVE • ИНТЕРАКТИВТІ МИНИ-ОЙЫНДАР",
-        hero_sub: "TikTok арқылы кіріп, тікелей эфир кезінде көрермендерге арналған мини-ойындарды іске қосыңыз.",
+        hero_sub: "TikTok арқылы кіріп, тікелей эфирде дыбыс пен арнайы эффектілері бар мини-ойындарды іске қосыңыз.",
         catalog_title: "Стримге арналған мини-ойындар",
-        catalog_desc: "Экранда іске қосу және рейтинг ұпайларын жинау үшін ойынды таңдаңыз.",
+        catalog_desc: "Көрермендермен нақты уақытта жарысу үшін мини-ойынды таңдаңыз.",
         g1_title: "Таптар шайқасы: Көктер vs Қызылдар",
-        g1_desc: "Лайктар мен сыйлықтар арқылы арқан тартыс. Қай команда жеңеді?",
+        g1_desc: "Жарқын эффектілері бар интерактивті арқан тартыс ойыны.",
         g2_title: "Сәттілік Дөңгелегі LIVE",
-        g2_desc: "Кездейсоқ челлендждер, бонустық ұпайлар және стрим тапсырмалары.",
+        g2_desc: "Чатқа арналған кездейсоқ тапсырмалар мен бонустық ұпайлар рулеткасы.",
         g3_title: "TikTok Неон Реакторы",
-        g3_desc: "Жылдам реакция ойыны: эфир импульстарын ұстап, топ-1 орынға шығыңыз.",
+        g3_desc: "Жылдам неон импульсін ұстап, комбо жинап, Топ-1 орынға шығыңыз!",
         play_btn: "Іске қосу",
         lb_title: "TikTok LIVE Көшбасшылар кестесі",
-        lb_desc: "Мини-ойындарда жиналған ұпайлар бойынша нақты ойыншылар тобы.",
-        footer_note: "Тіл параметрлері мен TikTok профилі автоматты түрде сақталады"
+        lb_desc: "Мини-ойындарда жиналған ұпайлар бойынша нақты ойыншылар рейтингі.",
+        footer_note: "Дыбыс қозғалтқышы, эффектілер және рейтинг синхрондауы белсенді"
       },
       en: {
         login_tt: "Login with TikTok",
@@ -651,31 +966,204 @@
         tab_rating: "Leaderboard",
         tab_profile: "Profile",
         badge_text: "TIKTOK LIVE • INTERACTIVE MINI-GAMES",
-        hero_sub: "Log in with TikTok and launch interactive mini-games for your viewers live on stream.",
+        hero_sub: "Log in with TikTok and launch interactive mini-games with sound effects, particles, and live rankings.",
         catalog_title: "Stream Mini-Games Catalog",
-        catalog_desc: "Pick a game to launch on your stream and earn leaderboard points.",
+        catalog_desc: "Choose a mini-game to display on stream and compete with viewers in real time.",
         g1_title: "Tap Battle: Blue vs Red",
-        g1_desc: "Tug-of-war powered by viewer likes and gifts. Which team will win?",
+        g1_desc: "Interactive tug-of-war bar with neon particle bursts and live balance.",
         g2_title: "Wheel of Fortune LIVE",
-        g2_desc: "Random challenges, bonus points, and live dares for your stream audience.",
+        g2_desc: "Animated roulette with sound clicks, live chat dares, and jackpot points.",
         g3_title: "TikTok Neon Reactor",
-        g3_desc: "Fast-paced reaction arcade: catch live pulses and climb to #1.",
+        g3_desc: "Catch the jumping neon orb at high speed, build combos, and hit #1!",
         play_btn: "Launch",
         lb_title: "TikTok LIVE Leaderboard",
-        lb_desc: "Top real streamers and players ranked by mini-game points.",
-        footer_note: "Language settings and TikTok profile are saved automatically"
+        lb_desc: "Top real streamers and players ranked by mini-game points (no bots).",
+        footer_note: "Sound engine, particle effects, and leaderboard sync are active"
       }
     };
 
+    /* ==========================================================
+       СОСТОЯНИЕ ПРИЛОЖЕНИЯ И ОЧИСТКА ОТ СТАРЫХ БОТОВ
+    ========================================================== */
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
     let playersMap = JSON.parse(localStorage.getItem("lg_real_leaderboard") || "{}");
+    let firebaseDbUrl = localStorage.getItem("lg_firebase_url") || "";
+    let soundEnabled = localStorage.getItem("lg_sound") !== "off";
     let tugPercent = 50;
+    let wheelAngle = 0;
+    let reactorCombo = 1;
+    let lastReactorHit = 0;
 
-    // Удаляем старых тестовых ботов, если они остались в памяти
+    // Полное удаление старых демо-ботов
     delete playersMap["@kazakh_stream"];
     delete playersMap["@neon_arena"];
     localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
+    /* ==========================================================
+       ЭТАП 2: ЗВУКОВОЙ ДВИЖОК (Web Audio API) + ЧАСТИЦЫ + ВИБРО
+    ========================================================== */
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        if (!audioCtx) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === "tap") {
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.09);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } else if (type === "tick") {
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(700, now);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+          osc.start(now);
+          osc.stop(now + 0.04);
+        } else if (type === "win") {
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.setValueAtTime(554.37, now + 0.08);
+          osc.frequency.setValueAtTime(659.25, now + 0.16);
+          osc.frequency.setValueAtTime(880, now + 0.24);
+          gain.gain.setValueAtTime(0.22, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
+          osc.start(now);
+          osc.stop(now + 0.42);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem("lg_sound", soundEnabled ? "on" : "off");
+      document.getElementById("soundToggleBtn").textContent = soundEnabled ? "🔊" : "🔇";
+      if (soundEnabled) playSound("tap");
+    }
+
+    function spawnSparks(x, y, ptsText) {
+      if (navigator.vibrate) navigator.vibrate(18);
+      const colors = ["#25f4ee", "#fe2c55", "#a855f7", "#10b981", "#f59e0b"];
+      for (let i = 0; i < 12; i++) {
+        const s = document.createElement("div");
+        s.className = "spark";
+        const size = Math.random() * 7 + 5;
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 65 + 25;
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        s.style.left = x + "px";
+        s.style.top = y + "px";
+        s.style.background = colors[i % colors.length];
+        s.style.boxShadow = `0 0 10px ${colors[i % colors.length]}`;
+        s.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+        s.style.setProperty("--dy", Math.sin(angle) * dist + "px");
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 650);
+      }
+      if (ptsText) {
+        const fp = document.createElement("div");
+        fp.className = "float-pts";
+        fp.textContent = ptsText;
+        fp.style.left = (x - 28) + "px";
+        fp.style.top = (y - 18) + "px";
+        document.body.appendChild(fp);
+        setTimeout(() => fp.remove(), 850);
+      }
+    }
+
+    /* ==========================================================
+       ЭТАП 1: ОБЩАЯ ОНЛАЙН-БАЗА FIREBASE + LOKAL BACKUP
+    ========================================================== */
+    function cleanFirebaseUrl(url) {
+      if (!url) return "";
+      let u = url.trim().replace(/\/+$/, "");
+      if (!u.startsWith("https://")) return "";
+      return u;
+    }
+
+    function updateCloudIndicator() {
+      const el = document.getElementById("cloudStatusText");
+      if (cleanFirebaseUrl(firebaseDbUrl)) {
+        el.textContent = "☁️ Общий онлайн";
+      } else {
+        el.textContent = "LIVE • Онлайн";
+      }
+    }
+
+    async function pushScoreToCloud(username, pts) {
+      const base = cleanFirebaseUrl(firebaseDbUrl);
+      if (!base || !username) return;
+      const safeKey = encodeURIComponent(username.replace(/[.#$\[\]\/]/g, "_"));
+      try {
+        await fetch(`${base}/leaderboard/${safeKey}.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, pts, updatedAt: Date.now() })
+        });
+      } catch (e) {}
+    }
+
+    async function syncLeaderboardNow() {
+      const base = cleanFirebaseUrl(firebaseDbUrl);
+      if (base) {
+        try {
+          const res = await fetch(`${base}/leaderboard.json`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data && typeof data === "object") {
+              Object.values(data).forEach(entry => {
+                if (entry && entry.username && typeof entry.pts === "number") {
+                  const localPts = playersMap[entry.username] || 0;
+                  playersMap[entry.username] = Math.max(localPts, entry.pts);
+                }
+              });
+              localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
+            }
+          }
+        } catch (e) {}
+      }
+      renderLeaderboard();
+    }
+
+    function saveCloudConfig() {
+      const val = cleanFirebaseUrl(document.getElementById("firebaseUrlInput").value);
+      firebaseDbUrl = val;
+      localStorage.setItem("lg_firebase_url", val);
+      updateCloudIndicator();
+      const msg = document.getElementById("cloudSaveMsg");
+      if (val) {
+        msg.textContent = "✅ Общая облачная база подключена! Синхронизируем...";
+        if (currentUser) pushScoreToCloud(currentUser.username, playersMap[currentUser.username] || 0);
+        syncLeaderboardNow();
+      } else {
+        msg.textContent = "Включен автономный режим.";
+      }
+    }
+
+    /* ==========================================================
+       НАВИГАЦИЯ, МУЛЬТИЯЗЫЧНОСТЬ И ПРОФИЛЬ
+    ========================================================== */
     function setLanguage(lang) {
       localStorage.setItem("lg_lang", lang);
       document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -690,6 +1178,7 @@
     }
 
     function switchTab(tabName) {
+      playSound("tap");
       const tabs = ["home", "arena", "leaderboard", "profile"];
       document.querySelectorAll(".tab-btn").forEach((btn, idx) => {
         btn.classList.toggle("active", tabs[idx] === tabName);
@@ -697,7 +1186,7 @@
       tabs.forEach(t => {
         document.getElementById("tab-" + t).classList.toggle("active", t === tabName);
       });
-      if (tabName === "leaderboard") renderLeaderboard();
+      if (tabName === "leaderboard") syncLeaderboardNow();
     }
 
     function updateUserUI() {
@@ -713,13 +1202,13 @@
 
         authText.textContent = `${currentUser.username} ✕`;
         profileName.textContent = currentUser.username;
-        profileStatus.textContent = "Профиль TikTok LIVE активен";
+        profileStatus.textContent = "Профиль TikTok LIVE активен • Очки идут в рейтинг";
         profilePts.textContent = pts.toLocaleString();
       } else {
         const lang = localStorage.getItem("lg_lang") || "ru";
         authText.textContent = translations[lang].login_tt;
         profileName.textContent = "@Гость";
-        profileStatus.textContent = "Авторизуйтесь через TikTok, чтобы сохранять свои очки.";
+        profileStatus.textContent = "Авторизуйтесь через TikTok, чтобы сохранять свои очки в общем рейтинге.";
         profilePts.textContent = "0";
       }
       renderLeaderboard();
@@ -734,7 +1223,7 @@
         .sort((a, b) => b[1] - a[1]);
 
       if (entries.length === 0) {
-        list.innerHTML = `<div class="empty-box">В рейтинге пока нет участников. Войдите через TikTok и запустите любую мини-игру, чтобы занять 1-е место!</div>`;
+        list.innerHTML = `<div class="empty-box">В рейтинге пока нет участников. Войдите через TikTok и запустите любую мини-игру, чтобы занять 1-е место 🥇!</div>`;
         return;
       }
 
@@ -752,10 +1241,10 @@
       });
     }
 
-    function addPoints(amount) {
+    function addPoints(amount, event) {
       if (!currentUser) {
         openAuthModal();
-        return;
+        return false;
       }
       const currentPts = playersMap[currentUser.username] || 0;
       const updated = currentPts + amount;
@@ -763,49 +1252,146 @@
       currentUser.pts = updated;
       localStorage.setItem("lg_user", JSON.stringify(currentUser));
       localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
+
+      if (event && event.clientX) {
+        spawnSparks(event.clientX, event.clientY, `+${amount} PTS`);
+      }
+      pushScoreToCloud(currentUser.username, updated);
       updateUserUI();
+      return true;
     }
 
-    function launchGame(type) {
+    /* ==========================================================
+       ИГРОВАЯ ЛОГИКА (3 МИНИ-ИГРЫ)
+    ========================================================== */
+    function launchGame(type, event) {
       if (!currentUser) {
         openAuthModal();
         return;
       }
+      if (event) playSound("tap");
       switchTab("arena");
-      document.getElementById("game-tug").style.display = type === "tug" ? "block" : "none";
-      document.getElementById("game-wheel").style.display = type === "wheel" ? "block" : "none";
-      document.getElementById("game-reactor").style.display = type === "reactor" ? "block" : "none";
+
+      ["tug", "wheel", "reactor"].forEach(g => {
+        document.getElementById("game-" + g).style.display = g === type ? "block" : "none";
+        document.getElementById("pill-" + g).classList.toggle("active", g === type);
+      });
 
       const titles = {
         tug: "⚔️ Битва Тапов: Синие vs Красные",
         wheel: "🎡 Колесо Фортуны LIVE",
         reactor: "⚡ Неоновый Реактор TikTok"
       };
+      const subs = {
+        tug: "Тапайте за свою команду! Доведите полосу до 95%, чтобы сорвать бонус +100 PTS!",
+        wheel: "Раскрутите неоновое колесо и получите задание для стрима или джекпот очков!",
+        reactor: "Ловите сферу как можно быстрее, чтобы растить множитель Комбо!"
+      };
       document.getElementById("arenaTitle").textContent = titles[type];
+      document.getElementById("arenaSub").textContent = subs[type];
     }
 
-    function playTug(delta) {
+    function playTug(delta, event) {
+      if (!addPoints(10, event)) return;
+      playSound("tap");
       tugPercent = Math.max(5, Math.min(95, tugPercent + delta));
       document.getElementById("tugFill").style.width = tugPercent + "%";
-      addPoints(10);
+      document.getElementById("bluePct").textContent = Math.round(tugPercent);
+      document.getElementById("redPct").textContent = Math.round(100 - tugPercent);
+
+      if (tugPercent >= 95 || tugPercent <= 5) {
+        const winner = tugPercent >= 95 ? "🔵 СИНИЕ ПОБЕДИЛИ!" : "🔴 КРАСНЫЕ ПОБЕДИЛИ!";
+        playSound("win");
+        addPoints(100, event);
+        document.getElementById("arenaSub").textContent = `🏆 ${winner} Вы получаете супер-бонус +100 PTS!`;
+        setTimeout(() => {
+          tugPercent = 50;
+          document.getElementById("tugFill").style.width = "50%";
+          document.getElementById("bluePct").textContent = "50";
+          document.getElementById("redPct").textContent = "50";
+        }, 1200);
+      }
     }
 
-    function spinWheel() {
-      const prizes = [
-        "🔥 +50 Бонусных очков!",
-        "🎁 Челлендж: Передай привет чату!",
-        "⚡ Удвоение очков за лайки!",
-        "💎 Джекпот арены TikTok LIVE!"
-      ];
-      const pick = prizes[Math.floor(Math.random() * prizes.length)];
-      document.getElementById("wheelResult").textContent = pick;
-      addPoints(25);
+    function spinWheel(event) {
+      if (!currentUser) {
+        openAuthModal();
+        return;
+      }
+      const btn = document.getElementById("spinBtn");
+      btn.disabled = true;
+
+      wheelAngle += Math.floor(Math.random() * 720) + 720;
+      document.getElementById("wheelCircle").style.transform = `rotate(${wheelAngle}deg)`;
+      document.getElementById("wheelResult").textContent = "Крутим колесо...";
+
+      // Звук трещотки при вращении
+      let ticks = 0;
+      const tickTimer = setInterval(() => {
+        playSound("tick");
+        ticks++;
+        if (ticks > 8) clearInterval(tickTimer);
+      }, 120);
+
+      setTimeout(() => {
+        const prizes = [
+          { text: "🔥 +50 Бонусных очков в рейтинг!", bonus: 50 },
+          { text: "🎁 Челлендж: Передай привет 3 зрителям в чате! (+35 PTS)", bonus: 35 },
+          { text: "⚡ Сверхзаряд эфира! (+60 PTS)", bonus: 60 },
+          { text: "💎 ДЖЕКПОТ АРЕНЫ TIKTOK LIVE! (+100 PTS)", bonus: 100 }
+        ];
+        const pick = prizes[Math.floor(Math.random() * prizes.length)];
+        document.getElementById("wheelResult").textContent = pick.text;
+        playSound("win");
+        addPoints(pick.bonus, event);
+        btn.disabled = false;
+      }, 1200);
     }
 
-    function hitReactor() {
-      document.getElementById("reactorScore").textContent = "⚡ Импульс пойман! +30 PTS";
-      addPoints(30);
+    function hitReactor(event) {
+      const now = Date.now();
+      if (now - lastReactorHit < 1400) {
+        reactorCombo = Math.min(5, reactorCombo + 1);
+      } else {
+        reactorCombo = 1;
+      }
+      lastReactorHit = now;
+
+      const pts = 20 * reactorCombo;
+      if (!addPoints(pts, event)) return;
+      playSound(reactorCombo >= 3 ? "win" : "tap");
+
+      document.getElementById("comboCount").textContent = "x" + reactorCombo;
+      const arena = document.getElementById("reactorArena");
+      const orb = document.getElementById("reactorOrb");
+      const maxX = Math.max(20, arena.clientWidth - 80);
+      const maxY = Math.max(20, arena.clientHeight - 80);
+      orb.style.left = Math.floor(Math.random() * maxX) + "px";
+      orb.style.top = Math.floor(Math.random() * maxY) + "px";
     }
+
+    /* ==========================================================
+       ЭТАП 3: СТРИМ-ЭКРАН И МОДАЛЬНЫЕ ОКНА
+    ========================================================== */
+    function toggleStreamMode() {
+      playSound("tap");
+      document.body.classList.toggle("stream-mode");
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    function openAuthModal() { openModal("authModal"); }
+    function openCloudModal() {
+      document.getElementById("firebaseUrlInput").value = firebaseDbUrl;
+      openModal("cloudModal");
+    }
+    function openHowToModal() { openModal("howToModal"); }
+    function openShareModal() { openModal("shareModal"); }
 
     function handleAuthClick() {
       if (currentUser) {
@@ -819,13 +1405,6 @@
       }
     }
 
-    function openAuthModal() {
-      document.getElementById("authModal").classList.add("open");
-    }
-    function closeAuthModal() {
-      document.getElementById("authModal").classList.remove("open");
-    }
-
     function quickTikTokLogin() {
       let val = document.getElementById("ttUsernameInput").value.trim();
       if (!val) val = "@joffffffffff38";
@@ -835,7 +1414,9 @@
       playersMap[val] = existingPts;
       localStorage.setItem("lg_user", JSON.stringify(currentUser));
       localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
-      closeAuthModal();
+      playSound("win");
+      closeModal("authModal");
+      pushScoreToCloud(val, existingPts);
       updateUserUI();
     }
 
@@ -850,28 +1431,44 @@
       window.location.href = `https://www.tiktok.com/v2/auth/authorize/?client_key=${encodeURIComponent(key)}&scope=user.info.basic&response_type=code&redirect_uri=${redirectUri}&state=${state}`;
     }
 
-    function openShareModal() {
-      document.getElementById("shareModal").classList.add("open");
-    }
-    function closeShareModal() {
-      document.getElementById("shareModal").classList.remove("open");
-    }
-
-    function copyPublicLink() {
+    function shareOrCopyLink() {
       const url = document.getElementById("publicSiteUrl").value;
-      navigator.clipboard.writeText(url);
-      document.getElementById("copyStatus").textContent = "✅ Ссылка на сайт скопирована!";
+      if (navigator.share) {
+        navigator.share({
+          title: "live game — TikTok LIVE Мини-игры",
+          text: "Заходи на мою лайв-арену и соревнуйся в рейтинге!",
+          url: url
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(url);
+        document.getElementById("copyStatus").textContent = "✅ Ссылка скопирована в буфер обмена!";
+      }
     }
 
     function copyFullHtmlCode() {
       const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
       navigator.clipboard.writeText(fullHtml);
-      document.getElementById("copyStatus").textContent = "✅ Весь код index.html скопирован в буфер обмена!";
+      document.getElementById("copyStatus").textContent = "✅ Весь код index.html скопирован!";
     }
 
-    // Init
-    const savedLang = localStorage.getItem("lg_lang") || "ru";
-    setLanguage(savedLang);
+    /* ==========================================================
+       ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
+    ========================================================== */
+    document.getElementById("soundToggleBtn").textContent = soundEnabled ? "🔊" : "🔇";
+    updateCloudIndicator();
+    setLanguage(localStorage.getItem("lg_lang") || "ru");
+    syncLeaderboardNow();
+
+    // Показываем подсказку при самом первом визите нового человека
+    if (!localStorage.getItem("lg_welcomed")) {
+      localStorage.setItem("lg_welcomed", "1");
+      setTimeout(() => openHowToModal(), 600);
+    }
+
+    // Автообновление онлайн-рейтинга каждые 15 секунд
+    setInterval(() => {
+      if (cleanFirebaseUrl(firebaseDbUrl)) syncLeaderboardNow();
+    }, 15000);
   </script>
 </body>
 </html>
