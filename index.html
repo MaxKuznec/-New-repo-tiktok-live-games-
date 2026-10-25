@@ -203,6 +203,7 @@
       font-weight: 700;
     }
 
+    /* Навигационные вкладки (5 штук) */
     .nav-tabs {
       display: flex;
       justify-content: space-around;
@@ -210,6 +211,7 @@
       border-radius: var(--m3-radius-md);
       padding: 4px;
       border: 1px solid var(--m3-outline-variant);
+      gap: 2px;
     }
 
     .tab-btn {
@@ -217,12 +219,13 @@
       background: transparent;
       border: none;
       color: var(--m3-muted);
-      padding: 8px 12px;
+      padding: 8px 6px;
       border-radius: 16px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       cursor: pointer;
       text-align: center;
+      white-space: nowrap;
     }
 
     .tab-btn.active {
@@ -363,7 +366,6 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    /* Устранение залипания и красивая анимация вращения иконки */
     .m3-action-btn {
       display: inline-flex;
       align-items: center;
@@ -376,19 +378,10 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      user-select: none;
-      outline: none;
     }
     .m3-action-btn:hover {
       background: var(--m3-surface-container-high);
       border-color: var(--m3-primary);
-    }
-    .m3-action-btn:active {
-      background: var(--m3-primary-container);
-      color: var(--m3-on-primary-container);
-      transform: scale(0.96);
     }
     .m3-action-btn svg {
       width: 16px;
@@ -555,33 +548,60 @@
       border-radius: var(--m3-radius-md);
     }
 
-    .spark {
-      position: fixed;
-      pointer-events: none;
-      border-radius: 50%;
-      z-index: 999;
-      animation: flySpark 0.6s ease-out forwards;
+    /* Стили для встроенного чата поддержки ИИ */
+    .chat-box {
+      display: flex;
+      flex-direction: column;
+      height: 340px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-md);
+      overflow: hidden;
+      margin-top: 10px;
     }
-
-    @keyframes flySpark {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+    .chat-messages {
+      flex: 1;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-
-    .float-pts {
-      position: fixed;
-      pointer-events: none;
-      font-weight: 800;
-      font-size: 16px;
-      color: var(--m3-primary);
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      animation: floatUp 0.8s ease-out forwards;
+    .chat-msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 13px;
+      line-height: 1.4;
     }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(0.9); opacity: 1; }
-      100% { transform: translateY(-44px) scale(1.1); opacity: 0; }
+    .chat-msg.bot {
+      background: var(--m3-surface-container-high);
+      color: var(--m3-text);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.user {
+      background: var(--m3-primary);
+      color: var(--m3-on-primary);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      background: var(--m3-surface);
+      border-top: 1px solid var(--m3-outline-variant);
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline);
+      color: var(--m3-text);
+      padding: 10px 14px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 13px;
+      outline: none;
     }
 
     .modal-backdrop {
@@ -638,11 +658,6 @@
       outline: none;
     }
 
-    .input-field:focus {
-      border-color: var(--m3-primary);
-      border-width: 2px;
-    }
-
     .error-msg {
       color: var(--m3-error);
       font-size: 12px;
@@ -691,11 +706,13 @@
         </div>
       </div>
 
+      <!-- Вкладки навигации (добавлена Поддержка) -->
       <nav class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('home')" data-i18n="tab_home">Главная</button>
-        <button class="tab-btn" onclick="switchTab('arena')" data-i18n="tab_arena">Лайв-арена</button>
+        <button class="tab-btn" onclick="switchTab('arena')" data-i18n="tab_arena">Лайв</button>
         <button class="tab-btn" onclick="switchTab('leaderboard')" data-i18n="tab_rating">Рейтинг</button>
         <button class="tab-btn" onclick="switchTab('profile')" data-i18n="tab_profile">Профиль</button>
+        <button class="tab-btn" onclick="switchTab('support')" data-i18n="tab_support">Помощь</button>
       </nav>
     </div>
   </header>
@@ -799,7 +816,6 @@
       <div class="m3-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
           <h2 class="section-title" style="margin:0;" data-i18n="lb_title">Таблица лидеров</h2>
-          <!-- Исправленная кнопка с плавной анимацией вращения иконки -->
           <button class="m3-action-btn" id="refreshBtn" onclick="triggerRefresh(this)">
             <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
             <span>Обновить</span>
@@ -818,6 +834,24 @@
         </div>
         <div id="profileActionBox">
           <button class="primary-btn" style="max-width:280px; margin:0 auto;" onclick="openAuthModal()" data-i18n="login_tt">Войти</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВКЛАДКА ПОДДЕРЖКА / ИИ-АССИСТЕНТ -->
+    <div id="tab-support" class="tab-pane">
+      <div class="m3-card">
+        <h2 class="section-title">🤖 ИИ-Ассистент Поддержки</h2>
+        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по работе игр, лайкам или рейтингу:</p>
+        
+        <div class="chat-box">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">Привет! Я виртуальный помощник платформы live game. Чем могу помочь по трансляциям?</div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Напишите вопрос..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
+            <button class="primary-btn" style="width:auto; padding:0 16px;" onclick="sendChatMessage()">➤</button>
+          </div>
         </div>
       </div>
     </div>
@@ -851,9 +885,9 @@
 
   <script>
     const translations = {
-      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE • STREAM GAMES", hero_sub: "Интерактивная платформа для трансляций в стиле Material Design.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
-      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", badge_text: "TIKTOK LIVE", hero_sub: "Стримдерге арналған заманауи платформа.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
-      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", badge_text: "TIKTOK LIVE", hero_sub: "Modern minimalist streaming platform.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
+      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Помощь", badge_text: "TIKTOK LIVE • STREAM GAMES", hero_sub: "Интерактивная платформа для трансляций в стиле Material Design.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
+      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Анықтама", badge_text: "TIKTOK LIVE", hero_sub: "Стримдерге арналған заманауи платформа.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
+      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", tab_support: "Support", badge_text: "TIKTOK LIVE", hero_sub: "Modern minimalist streaming platform.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
     };
 
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
@@ -884,6 +918,46 @@
         openModal('secretDevModal');
       }
     });
+
+    // Логика ИИ-помощника поддержки
+    function sendChatMessage() {
+      const input = document.getElementById("chatInput");
+      const text = input.value.trim();
+      if (!text) return;
+      
+      const msgs = document.getElementById("chatMessages");
+      
+      // Сообщение пользователя
+      const userDiv = document.createElement("div");
+      userDiv.className = "chat-msg user";
+      userDiv.textContent = text;
+      msgs.appendChild(userDiv);
+      input.value = "";
+      msgs.scrollTop = msgs.scrollHeight;
+
+      playSound("tap");
+
+      // Ответ ИИ-агента с небольшой задержкой для реалистичности
+      setTimeout(() => {
+        const botDiv = document.createElement("div");
+        botDiv.className = "chat-msg bot";
+        
+        const lower = text.toLowerCase();
+        if (lower.includes("лайк") || lower.includes("тац") || lower.includes("канат")) {
+          botDiv.textContent = "«Битва тапов» двигается автоматически при поступлении лайков и тапов от зрителей на трансляции!";
+        } else if (lower.includes("подар") || lower.includes("колесо")) {
+          botDiv.textContent = "Колесо Фортуны запускается автоматически, когда зритель отправляет платный подарок в TikTok LIVE.";
+        } else if (lower.includes("очк") || lower.includes("рейтинг") || lower.includes("pts")) {
+          botDiv.textContent = "Все набранные очки суммируются и выводятся в общей «Таблице лидеров» в реальном времени.";
+        } else {
+          botDiv.textContent = "Отличный вопрос! Чтобы трансляция работала идеально, убедитесь, что вы авторизованы под своим никнеймом и открыли вкладку «Лайв-арена».";
+        }
+
+        msgs.appendChild(botDiv);
+        msgs.scrollTop = msgs.scrollHeight;
+        playSound("win");
+      }, 600);
+    }
 
     let audioCtx = null;
     function playSound(type) {
@@ -948,14 +1022,11 @@
       renderLeaderboard();
     }
 
-    // Обработчик нажатия на кнопку обновить с защитой от залипания
     function triggerRefresh(btn) {
       playSound("tap");
       btn.classList.add("rotating");
       syncLeaderboardNow();
-      setTimeout(() => {
-        btn.classList.remove("rotating");
-      }, 400);
+      setTimeout(() => { btn.classList.remove("rotating"); }, 400);
     }
 
     function saveCloudConfig() {
@@ -978,7 +1049,7 @@
 
     function switchTab(tabName) {
       playSound("tap");
-      const tabs = ["home", "arena", "leaderboard", "profile"];
+      const tabs = ["home", "arena", "leaderboard", "profile", "support"];
       document.querySelectorAll(".tab-btn").forEach((btn, idx) => btn.classList.toggle("active", tabs[idx] === tabName));
       tabs.forEach(t => document.getElementById("tab-" + t).classList.toggle("active", t === tabName));
       if (tabName === "leaderboard") syncLeaderboardNow();
