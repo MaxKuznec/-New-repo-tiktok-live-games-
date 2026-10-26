@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>live game — Material Design Stream Platform</title>
+  <title>live game — Material Design Stream Platform & Video Studio</title>
 
-  <meta name="description" content="Интерактивные мини-игры для зрителей TikTok LIVE в стиле Material Design." />
+  <meta name="description" content="Интерактивные мини-игры и генератор промо-видео для TikTok LIVE в стиле Material Design 3." />
   <meta name="theme-color" content="#121316" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='32' fill='%231e1f24'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23d0bcff' stroke-width='8'/><polygon points='44,34 70,50 44,66' fill='%23efb8c8'/></svg>" />
 
@@ -211,6 +211,7 @@
       padding: 4px;
       border: 1px solid var(--m3-outline-variant);
       gap: 2px;
+      overflow-x: auto;
     }
 
     .tab-btn {
@@ -218,9 +219,9 @@
       background: transparent;
       border: none;
       color: var(--m3-muted);
-      padding: 8px 6px;
+      padding: 8px 8px;
       border-radius: 16px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 500;
       cursor: pointer;
       text-align: center;
@@ -236,7 +237,7 @@
 
     .brand-hero {
       text-align: center;
-      padding: 28px 16px 16px;
+      padding: 24px 16px 14px;
       max-width: 720px;
       margin: 0 auto;
     }
@@ -253,7 +254,7 @@
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .live-badge span.dot {
@@ -264,16 +265,16 @@
     }
 
     .brand-title {
-      font-size: clamp(36px, 8vw, 54px);
+      font-size: clamp(34px, 8vw, 50px);
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--m3-text);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .brand-sub {
       color: var(--m3-muted);
-      font-size: 13.5px;
+      font-size: 13px;
       line-height: 1.5;
       max-width: 500px;
       margin: 0 auto;
@@ -305,7 +306,7 @@
       background: var(--m3-surface);
       border: 1px solid var(--m3-outline-variant);
       border-radius: var(--m3-radius-lg);
-      padding: 24px;
+      padding: 22px;
       margin-bottom: 16px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
@@ -363,6 +364,14 @@
       cursor: pointer;
       width: 100%;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.1s, filter 0.2s;
+    }
+    .primary-btn:active {
+      transform: scale(0.98);
+    }
+    .primary-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .m3-action-btn {
@@ -377,10 +386,6 @@
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-    }
-    .m3-action-btn:hover {
-      background: var(--m3-surface-container-high);
-      border-color: var(--m3-primary);
     }
     .m3-action-btn svg {
       width: 16px;
@@ -525,6 +530,73 @@
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    /* СТУДИЯ ГЕНЕРАЦИИ ВИДЕО (9:16 TikTok Format) */
+    .video-studio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (min-width: 640px) {
+      .video-studio-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+    .studio-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--m3-surface-container);
+      border: 1px solid var(--m3-outline-variant);
+      border-radius: var(--m3-radius-md);
+      padding: 16px;
+    }
+    .studio-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--m3-muted);
+      margin-bottom: 4px;
+      display: block;
+    }
+    .studio-select {
+      width: 100%;
+      background: var(--m3-surface);
+      border: 1px solid var(--m3-outline);
+      color: var(--m3-text);
+      padding: 10px 12px;
+      border-radius: var(--m3-radius-sm);
+      font-size: 13.5px;
+      outline: none;
+    }
+    .canvas-preview-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    #videoCanvas {
+      width: 225px;
+      height: 400px;
+      border-radius: 20px;
+      border: 2px solid var(--m3-outline-variant);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      background: #0d0f18;
+    }
+    .render-progress {
+      width: 100%;
+      height: 8px;
+      background: var(--m3-surface);
+      border-radius: 999px;
+      overflow: hidden;
+      display: none;
+    }
+    .render-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--m3-primary);
+      transition: width 0.1s linear;
     }
 
     .leaderboard-list {
@@ -673,6 +745,7 @@
       font-size: 14px;
       margin-bottom: 12px;
       outline: none;
+      user-select: text;
     }
 
     .error-msg {
@@ -726,6 +799,7 @@
       <nav class="nav-tabs">
         <button class="tab-btn active" onclick="switchTab('home')" data-i18n="tab_home">Главная</button>
         <button class="tab-btn" onclick="switchTab('arena')" data-i18n="tab_arena">Лайв</button>
+        <button class="tab-btn" onclick="switchTab('video')" data-i18n="tab_video">🎬 Видео</button>
         <button class="tab-btn" onclick="switchTab('leaderboard')" data-i18n="tab_rating">Рейтинг</button>
         <button class="tab-btn" onclick="switchTab('profile')" data-i18n="tab_profile">Профиль</button>
         <button class="tab-btn" onclick="switchTab('support')" data-i18n="tab_support">Помощь</button>
@@ -736,13 +810,14 @@
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
-      <span data-i18n="badge_text">TIKTOK LIVE • WEBSOCKET READY</span>
+      <span data-i18n="badge_text">TIKTOK LIVE • VIDEO & GAMES</span>
     </div>
     <h1 class="brand-title">live game</h1>
-    <p class="brand-sub" data-i18n="hero_sub">Интерактивная платформа с поддержкой WebSocket-моста для трансляций.</p>
+    <p class="brand-sub" data-i18n="hero_sub">Интерактивная платформа с генератором промо-видео и WebSocket-мостом.</p>
   </section>
 
   <main class="main-container">
+    <!-- ГЛАВНАЯ -->
     <div id="tab-home" class="tab-pane active">
       <div class="m3-card">
         <h2 class="section-title" data-i18n="catalog_title">Каталог мини-игр</h2>
@@ -835,6 +910,63 @@
       </div>
     </div>
 
+    <!-- ВКЛАДКА: ГЕНЕРАТОР ВИДЕО ДЛЯ TIKTOK (9:16) -->
+    <div id="tab-video" class="tab-pane">
+      <div class="m3-card">
+        <h2 class="section-title">🎬 Генератор промо-видео TikTok (9:16)</h2>
+        <div class="video-studio-grid">
+          <div class="studio-controls">
+            <div>
+              <label class="studio-label">Текст / Промпт для видеоролика:</label>
+              <input type="text" id="videoPromptInput" class="input-field" style="margin-bottom:0;" value="ЗАХОДИ НА СТРИМ! ЖМИ ❤️" oninput="updateVideoConfig()" />
+            </div>
+
+            <div>
+              <label class="studio-label">Сценарий анимации:</label>
+              <select id="videoSceneSelect" class="studio-select" onchange="updateVideoConfig()">
+                <option value="tug">⚔️ Битва Тапов: Синие vs Красные</option>
+                <option value="wheel">🎡 Колесо Фортуны и Подарки</option>
+                <option value="reactor">⚡ Неоновый Реактор Комбо</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="studio-label">Цветовая палитра (Material 3):</label>
+              <select id="videoThemeSelect" class="studio-select" onchange="updateVideoConfig()">
+                <option value="m3">🟣 Material You Violet</option>
+                <option value="cyber">🔵 Cyber Neon Blue & Pink</option>
+                <option value="gold">🟡 Gold Leader Arena</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="studio-label">Длительность ролика:</label>
+              <select id="videoDurationSelect" class="studio-select">
+                <option value="4000">4 секунды (Быстрый тизер)</option>
+                <option value="6000" selected>6 секунд (Стандарт TikTok)</option>
+                <option value="8000">8 секунд (Полный анонс)</option>
+              </select>
+            </div>
+
+            <div class="render-progress" id="renderProgressBox">
+              <div class="render-progress-bar" id="renderProgressBar"></div>
+            </div>
+
+            <button class="primary-btn" id="generateVideoBtn" onclick="startVideoGeneration()">
+              🎥 Сгенерировать и скачать видео
+            </button>
+            <div id="videoStatusText" style="font-size:12px; color:var(--m3-success); text-align:center; min-height:18px;"></div>
+          </div>
+
+          <div class="canvas-preview-wrap">
+            <span style="font-size:12px; color:var(--m3-muted); font-weight:600;">Живое превью (720×1280 HD):</span>
+            <canvas id="videoCanvas" width="720" height="1280"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- РЕЙТИНГ -->
     <div id="tab-leaderboard" class="tab-pane">
       <div class="m3-card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
@@ -848,6 +980,7 @@
       </div>
     </div>
 
+    <!-- ПРОФИЛЬ -->
     <div id="tab-profile" class="tab-pane">
       <div class="m3-card" style="text-align:center;">
         <h2 class="section-title" id="profileName">@Гость</h2>
@@ -860,17 +993,18 @@
       </div>
     </div>
 
+    <!-- ПОДДЕРЖКА -->
     <div id="tab-support" class="tab-pane">
       <div class="m3-card">
         <h2 class="section-title">🤖 ИИ-Ассистент Поддержки</h2>
-        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по работе #ws, #live трансляций или #сайт:</p>
+        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по #видео, #game, #live или #сайт:</p>
         
         <div class="chat-box">
           <div class="chat-messages" id="chatMessages">
-            <div class="chat-msg bot">Привет! WebSocket-мост настроен и готов принимать события от вашего стрима #ws #live.</div>
+            <div class="chat-msg bot">Привет! Я ИИ-помощник платформы live game. Расскажу про генерацию промо-видео (#видео), запуск игр (#game) и подключение стрима (#live).</div>
           </div>
           <div class="chat-input-row">
-            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
+            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь (например: Как создать видео?)..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
             <button class="primary-btn" style="width:auto; padding:0 16px;" onclick="sendChatMessage()">➤</button>
           </div>
         </div>
@@ -901,14 +1035,14 @@
   </div>
 
   <footer>
-    <strong>live game</strong> • WebSocket Bridge Ready
+    <strong>live game</strong> • Video Generator & WebSocket Bridge
   </footer>
 
   <script>
     const translations = {
-      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Помощь", badge_text: "TIKTOK LIVE • WEBSOCKET READY", hero_sub: "Интерактивная платформа с поддержкой WebSocket-моста.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
-      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Анықтама", badge_text: "TIKTOK LIVE", hero_sub: "WebSocket қолдауы бар платформа.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
-      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", tab_support: "Support", badge_text: "TIKTOK LIVE", hero_sub: "Interactive platform with WebSocket bridge.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
+      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_video: "🎬 Видео", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Помощь", badge_text: "TIKTOK LIVE • VIDEO & GAMES", hero_sub: "Интерактивная платформа с генератором промо-видео и WebSocket-мостом.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
+      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_video: "🎬 Видео", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Анықтама", badge_text: "TIKTOK LIVE", hero_sub: "Видео генераторы бар стрим платформасы.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
+      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_video: "🎬 Video", tab_rating: "Leaderboard", tab_profile: "Profile", tab_support: "Support", badge_text: "TIKTOK LIVE", hero_sub: "Interactive platform with promo video generator.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
     };
 
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
@@ -924,6 +1058,248 @@
     delete playersMap["@neon_arena"];
     localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
 
+    // ДВИЖОК ГЕНЕРАЦИИ ВИДЕО НА CANVAS (720x1280)
+    let vCanvas, vCtx;
+    let vTick = 0;
+    let vParticles = [];
+    let videoConfig = {
+      prompt: "ЗАХОДИ НА СТРИМ! ЖМИ ❤️",
+      scene: "tug",
+      theme: "m3"
+    };
+
+    function initVideoStudio() {
+      vCanvas = document.getElementById("videoCanvas");
+      if (!vCanvas) return;
+      vCtx = vCanvas.getContext("2d");
+
+      for (let i = 0; i < 28; i++) {
+        vParticles.push({
+          x: Math.random() * 720,
+          y: Math.random() * 1280,
+          r: Math.random() * 6 + 3,
+          vy: -(Math.random() * 3 + 1.5),
+          emoji: ["❤️", "🎁", "⚡", "🔥", "💎"][i % 5]
+        });
+      }
+      requestAnimationFrame(renderVideoFrame);
+    }
+
+    function updateVideoConfig() {
+      videoConfig.prompt = document.getElementById("videoPromptInput").value || "LIVE STREAM";
+      videoConfig.scene = document.getElementById("videoSceneSelect").value;
+      videoConfig.theme = document.getElementById("videoThemeSelect").value;
+    }
+
+    function renderVideoFrame() {
+      if (!vCtx) return;
+      vTick += 0.04;
+
+      // 1. Фон в зависимости от выбранной темы
+      const grad = vCtx.createLinearGradient(0, 0, 720, 1280);
+      if (videoConfig.theme === "m3") {
+        grad.addColorStop(0, "#121316");
+        grad.addColorStop(0.5, "#281e46");
+        grad.addColorStop(1, "#121316");
+      } else if (videoConfig.theme === "cyber") {
+        grad.addColorStop(0, "#090d1a");
+        grad.addColorStop(0.5, "#0f2942");
+        grad.addColorStop(1, "#2a0f26");
+      } else {
+        grad.addColorStop(0, "#17140d");
+        grad.addColorStop(0.5, "#3d2f10");
+        grad.addColorStop(1, "#121316");
+      }
+      vCtx.fillStyle = grad;
+      vCtx.fillRect(0, 0, 720, 1280);
+
+      // 2. Всплывающие частицы и иконки подарков/лайков
+      vCtx.font = "34px sans-serif";
+      vCtx.textAlign = "center";
+      vParticles.forEach(p => {
+        p.y += p.vy;
+        if (p.y < -40) {
+          p.y = 1320;
+          p.x = Math.random() * 680 + 20;
+        }
+        vCtx.fillText(p.emoji, p.x + Math.sin(vTick + p.r) * 15, p.y);
+      });
+
+      // 3. Верхний пульсирующий бейдж TIKTOK LIVE
+      const pulse = 1 + Math.sin(vTick * 3) * 0.05;
+      vCtx.save();
+      vCtx.translate(360, 140);
+      vCtx.scale(pulse, pulse);
+      vCtx.fillStyle = "rgba(244, 63, 94, 0.9)";
+      vCtx.beginPath();
+      vCtx.roundRect(-180, -34, 360, 68, 34);
+      vCtx.fill();
+      vCtx.fillStyle = "#ffffff";
+      vCtx.font = "bold 28px Roboto, sans-serif";
+      vCtx.fillText("● TIKTOK LIVE ИГРА", 0, 10);
+      vCtx.restore();
+
+      // 4. Никнейм стримера
+      const streamerName = currentUser?.username || "@live_streamer";
+      vCtx.fillStyle = "#d0bcff";
+      vCtx.font = "bold 44px Roboto, sans-serif";
+      vCtx.fillText(streamerName, 360, 260);
+
+      // 5. Центральная сцена выбранной мини-игры
+      vCtx.save();
+      vCtx.fillStyle = "rgba(34, 35, 40, 0.85)";
+      vCtx.strokeStyle = "rgba(208, 188, 255, 0.4)";
+      vCtx.lineWidth = 4;
+      vCtx.beginPath();
+      vCtx.roundRect(60, 360, 600, 480, 40);
+      vCtx.fill();
+      vCtx.stroke();
+
+      if (videoConfig.scene === "tug") {
+        const dynTug = 50 + Math.sin(vTick * 2.2) * 32;
+        vCtx.fillStyle = "#ffffff";
+        vCtx.font = "bold 38px Roboto, sans-serif";
+        vCtx.fillText("⚔️ БИТВА ТАПОВ", 360, 450);
+
+        vCtx.font = "bold 32px Roboto, sans-serif";
+        vCtx.fillStyle = "#38bdf8";
+        vCtx.fillText(`🔵 СИНИЕ: ${Math.round(dynTug)}%`, 210, 540);
+        vCtx.fillStyle = "#f43f5e";
+        vCtx.fillText(`🔴 КРАСНЫЕ: ${Math.round(100 - dynTug)}%`, 510, 540);
+
+        // Полоса перетягивания
+        vCtx.fillStyle = "#f43f5e";
+        vCtx.beginPath();
+        vCtx.roundRect(110, 590, 500, 56, 28);
+        vCtx.fill();
+
+        vCtx.fillStyle = "#38bdf8";
+        vCtx.beginPath();
+        vCtx.roundRect(110, 590, (500 * dynTug) / 100, 56, 28);
+        vCtx.fill();
+
+        vCtx.fillStyle = "#e3e2e6";
+        vCtx.font = "28px Roboto, sans-serif";
+        vCtx.fillText("Тапай по экрану за свою команду!", 360, 740);
+
+      } else if (videoConfig.scene === "wheel") {
+        vCtx.fillStyle = "#ffffff";
+        vCtx.font = "bold 38px Roboto, sans-serif";
+        vCtx.fillText("🎡 КОЛЕСО ФОРТУНЫ", 360, 440);
+
+        vCtx.save();
+        vCtx.translate(360, 600);
+        vCtx.rotate(vTick * 2.5);
+        const colors = ["#d0bcff", "#f43f5e", "#6dd58c", "#38bdf8"];
+        for (let i = 0; i < 4; i++) {
+          vCtx.beginPath();
+          vCtx.moveTo(0, 0);
+          vCtx.arc(0, 0, 110, (i * Math.PI) / 2, ((i + 1) * Math.PI) / 2);
+          vCtx.fillStyle = colors[i];
+          vCtx.fill();
+        }
+        vCtx.restore();
+
+        vCtx.fillStyle = "#e3e2e6";
+        vCtx.font = "28px Roboto, sans-serif";
+        vCtx.fillText("Каждый подарок крутит рулетку!", 360, 780);
+
+      } else {
+        vCtx.fillStyle = "#ffffff";
+        vCtx.font = "bold 38px Roboto, sans-serif";
+        vCtx.fillText("⚡ НЕОНОВЫЙ РЕАКТОР", 360, 440);
+
+        const ox = 360 + Math.cos(vTick * 3) * 140;
+        const oy = 600 + Math.sin(vTick * 4) * 70;
+        vCtx.beginPath();
+        vCtx.arc(ox, oy, 55, 0, Math.PI * 2);
+        vCtx.fillStyle = "#d0bcff";
+        vCtx.fill();
+        vCtx.font = "42px sans-serif";
+        vCtx.fillText("⚡", ox, oy + 14);
+
+        vCtx.fillStyle = "#6dd58c";
+        vCtx.font = "bold 34px Roboto, sans-serif";
+        vCtx.fillText("КОМБО ЧАТА: x5", 360, 770);
+      }
+      vCtx.restore();
+
+      // 6. Пользовательский текст / Промпт внизу
+      vCtx.fillStyle = "#ffffff";
+      vCtx.font = "bold 40px Roboto, sans-serif";
+      vCtx.fillText(videoConfig.prompt.slice(0, 28), 360, 980);
+
+      vCtx.fillStyle = "#c4c6d0";
+      vCtx.font = "26px Roboto, sans-serif";
+      vCtx.fillText("live game • Material Design 3", 360, 1180);
+
+      requestAnimationFrame(renderVideoFrame);
+    }
+
+    function startVideoGeneration() {
+      const btn = document.getElementById("generateVideoBtn");
+      const statusEl = document.getElementById("videoStatusText");
+      const progressBox = document.getElementById("renderProgressBox");
+      const progressBar = document.getElementById("renderProgressBar");
+      const duration = parseInt(document.getElementById("videoDurationSelect").value, 10) || 6000;
+
+      if (!vCanvas || typeof vCanvas.captureStream !== "function") {
+        statusEl.textContent = "Ваш браузер не поддерживает запись Canvas-видео.";
+        return;
+      }
+
+      playSound("tap");
+      btn.disabled = true;
+      btn.textContent = "⏳ Генерация видео...";
+      statusEl.textContent = "Идет рендеринг кадров в реальном времени...";
+      progressBox.style.display = "block";
+      progressBar.style.width = "0%";
+
+      const stream = vCanvas.captureStream(30);
+      let mimeType = "video/webm;codecs=vp9";
+      if (!MediaRecorder.isTypeSupported(mimeType)) {
+        mimeType = MediaRecorder.isTypeSupported("video/mp4") ? "video/mp4" : "video/webm";
+      }
+
+      const recorder = new MediaRecorder(stream, { mimeType });
+      const chunks = [];
+
+      recorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) chunks.push(e.data);
+      };
+
+      recorder.onstop = () => {
+        const blob = new Blob(chunks, { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const ext = mimeType.includes("mp4") ? "mp4" : "webm";
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `tiktok-live-game-${Date.now()}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        playSound("win");
+        btn.disabled = false;
+        btn.textContent = "🎥 Сгенерировать и скачать видео";
+        statusEl.textContent = "✅ Ваше видео готово и сохранено на устройство!";
+        setTimeout(() => { progressBox.style.display = "none"; }, 1500);
+      };
+
+      recorder.start();
+
+      const startTime = Date.now();
+      const progInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const pct = Math.min(100, (elapsed / duration) * 100);
+        progressBar.style.width = pct + "%";
+        if (elapsed >= duration) {
+          clearInterval(progInterval);
+          if (recorder.state === "recording") recorder.stop();
+        }
+      }, 100);
+    }
+
     function initOnlineCounter() {
       let currentOnline = Math.floor(Math.random() * 6) + 11;
       document.getElementById("onlineCount").textContent = currentOnline;
@@ -933,31 +1309,22 @@
       }, 8000);
     }
 
-    // НАСТРОЙКА WEBSOCKET СЛУШАТЕЛЯ
     function initWebSocketBridge() {
       try {
-        // Укажите адрес вашего локального или удаленного WebSocket-сервера (например, ws://localhost:8080)
-        // Если сервер не запущен, сайт автоматически перейдет на локальную симуляцию
-        wsConnection = new WebSocket("wss://echo.websocket.events"); // Тестовый публичный WS эхо-сервер
-        
-        wsConnection.onopen = () => {
-          console.log("WebSocket мост успешно подключен!");
-        };
-
+        wsConnection = new WebSocket("wss://echo.websocket.events");
         wsConnection.onmessage = (event) => {
           try {
             const data = JSON.parse(event.data);
             handleIncomingStreamEvent(data.type, data.payload);
           } catch(e) {}
         };
-      } catch (e) {
-        console.log("WebSocket недоступен, используется локальный режим.");
-      }
+      } catch (e) {}
     }
 
     window.addEventListener("DOMContentLoaded", () => {
       initOnlineCounter();
       initWebSocketBridge();
+      initVideoStudio();
       const params = new URLSearchParams(window.location.search);
       if (params.get("admin") === "true") {
         document.getElementById("adminHeaderBtn").style.display = "inline-flex";
@@ -1058,7 +1425,14 @@
       setTimeout(() => {
         const botDiv = document.createElement("div");
         botDiv.className = "chat-msg bot";
-        botDiv.textContent = "🌐 WebSocket-мост готов принимать события от вашего #live эфира и обновлять #game и #сайт в реальном времени!";
+        const lower = text.toLowerCase();
+        if (lower.includes("видео") || lower.includes("ролик") || lower.includes("скач")) {
+          botDiv.textContent = "🎬 Перейдите во вкладку «🎬 Видео», введите свой текст, выберите сцену мини-игры и нажмите «Сгенерировать и скачать видео». Ролик сохранится в формате 9:16 для TikTok!";
+        } else if (lower.includes("топ") || lower.includes("рейтинг") || lower.includes("очки")) {
+          botDiv.textContent = "🏆 Очки начисляются в реальном времени за события эфира и отображаются во вкладке «Рейтинг» #сайт.";
+        } else {
+          botDiv.textContent = "🌐 Платформа #сайт поддерживает генерацию вертикальных промо-видео (#видео), мини-игры (#game) и WebSocket-мост для #live эфиров!";
+        }
         msgs.appendChild(botDiv);
         msgs.scrollTop = msgs.scrollHeight;
         playSound("win");
@@ -1144,7 +1518,7 @@
 
     function switchTab(tabName) {
       playSound("tap");
-      const tabs = ["home", "arena", "leaderboard", "profile", "support"];
+      const tabs = ["home", "arena", "video", "leaderboard", "profile", "support"];
       document.querySelectorAll(".tab-btn").forEach((btn, idx) => btn.classList.toggle("active", tabs[idx] === tabName));
       tabs.forEach(t => document.getElementById("tab-" + t).classList.toggle("active", t === tabName));
       if (tabName === "leaderboard") syncLeaderboardNow();
