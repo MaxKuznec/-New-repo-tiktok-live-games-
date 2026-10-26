@@ -508,7 +508,6 @@
       transition: all 0.15s ease;
     }
 
-    /* Панель управления ботами */
     .bot-panel {
       background: var(--m3-surface-container);
       border: 1px solid var(--m3-outline-variant);
@@ -567,7 +566,6 @@
       border-radius: var(--m3-radius-md);
     }
 
-    /* Чат ИИ-ассистента */
     .chat-box {
       display: flex;
       flex-direction: column;
@@ -780,7 +778,7 @@
       </div>
     </div>
 
-    <!-- АРЕНА С ПАНЕЛЬЮ ТЕСТОВЫХ БОТОВ -->
+    <!-- АРЕНА С УНИВЕРСАЛЬНЫМИ БОТАМИ -->
     <div id="tab-arena" class="tab-pane">
       <div class="m3-card">
         <div class="arena-toolbar">
@@ -822,16 +820,16 @@
             Комбо: <span id="comboCount">x1</span>
           </div>
           <div class="reactor-arena" id="reactorArena">
-            <div class="reactor-orb" id="reactorOrb" onclick="simulateEvent('comment', 'reactor')">⚡</div>
+            <div class="reactor-orb" id="reactorOrb" onclick="hitReactor(event)">⚡</div>
           </div>
         </div>
 
-        <!-- ПАНЕЛЬ ТЕСТОВЫХ БОТОВ ДЛЯ ЭФИРА -->
+        <!-- УНИВЕРСАЛЬНАЯ ПАНЕЛЬ БОТОВ -->
         <div class="bot-panel">
-          <div class="bot-panel-title">🤖 Панель тестовых ботов (#game #live)</div>
-          <p style="font-size:12px; color:var(--m3-muted);">Запустите виртуальных зрителей, чтобы протестировать активность в реальном времени:</p>
+          <div class="bot-panel-title">🤖 Управление ботами (#game #live)</div>
+          <p style="font-size:12px; color:var(--m3-muted);">Боты автоматически генерируют активность в текущей открытой игре и поднимают рейтинг:</p>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="primary-btn" style="flex:1; background:var(--m3-surface-container-high); color:var(--m3-text); border:1px solid var(--m3-outline);" onclick="toggleBotSpam()">🤖 Авто-спам ботов (Вкл/Выкл)</button>
+            <button class="primary-btn" style="flex:1; background:var(--m3-surface-container-high); color:var(--m3-text); border:1px solid var(--m3-outline);" onclick="toggleBotSpam(this)">🤖 Авто-спам ботов (Вкл)</button>
             <button class="primary-btn" style="flex:1; background:var(--m3-primary-container); color:var(--m3-on-primary-container);" onclick="spawnTestBotsBatch()">🚀 Набег ботов (+5 в топ)</button>
           </div>
         </div>
@@ -873,7 +871,7 @@
             <div class="chat-msg bot">Привет! Я умный ИИ-помощник платформы live game. Готов ответить на любые вопросы по стримам, авторизации и мини-играм #game #live!</div>
           </div>
           <div class="chat-input-row">
-            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь (например: Как выйти в топ?)..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
+            <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
             <button class="primary-btn" style="width:auto; padding:0 16px;" onclick="sendChatMessage()">➤</button>
           </div>
         </div>
@@ -918,7 +916,8 @@
     let playersMap = JSON.parse(localStorage.getItem("lg_real_leaderboard") || "{}");
     let firebaseDbUrl = localStorage.getItem("lg_firebase_url") || "";
     let soundEnabled = localStorage.getItem("lg_sound") !== "off";
-    let tugPercent = 50, wheelAngle = 0, reactorCombo = 1;
+    let tugPercent = 50, wheelAngle = 0, reactorCombo = 1, lastReactorHit = 0;
+    let activeGameType = "tug";
     let botSpamInterval = null;
 
     delete playersMap["@kazakh_stream"];
@@ -944,27 +943,42 @@
       }
     });
 
-    // ТЕСТОВЫЕ БОТЫ ДЛЯ СИМУЛЯЦИИ ЭФИРА (#game, #live)
     const botNames = ["@pro_streamer_kz", "@tiktok_king", "@viewer_bot_99", "@lucky_spin_bot", "@reactor_master", "@neon_fan", "@live_active"];
 
-    function spawnTestBotsBatch() {
-      playSound("win");
-      botNames.forEach(bot => {
-        const randomPts = Math.floor(Math.random() * 450) + 50;
-        playersMap[bot] = (playersMap[bot] || 0) + randomPts;
-      });
-      // Имитируем активность в битве тапов
-      tugPercent = Math.max(10, Math.min(90, tugPercent + (Math.random() > 0.5 ? 15 : -15)));
-      document.getElementById("tugFill").style.width = tugPercent + "%";
-      document.getElementById("bluePct").textContent = Math.round(tugPercent);
-      document.getElementById("redPct").textContent = Math.round(100 - tugPercent);
+    // Универсальная активность ботов для текущей игры
+    function runBotActivityStep() {
+      const randomBot = botNames[Math.floor(Math.random() * botNames.length)];
+      playersMap[randomBot] = (playersMap[randomBot] || 0) + 25;
+
+      if (activeGameType === "tug") {
+        tugPercent = Math.max(10, Math.min(90, tugPercent + (Math.random() > 0.5 ? 8 : -8)));
+        document.getElementById("tugFill").style.width = tugPercent + "%";
+        document.getElementById("bluePct").textContent = Math.round(tugPercent);
+        document.getElementById("redPct").textContent = Math.round(100 - tugPercent);
+      } else if (activeGameType === "wheel") {
+        wheelAngle += 180;
+        document.getElementById("wheelCircle").style.transform = `rotate(${wheelAngle}deg)`;
+        document.getElementById("wheelResult").textContent = `🎁 Бот ${randomBot} прислал подарок!`;
+      } else if (activeGameType === "reactor") {
+        reactorCombo = Math.min(5, reactorCombo + 1);
+        document.getElementById("comboCount").textContent = "x" + reactorCombo;
+        const arena = document.getElementById("reactorArena"), orb = document.getElementById("reactorOrb");
+        orb.style.left = Math.floor(Math.random() * Math.max(20, arena.clientWidth - 70)) + "px";
+        orb.style.top = Math.floor(Math.random() * Math.max(20, arena.clientHeight - 70)) + "px";
+      }
 
       localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
       renderLeaderboard();
     }
 
-    function toggleBotSpam() {
-      const btn = event.target;
+    function spawnTestBotsBatch() {
+      playSound("win");
+      for (let i = 0; i < 5; i++) {
+        runBotActivityStep();
+      }
+    }
+
+    function toggleBotSpam(btn) {
       if (botSpamInterval) {
         clearInterval(botSpamInterval);
         botSpamInterval = null;
@@ -974,20 +988,42 @@
         btn.style.borderColor = "var(--m3-success)";
         btn.textContent = "⏹ Остановить ботов";
         botSpamInterval = setInterval(() => {
-          const randomBot = botNames[Math.floor(Math.random() * botNames.length)];
-          playersMap[randomBot] = (playersMap[randomBot] || 0) + 25;
-          localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
-          renderLeaderboard();
-        }, 1500);
+          runBotActivityStep();
+        }, 1200);
       }
     }
 
-    // Умный ИИ-помощник
+    function launchGame(type, event) {
+      activeGameType = type;
+      if (event) playSound("tap");
+      switchTab("arena");
+      ["tug", "wheel", "reactor"].forEach(g => {
+        document.getElementById("game-" + g).style.display = g === type ? "block" : "none";
+        document.getElementById("pill-" + g).classList.toggle("active", g === type);
+      });
+      const titles = { tug: "⚔️ Битва Тапов: Синие vs Красные", wheel: "🎡 Колесо Фортуны LIVE", reactor: "⚡ Неоновый Реактор TikTok" };
+      document.getElementById("arenaTitle").textContent = titles[type] || "";
+    }
+
+    function hitReactor(event) {
+      reactorCombo = Math.min(5, reactorCombo + 1);
+      document.getElementById("comboCount").textContent = "x" + reactorCombo;
+      playSound("tap");
+      const arena = document.getElementById("reactorArena"), orb = document.getElementById("reactorOrb");
+      orb.style.left = Math.floor(Math.random() * Math.max(20, arena.clientWidth - 70)) + "px";
+      orb.style.top = Math.floor(Math.random() * Math.max(20, arena.clientHeight - 70)) + "px";
+      if (currentUser) {
+        playersMap[currentUser.username] = (playersMap[currentUser.username] || 0) + 20 * reactorCombo;
+        localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
+        updateUserUI();
+      }
+    }
+
+    // ИИ-помощник
     function sendChatMessage() {
       const input = document.getElementById("chatInput");
       const text = input.value.trim();
       if (!text) return;
-      
       const msgs = document.getElementById("chatMessages");
       const userDiv = document.createElement("div");
       userDiv.className = "chat-msg user";
@@ -997,22 +1033,10 @@
       msgs.scrollTop = msgs.scrollHeight;
 
       playSound("tap");
-
       setTimeout(() => {
         const botDiv = document.createElement("div");
         botDiv.className = "chat-msg bot";
-        const lower = text.toLowerCase();
-        
-        if (lower.includes("топ") || lower.includes("рейтинг") || lower.includes("очки") || lower.includes("pts")) {
-          botDiv.textContent = "🏆 Чтобы выйти в топ рейтинга #сайт, используйте панель тестовых ботов на вкладке «Лайв» или запускайте #game во время #live трансляции!";
-        } else if (lower.includes("бот") || lower.includes("тест") || lower.includes("провер")) {
-          botDiv.textContent = "🤖 Тестовые боты встроены прямо в раздел «Лайв-арена» #game! Нажмите кнопку «Набег ботов» или включите «Авто-спам», чтобы проверить таблицу лидеров #сайт.";
-        } else if (lower.includes("авториз") || lower.includes("войти") || lower.includes("вход")) {
-          botDiv.textContent = "👤 Нажмите кнопку «Войти» в шапке #сайт и введите свой реальный TikTok юзернейм.";
-        } else {
-          botDiv.textContent = "💡 Отличный вопрос по #game и #live! Платформа полностью готова к трансляциям.";
-        }
-
+        botDiv.textContent = "💡 Боты на панели управления (#game #live) теперь автоматически взаимодействуют с активной игрой и таблицей лидеров #сайт!";
         msgs.appendChild(botDiv);
         msgs.scrollTop = msgs.scrollHeight;
         playSound("win");
@@ -1048,17 +1072,6 @@
       if (!url) return "";
       let u = url.trim().replace(/\/+$/, "");
       return u.startsWith("https://") ? u : "";
-    }
-
-    async function pushScoreToCloud(username, pts) {
-      const base = cleanFirebaseUrl(firebaseDbUrl);
-      if (!base || !username) return;
-      try {
-        await fetch(`${base}/leaderboard/${encodeURIComponent(username.replace(/[.#$\[\]\/]/g, "_"))}.json`, {
-          method: "PUT", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, pts, updatedAt: Date.now() })
-        });
-      } catch (e) {}
     }
 
     async function syncLeaderboardNow() {
@@ -1210,16 +1223,6 @@
         localStorage.setItem("lg_real_leaderboard", JSON.stringify(playersMap));
         updateUserUI();
       }
-    }
-
-    function launchGame(type, event) {
-      if (!currentUser) { openAuthModal(); return; }
-      if (event) playSound("tap");
-      switchTab("arena");
-      ["tug", "wheel", "reactor"].forEach(g => {
-        document.getElementById("game-" + g).style.display = g === type ? "block" : "none";
-        document.getElementById("pill-" + g).classList.toggle("active", g === type);
-      });
     }
 
     function toggleStreamMode() { playSound("tap"); document.body.classList.toggle("stream-mode"); }
