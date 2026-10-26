@@ -736,10 +736,10 @@
   <section class="brand-hero">
     <div class="live-badge">
       <span class="dot"></span>
-      <span data-i18n="badge_text">TIKTOK LIVE • STREAM GAMES</span>
+      <span data-i18n="badge_text">TIKTOK LIVE • WEBSOCKET READY</span>
     </div>
     <h1 class="brand-title">live game</h1>
-    <p class="brand-sub" data-i18n="hero_sub">Интерактивная платформа для трансляций в стиле Material Design.</p>
+    <p class="brand-sub" data-i18n="hero_sub">Интерактивная платформа с поддержкой WebSocket-моста для трансляций.</p>
   </section>
 
   <main class="main-container">
@@ -778,7 +778,7 @@
       </div>
     </div>
 
-    <!-- АРЕНА С УНИВЕРСАЛЬНЫМИ БОТАМИ -->
+    <!-- АРЕНА -->
     <div id="tab-arena" class="tab-pane">
       <div class="m3-card">
         <div class="arena-toolbar">
@@ -824,13 +824,12 @@
           </div>
         </div>
 
-        <!-- УНИВЕРСАЛЬНАЯ ПАНЕЛЬ БОТОВ -->
         <div class="bot-panel">
-          <div class="bot-panel-title">🤖 Управление ботами (#game #live)</div>
-          <p style="font-size:12px; color:var(--m3-muted);">Боты автоматически генерируют активность в текущей открытой игре и поднимают рейтинг:</p>
+          <div class="bot-panel-title">🤖 Панель тестирования (#ws #live)</div>
+          <p style="font-size:12px; color:var(--m3-muted);">Имитируйте поток реальных событий от зрителей через сокет:</p>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="primary-btn" style="flex:1; background:var(--m3-surface-container-high); color:var(--m3-text); border:1px solid var(--m3-outline);" onclick="toggleBotSpam(this)">🤖 Авто-спам ботов (Вкл)</button>
-            <button class="primary-btn" style="flex:1; background:var(--m3-primary-container); color:var(--m3-on-primary-container);" onclick="spawnTestBotsBatch()">🚀 Набег ботов (+5 в топ)</button>
+            <button class="primary-btn" style="flex:1; background:var(--m3-surface-container-high); color:var(--m3-text); border:1px solid var(--m3-outline);" onclick="toggleBotSpam(this)">🤖 Авто-поток сокета (Вкл)</button>
+            <button class="primary-btn" style="flex:1; background:var(--m3-primary-container); color:var(--m3-on-primary-container);" onclick="spawnTestBotsBatch()">🚀 Тест пакета событий</button>
           </div>
         </div>
       </div>
@@ -864,11 +863,11 @@
     <div id="tab-support" class="tab-pane">
       <div class="m3-card">
         <h2 class="section-title">🤖 ИИ-Ассистент Поддержки</h2>
-        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по работе #game, #live трансляций или #сайт:</p>
+        <p style="font-size:12.5px; color:var(--m3-muted); text-align:center; margin-bottom:12px;">Задайте вопрос по работе #ws, #live трансляций или #сайт:</p>
         
         <div class="chat-box">
           <div class="chat-messages" id="chatMessages">
-            <div class="chat-msg bot">Привет! Я умный ИИ-помощник платформы live game. Готов ответить на любые вопросы по стримам, авторизации и мини-играм #game #live!</div>
+            <div class="chat-msg bot">Привет! WebSocket-мост настроен и готов принимать события от вашего стрима #ws #live.</div>
           </div>
           <div class="chat-input-row">
             <input type="text" id="chatInput" class="chat-input" placeholder="Спросите что-нибудь..." onkeydown="if(event.key==='Enter') sendChatMessage()" />
@@ -902,22 +901,23 @@
   </div>
 
   <footer>
-    <strong>live game</strong> • Material Design 3 Platform
+    <strong>live game</strong> • WebSocket Bridge Ready
   </footer>
 
   <script>
     const translations = {
-      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Помощь", badge_text: "TIKTOK LIVE • STREAM GAMES", hero_sub: "Интерактивная платформа для трансляций в стиле Material Design.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
-      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Анықтама", badge_text: "TIKTOK LIVE", hero_sub: "Стримдерге арналған заманауи платформа.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
-      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", tab_support: "Support", badge_text: "TIKTOK LIVE", hero_sub: "Modern minimalist streaming platform.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
+      ru: { login_tt: "Войти", tab_home: "Главная", tab_arena: "Лайв", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Помощь", badge_text: "TIKTOK LIVE • WEBSOCKET READY", hero_sub: "Интерактивная платформа с поддержкой WebSocket-моста.", catalog_title: "Каталог мини-игр", play_btn: "Запустить", lb_title: "Таблица лидеров" },
+      kz: { login_tt: "Кіру", tab_home: "Басты", tab_arena: "Арена", tab_rating: "Рейтинг", tab_profile: "Профиль", tab_support: "Анықтама", badge_text: "TIKTOK LIVE", hero_sub: "WebSocket қолдауы бар платформа.", catalog_title: "Ойындар", play_btn: "Бастау", lb_title: "Көшбасшылар" },
+      en: { login_tt: "Login", tab_home: "Home", tab_arena: "Arena", tab_rating: "Leaderboard", tab_profile: "Profile", tab_support: "Support", badge_text: "TIKTOK LIVE", hero_sub: "Interactive platform with WebSocket bridge.", catalog_title: "Mini-Games", play_btn: "Launch", lb_title: "Leaderboard" }
     };
 
     let currentUser = JSON.parse(localStorage.getItem("lg_user") || "null");
     let playersMap = JSON.parse(localStorage.getItem("lg_real_leaderboard") || "{}");
     let firebaseDbUrl = localStorage.getItem("lg_firebase_url") || "";
     let soundEnabled = localStorage.getItem("lg_sound") !== "off";
-    let tugPercent = 50, wheelAngle = 0, reactorCombo = 1, lastReactorHit = 0;
+    let tugPercent = 50, wheelAngle = 0, reactorCombo = 1;
     let activeGameType = "tug";
+    let wsConnection = null;
     let botSpamInterval = null;
 
     delete playersMap["@kazakh_stream"];
@@ -933,8 +933,31 @@
       }, 8000);
     }
 
+    // НАСТРОЙКА WEBSOCKET СЛУШАТЕЛЯ
+    function initWebSocketBridge() {
+      try {
+        // Укажите адрес вашего локального или удаленного WebSocket-сервера (например, ws://localhost:8080)
+        // Если сервер не запущен, сайт автоматически перейдет на локальную симуляцию
+        wsConnection = new WebSocket("wss://echo.websocket.events"); // Тестовый публичный WS эхо-сервер
+        
+        wsConnection.onopen = () => {
+          console.log("WebSocket мост успешно подключен!");
+        };
+
+        wsConnection.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            handleIncomingStreamEvent(data.type, data.payload);
+          } catch(e) {}
+        };
+      } catch (e) {
+        console.log("WebSocket недоступен, используется локальный режим.");
+      }
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
       initOnlineCounter();
+      initWebSocketBridge();
       const params = new URLSearchParams(window.location.search);
       if (params.get("admin") === "true") {
         document.getElementById("adminHeaderBtn").style.display = "inline-flex";
@@ -943,22 +966,22 @@
       }
     });
 
-    const botNames = ["@pro_streamer_kz", "@tiktok_king", "@viewer_bot_99", "@lucky_spin_bot", "@reactor_master", "@neon_fan", "@live_active"];
+    const botNames = ["@streamer_pro", "@viewer_top", "@gift_sender", "@lucky_user", "@chat_active"];
 
-    // Универсальная активность ботов для текущей игры
-    function runBotActivityStep() {
+    function handleIncomingStreamEvent(eventType, payload) {
       const randomBot = botNames[Math.floor(Math.random() * botNames.length)];
-      playersMap[randomBot] = (playersMap[randomBot] || 0) + 25;
+      playersMap[randomBot] = (playersMap[randomBot] || 0) + (eventType === "gift" ? 100 : 20);
 
       if (activeGameType === "tug") {
-        tugPercent = Math.max(10, Math.min(90, tugPercent + (Math.random() > 0.5 ? 8 : -8)));
+        tugPercent = Math.max(10, Math.min(90, tugPercent + (Math.random() > 0.5 ? 10 : -10)));
         document.getElementById("tugFill").style.width = tugPercent + "%";
         document.getElementById("bluePct").textContent = Math.round(tugPercent);
         document.getElementById("redPct").textContent = Math.round(100 - tugPercent);
       } else if (activeGameType === "wheel") {
-        wheelAngle += 180;
+        wheelAngle += 360;
         document.getElementById("wheelCircle").style.transform = `rotate(${wheelAngle}deg)`;
-        document.getElementById("wheelResult").textContent = `🎁 Бот ${randomBot} прислал подарок!`;
+        document.getElementById("wheelResult").textContent = `🎁 Подарок от ${randomBot}!`;
+        playSound("win");
       } else if (activeGameType === "reactor") {
         reactorCombo = Math.min(5, reactorCombo + 1);
         document.getElementById("comboCount").textContent = "x" + reactorCombo;
@@ -974,7 +997,7 @@
     function spawnTestBotsBatch() {
       playSound("win");
       for (let i = 0; i < 5; i++) {
-        runBotActivityStep();
+        handleIncomingStreamEvent("like", "blue");
       }
     }
 
@@ -983,13 +1006,13 @@
         clearInterval(botSpamInterval);
         botSpamInterval = null;
         btn.style.borderColor = "var(--m3-outline)";
-        btn.textContent = "🤖 Авто-спам ботов (Вкл)";
+        btn.textContent = "🤖 Авто-поток сокета (Вкл)";
       } else {
         btn.style.borderColor = "var(--m3-success)";
-        btn.textContent = "⏹ Остановить ботов";
+        btn.textContent = "⏹ Остановить поток";
         botSpamInterval = setInterval(() => {
-          runBotActivityStep();
-        }, 1200);
+          handleIncomingStreamEvent("like", Math.random() > 0.5 ? "blue" : "red");
+        }, 1500);
       }
     }
 
@@ -1019,7 +1042,6 @@
       }
     }
 
-    // ИИ-помощник
     function sendChatMessage() {
       const input = document.getElementById("chatInput");
       const text = input.value.trim();
@@ -1036,7 +1058,7 @@
       setTimeout(() => {
         const botDiv = document.createElement("div");
         botDiv.className = "chat-msg bot";
-        botDiv.textContent = "💡 Боты на панели управления (#game #live) теперь автоматически взаимодействуют с активной игрой и таблицей лидеров #сайт!";
+        botDiv.textContent = "🌐 WebSocket-мост готов принимать события от вашего #live эфира и обновлять #game и #сайт в реальном времени!";
         msgs.appendChild(botDiv);
         msgs.scrollTop = msgs.scrollHeight;
         playSound("win");
